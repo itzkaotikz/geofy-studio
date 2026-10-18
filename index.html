@@ -125,6 +125,9 @@ textarea{font:15px/1.5 var(--f-body);color:var(--ink);background:var(--ozean);bo
 .gen{display:flex;gap:10px;flex-wrap:wrap;align-items:end}
 .gen label{flex:1 1 180px}
 .info{font-family:var(--f-mono);font-size:12px;color:var(--mute)}
+.coverbox{display:grid;grid-template-columns:minmax(0,200px) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:520px){.coverbox{grid-template-columns:120px minmax(0,1fr)}}
+.coverbox img{width:100%;aspect-ratio:9/16;border-radius:12px;border:1px solid var(--linie);display:block;background:var(--ozean)}
 .update{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 16px);background:var(--ink);color:var(--tiefsee);border:0;border-radius:999px;padding:12px 20px;font:700 14px var(--f-body);box-shadow:0 8px 30px rgba(0,0,0,.4);z-index:20;cursor:pointer}
 select#channel{width:auto;padding:6px 10px;font-size:13px}
 </style>
@@ -168,6 +171,11 @@ select#channel{width:auto;padding:6px 10px;font-size:13px}
       </div>
     </section>
 
+  <section class="sec" aria-labelledby="h-kcover">
+      <div class="sec-head"><h2 id="h-kcover">Cover / Thumbnail</h2><button class="btn ghost" id="ksaveThumb" type="button">Cover sichern</button></div>
+      <div class="coverbox"><img id="kthumbImg" alt="Cover-Vorschau"><p class="hint">Wird automatisch passend zum Video erzeugt. In TikTok beim Posten auf „Cover bearbeiten“ tippen und das Bild aus deinen Fotos hinzufügen. Das Wichtigste liegt in der Mitte, damit es auch im 3:4-Raster deines Profils gut aussieht.</p></div>
+      <p class="status" id="kthumbStatus" role="status"></p>
+    </section>
     <section class="sec" aria-labelledby="h-scenes">
       <div class="sec-head"><h2 id="h-scenes">Szenen</h2><button class="mini" id="kAdd" type="button">+ Szene</button></div>
       <details class="help">
@@ -250,6 +258,11 @@ select#channel{width:auto;padding:6px 10px;font-size:13px}
     </div>
   </section>
 
+  <section class="sec" aria-labelledby="h-cover">
+    <div class="sec-head"><h2 id="h-cover">Cover / Thumbnail</h2><button class="btn ghost" id="saveThumb" type="button">Cover sichern</button></div>
+    <div class="coverbox"><img id="thumbImg" alt="Cover-Vorschau"><p class="hint">Wird automatisch passend zum Video erzeugt. In TikTok beim Posten auf „Cover bearbeiten“ tippen und das Bild aus deinen Fotos hinzufügen. Das Wichtigste liegt in der Mitte, damit es auch im 3:4-Raster deines Profils gut aussieht.</p></div>
+    <p class="status" id="thumbStatus" role="status"></p>
+  </section>
   <section class="sec" aria-labelledby="h-cap">
     <div class="sec-head">
       <h2 id="h-cap">Caption &amp; Hashtags für diese Folge</h2>

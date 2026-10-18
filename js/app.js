@@ -1,5 +1,5 @@
 (async function(){
-const APP_VERSION='1.0.0';
+const APP_VERSION='1.1.0';
 const W=1080,H=1920;
 const C={bg:'#0B1C2A',ocean:'#10283B',grat:'rgba(246,241,231,0.07)',land:'#E9DFC7',landDim:'#B9B09B',target:'#FF3B7F',ok:'#33D1B0',ink:'#F6F1E7',mute:'#8CA3B6',line:'#1F4360'};
 const FD='"Bricolage Grotesque", "Hanken Grotesk", sans-serif', FB='"Hanken Grotesk", sans-serif', FM='"JetBrains Mono", monospace';
@@ -193,6 +193,29 @@ function slideAnswers(ctx){const t=T[state.lang];
  fitFont(ctx,t.comment,800,40,28,MAPW-60,FD); ctx.fillStyle='#fff'; ctx.textAlign='center'; ctx.fillText(t.comment,LEFT+MAPW/2,y2+64); ctx.textAlign='left';
  ctx.font=`500 26px ${FB}`; ctx.fillStyle=C.mute; ctx.fillText(t.follow(state.handle),LEFT,y2+150);
 }
+// ---------- cover / thumbnail ----------
+// Key content sits in the middle so it also reads in TikTok's 3:4 profile grid (y≈240–1680)
+function drawThumb(ctx){const r=REGIONS[state.region]||REGIONS.europe, de=state.lang==='de';
+ bg(ctx); ctx.textAlign='left'; ctx.textBaseline='alphabetic';
+ const glow=ctx.createRadialGradient(W/2,1100,60,W/2,1100,700); glow.addColorStop(0,'rgba(255,59,127,0.16)'); glow.addColorStop(1,'rgba(255,59,127,0)'); ctx.fillStyle=glow; ctx.fillRect(0,0,W,H);
+ ctx.font=`700 30px ${FM}`; ctx.fillStyle=C.target; ctx.fillText(`${de?'GEO-QUIZ':'GEO QUIZ'} · #${String(state.ep).padStart(3,'0')}`,LEFT,400);
+ ctx.font=`800 132px ${FD}`; ctx.fillStyle=C.ink; ctx.fillText(de?'Erkennst du':'Can you name',LEFT,530);
+ const a=de?'alle ':'all ', w=ctx.measureText(a).width; ctx.fillText(a,LEFT,660); ctx.fillStyle=C.target; ctx.fillText('5',LEFT+w,660); const w5=ctx.measureText('5').width; ctx.fillStyle=C.ink; ctx.fillText('?',LEFT+w+w5,660);
+ // difficulty pill
+ ctx.font=`700 28px ${FM}`; const lab=de?'LEICHT  →  PROFI':'EASY  →  EXPERT'; const lw=ctx.measureText(lab).width+48;
+ ctx.fillStyle='rgba(51,209,176,0.14)'; rr(ctx,LEFT,705,lw,56,28); ctx.fill(); ctx.fillStyle=C.ok; ctx.fillText(lab,LEFT+24,743);
+ const box=[LEFT,800,MAPW,600]; const tg=state.ids.map(id=>byId.get(id)).filter(Boolean).map(mainPart); const v=tg.length?viewFor({type:'FeatureCollection',features:tg},box,0.16,2400):viewFor({type:'MultiPoint',coordinates:r.box},box,0.04); const proj=drawMap(ctx,box,v,{landColor:C.landDim});
+ ctx.save(); rr(ctx,box[0],box[1],box[2],box[3],36); ctx.clip();
+ state.ids.forEach((id,i)=>{const f=byId.get(id); if(!f) return; const p=proj(d3.geoCentroid(mainPart(f))); if(!p) return;
+  ctx.beginPath(); ctx.arc(p[0],p[1],50,0,Math.PI*2); ctx.fillStyle='rgba(255,59,127,0.25)'; ctx.fill();
+  ctx.beginPath(); ctx.arc(p[0],p[1],30,0,Math.PI*2); ctx.fillStyle=C.target; ctx.fill(); ctx.lineWidth=5; ctx.strokeStyle=C.ink; ctx.stroke();
+  ctx.font=`800 34px ${FD}`; ctx.fillStyle='#fff'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(String(i+1),p[0],p[1]+2); ctx.textAlign='left'; ctx.textBaseline='alphabetic';});
+ ctx.restore();
+ ctx.font=`800 44px ${FD}`; ctx.fillStyle=C.ink; ctx.fillText(CH.name,LEFT,1500); const bw=ctx.measureText(CH.name).width; ctx.fillStyle=C.target; ctx.fillText('.',LEFT+bw+2,1500);
+ ctx.font=`500 28px ${FB}`; ctx.fillStyle=C.mute; ctx.fillText(`${r[state.lang]} · ${de?'Kommentiere dein Ergebnis':'Comment your score'}`,LEFT,1550);
+}
+const thumbCanvas=document.createElement('canvas'); thumbCanvas.width=W; thumbCanvas.height=H; let thumbBlob=null;
+function renderThumb(){drawThumb(thumbCanvas.getContext('2d')); const du=thumbCanvas.toDataURL('image/png'); $('thumbImg').src=du; thumbBlob=dataURLtoBlob(du);}
 function renderSlides(){const out=[];
  const make=fn=>{const c=document.createElement('canvas');c.width=W;c.height=H;const x=c.getContext('2d');fn(x);out.push(c);};
  make(slideCover); for(let i=0;i<5;i++) make(x=>slideQuestion(x,i)); make(slideAnswers); return out;}
@@ -271,6 +294,7 @@ function refresh(){persist(); buildSlotsIfNeeded();
   row.innerHTML=`<small>${String(i+1).padStart(2,'0')} · ${names[i]}</small>`;
   const b=document.createElement('button'); b.className='mini'; b.type='button'; b.textContent='Speichern'; b.addEventListener('click',()=>saveOne(i));
   row.appendChild(b); d.append(img,row); strip.appendChild(d);});
+ renderThumb();
  $('vLen').textContent=`ca. ${Math.round(totalV())} Sekunden`;
  const RTAGS={europe:{de:['#europa','#europaquiz'],en:['#europe','#europequiz']},africa:{de:['#afrika','#afrikaquiz'],en:['#africa','#africaquiz']},samerica:{de:['#südamerika'],en:['#southamerica']},asia:{de:['#asien','#asienquiz'],en:['#asia','#asiaquiz']},namerica:{de:['#nordamerika','#karibik'],en:['#northamerica','#caribbean']},oceania:{de:['#ozeanien','#pazifik'],en:['#oceania','#pacific']},world:{de:['#weltkarte','#länder'],en:['#worldmap','#countries']}};
  const pr=PRESETS.find(p=>p.id===state.preset); const lv=pr&&pr.label.includes('Level')?pr.label.split('·')[1].trim():'';
@@ -398,6 +422,8 @@ async function renderClean({canvas,draw,duration,audio,codecs,onProgress}){
  await venc.flush(); venc.close(); if(err) throw err;
  muxer.finalize(); return new Blob([muxer.target.buffer],{type:'video/mp4'});}
 
+$('saveThumb').addEventListener('click',()=>{if(thumbBlob) save(fname(0,'png').replace('_00.png','_cover.png'),thumbBlob,$('thumbStatus'));});
+$('ksaveThumb').addEventListener('click',()=>{if(kThumbBlob) save(`${CH.id}_wissen_${K.story}_cover.png`,kThumbBlob,$('kthumbStatus'));});
 let pendingVideo=null;
 $('saveVideo').addEventListener('click',()=>{if(pendingVideo) save(pendingVideo.name,pendingVideo.blob,$('vidStatus'));});
 $('record').addEventListener('click',async()=>{const el=$('vidStatus'); if(playing) return; $('saveVideo').hidden=true;
@@ -554,7 +580,21 @@ function kScript(){const st=STORIES.find(s=>s.id===K.story); let t=0; const out=
  K.scenes.forEach((sc,i)=>{out.push(`## Szene ${i+1} · ${fmt(t)}–${fmt(t+kd.durs[i])}${sc.head?' · '+sc.head:''}`); out.push(sc.text||'(kein Sprechtext)'); out.push(''); t+=kd.durs[i];});
  return out.join('\n');}
 
-function kRender(){kRebuild(); kPersist();
+
+// Wissen cover: the first scene's map, darkened, with the story title large in the middle
+const kThumbCanvas=document.createElement('canvas'); kThumbCanvas.width=W; kThumbCanvas.height=H; let kThumbBlob=null;
+function renderKThumb(){if(!K.scenes.length) return; const ctx=kThumbCanvas.getContext('2d');
+ const s0=K.scenes[0], head=s0.head, subs=K.subs; s0.head=''; K.subs=false;
+ try{drawK(ctx,kd.durs[0]*0.9);}finally{s0.head=head; K.subs=subs;}
+ const g=ctx.createLinearGradient(0,0,0,H); g.addColorStop(0,'rgba(11,28,42,1)'); g.addColorStop(0.2,'rgba(11,28,42,1)'); g.addColorStop(0.45,'rgba(11,28,42,0.6)'); g.addColorStop(0.75,'rgba(11,28,42,0.25)'); g.addColorStop(1,'rgba(11,28,42,0.9)'); ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+ const st=STORIES.find(s=>s.id===K.story); const title=st?st.label:(head||'Geo-Wissen');
+ ctx.textAlign='left'; ctx.font=`700 30px ${FM}`; ctx.fillStyle=C.ok; ctx.fillText('GEO-WISSEN',LEFT,400);
+ let z=128; ctx.font=`800 ${z}px ${FD}`; const words=title.split(' '); const lines=()=>{const L=[];let l='';for(const w of words){const t=l?l+' '+w:w; if(ctx.measureText(t).width>MAPW&&l){L.push(l);l=w;} else l=t;} L.push(l); return L;};
+ let L=lines(); while(L.length>4&&z>80){z-=8; ctx.font=`800 ${z}px ${FD}`; L=lines();}
+ ctx.fillStyle=C.ink; L.forEach((l,i)=>{ if(i===L.length-1){ctx.fillStyle=C.target;} ctx.fillText(l,LEFT,520+i*(z+6)); ctx.fillStyle=C.ink;});
+ ctx.font=`800 44px ${FD}`; ctx.fillStyle=C.ink; ctx.fillText(CH.name,LEFT,1500); const bw=ctx.measureText(CH.name).width; ctx.fillStyle=C.target; ctx.fillText('.',LEFT+bw+2,1500);
+ const du=kThumbCanvas.toDataURL('image/png'); $('kthumbImg').src=du; kThumbBlob=dataURLtoBlob(du);}
+function kRender(){kRebuild(); kPersist(); renderKThumb();
  $('kTotal').textContent=fmt(kd.total);
  const b=$('kBadge'); const ok=kd.total>60; b.textContent=ok?`${fmt(kd.total)} · über 1 Minute, zählt für Creator Rewards`:`${fmt(kd.total)} · unter 1 Minute, zählt nicht für Creator Rewards`; b.classList.toggle('ok',ok);
  $('kScript').value=kScript();
