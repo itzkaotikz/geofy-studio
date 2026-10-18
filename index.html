@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Geofy Studio</title>
+<meta name="description" content="Geofy Studio: Geo-Quiz- und Wissens-Videos für TikTok erstellen.">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0B1C2A">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Geofy">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="preload" href="data/world.json" as="fetch" crossorigin>
+<style>@font-face{font-family:"Bricolage Grotesque";src:url(fonts/BricolageGrotesque.ttf) format("truetype");font-weight:200 800;font-display:swap}
+@font-face{font-family:"Hanken Grotesk";src:url(fonts/HankenGrotesk.ttf) format("truetype");font-weight:100 900;font-display:swap}
+@font-face{font-family:"JetBrains Mono";src:url(fonts/JetBrainsMono.ttf) format("truetype");font-weight:100 800;font-display:swap}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+img{max-width:100%}
+html{-webkit-text-size-adjust:100%}
+
+/* Layout: one working column — setup, carousel strip, video, brand sheet, caption. Single dark look that matches the slides. */
+:root{
+  --tiefsee:#0B1C2A;      /* page + slide ground */
+  --ozean:#10283B;        /* map water, panels */
+  --panel:#132F45;
+  --linie:#1F4360;
+  --pergament:#E9DFC7;    /* land */
+  --signal:#FF3B7F;       /* the marked country */
+  --lagune:#33D1B0;       /* correct / reveal */
+  --ink:#F6F1E7;
+  --mute:#8CA3B6;
+  --f-display:"Bricolage Grotesque", "Hanken Grotesk", system-ui, sans-serif;
+  --f-body:"Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --f-mono:"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  color-scheme:dark;
+}
+html,body{background:var(--tiefsee);color:var(--ink)}
+body{font-family:var(--f-body);font-size:15px;line-height:1.5;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:calc(env(safe-area-inset-top,0px) + 18px) calc(env(safe-area-inset-bottom,0px) + 48px);margin:0}
+.wrap{max-width:980px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+header{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.wordmark{font-family:var(--f-display);font-weight:800;font-size:clamp(30px,7vw,46px);letter-spacing:-.02em;line-height:1}
+.wordmark i{font-style:normal;color:var(--signal)}
+.tag{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+h2{font-family:var(--f-display);font-weight:800;font-size:22px;letter-spacing:-.01em;margin:0;text-wrap:balance}
+.sec{display:flex;flex-direction:column;gap:14px}
+.sec-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.hint{color:var(--mute);font-size:13.5px;margin:0;max-width:65ch}
+.panel{background:var(--panel);border:1px solid var(--linie);border-radius:18px;padding:16px;display:flex;flex-direction:column;gap:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+label{display:flex;flex-direction:column;gap:6px;font-size:12px;font-family:var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--mute);min-width:0}
+select,input{font:inherit;font-family:var(--f-body);font-size:15px;text-transform:none;letter-spacing:0;color:var(--ink);background:var(--ozean);border:1px solid var(--linie);border-radius:10px;padding:10px 12px;width:100%;min-width:0}
+select:focus-visible,input:focus-visible,button:focus-visible{outline:2px solid var(--lagune);outline-offset:2px}
+.seg{display:flex;border:1px solid var(--linie);border-radius:10px;overflow:hidden}
+.seg button{flex:1;background:var(--ozean);color:var(--mute);border:0;padding:10px;font:600 14px var(--f-body);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--tiefsee)}
+.slots{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.slot label span b{color:var(--signal)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:11px 18px;font:700 14.5px var(--f-body);cursor:pointer;background:var(--signal);color:#fff}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--linie)}
+.btn:disabled{opacity:.5;cursor:default}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.strip{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory}
+.shot{flex:0 0 auto;width:min(46vw,200px);display:flex;flex-direction:column;gap:8px;scroll-snap-align:start}
+.shot img{width:100%;aspect-ratio:9/16;border-radius:12px;border:1px solid var(--linie);display:block;background:var(--ozean)}
+.shot .row{justify-content:space-between}
+.shot small{font-family:var(--f-mono);color:var(--mute);font-size:11px}
+.mini{background:none;border:1px solid var(--linie);color:var(--ink);border-radius:999px;padding:5px 11px;font:600 12.5px var(--f-body);cursor:pointer}
+.video{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:640px){.video{grid-template-columns:1fr}}
+#vcanvas{width:100%;max-width:300px;aspect-ratio:9/16;border-radius:14px;border:1px solid var(--linie);background:var(--tiefsee);display:block}
+.status{font-family:var(--f-mono);font-size:12.5px;color:var(--lagune);min-height:1.5em}
+.status.err{color:var(--signal)}
+.swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
+.sw{border-radius:14px;overflow:hidden;border:1px solid var(--linie)}
+.sw div{height:64px}
+.sw p{margin:0;padding:8px 10px;font-size:13px;display:flex;flex-direction:column}
+.sw code{font-family:var(--f-mono);font-size:11.5px;color:var(--mute)}
+.type{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.type div{padding:14px;border:1px solid var(--linie);border-radius:14px;min-width:0}
+.type .d{font-family:var(--f-display);font-weight:800;font-size:28px;line-height:1.05}
+.type .b{font-size:17px}
+.type .m{font-family:var(--f-mono);font-size:15px}
+.type small{display:block;margin-top:6px;color:var(--mute);font-family:var(--f-mono);font-size:11px}
+textarea{font:15px/1.5 var(--f-body);color:var(--ink);background:var(--ozean);border:1px solid var(--linie);border-radius:12px;padding:12px;width:100%;min-height:120px;resize:vertical}
+#loadErr{color:var(--signal)}
+.cvwrap{position:relative;width:100%;max-width:300px}
+.cvwrap canvas{max-width:100%!important}
+.safe{position:absolute;inset:0;pointer-events:none;border-radius:14px;overflow:hidden}
+.safe i{position:absolute;background:rgba(255,59,127,0.28);outline:1px dashed rgba(255,255,255,0.5)}
+.safe .z-top{left:0;right:0;top:0;height:15.6%}
+.safe .z-bot{left:0;right:0;bottom:0;height:25%}
+.safe .z-rail{right:0;width:16.7%;top:45.3%;bottom:25%}
+.safe .z-l{left:0;width:4.7%;top:15.6%;bottom:25%}
+.safe .z-r{right:0;width:4.7%;top:15.6%;bottom:54.7%}
+.mode{display:flex;flex-direction:column;gap:28px}
+.tabs{display:flex;gap:6px;background:var(--ozean);border:1px solid var(--linie);border-radius:999px;padding:5px;align-self:flex-start}
+.tabs button{border:0;background:none;color:var(--mute);font:700 15px var(--f-body);padding:9px 22px;border-radius:999px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--tiefsee)}
+#kcanvas{width:100%;max-width:300px;aspect-ratio:9/16;border-radius:14px;border:1px solid var(--linie);background:var(--tiefsee);display:block}
+.check{flex-direction:row;align-items:center;gap:10px;text-transform:none;letter-spacing:0;font-family:var(--f-body);font-size:14.5px;color:var(--ink)}
+.check input{width:auto}
+.badge{margin:0;font-family:var(--f-mono);font-size:12.5px;padding:7px 12px;border-radius:999px;border:1px solid var(--linie);align-self:flex-start;color:var(--mute)}
+.badge.ok{color:var(--lagune);border-color:var(--lagune)}
+.scenes{display:flex;flex-direction:column;gap:12px}
+.scene{background:var(--panel);border:1px solid var(--linie);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:10px}
+.scene-top{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.scene-top strong{font-family:var(--f-mono);font-size:12.5px;letter-spacing:.06em;color:var(--signal);min-width:0}
+.scene-top .dur{font-family:var(--f-mono);font-size:12px;color:var(--mute);margin-right:auto}
+.scene-top select{width:auto;padding:6px 10px;font-size:13.5px}
+.scene .two{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px}
+.scene textarea{min-height:70px}
+.help{border:1px solid var(--linie);border-radius:14px;padding:10px 14px;color:var(--mute);font-size:13.5px}
+.help summary{cursor:pointer;color:var(--ink);font-weight:700}
+.help dl{margin:10px 0 0;display:grid;gap:8px}
+.help dt{font-family:var(--f-mono);font-size:12px;color:var(--signal);letter-spacing:.05em}
+.help dd{margin:0}
+.help code{font-family:var(--f-mono);font-size:12.5px;color:var(--ink);background:var(--ozean);padding:1px 5px;border-radius:5px}
+#kScript{min-height:180px;font-family:var(--f-mono);font-size:13px}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+
+.gen{display:flex;gap:10px;flex-wrap:wrap;align-items:end}
+.gen label{flex:1 1 180px}
+.info{font-family:var(--f-mono);font-size:12px;color:var(--mute)}
+.update{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 16px);background:var(--ink);color:var(--tiefsee);border:0;border-radius:999px;padding:12px 20px;font:700 14px var(--f-body);box-shadow:0 8px 30px rgba(0,0,0,.4);z-index:20;cursor:pointer}
+select#channel{width:auto;padding:6px 10px;font-size:13px}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="wordmark" id="wordmark">geofy<i>.</i></div>
+    <div class="row"><label class="sr" for="channel" hidden>Kanal</label><select id="channel" aria-label="Kanal"></select><span class="tag" id="ver"></span></div>
+  </header>
+
+  <p id="loadErr" hidden>Die Kartendaten konnten nicht geladen werden. Bitte die Seite neu laden.</p>
+
+  <nav class="tabs" role="tablist" aria-label="Modus">
+    <button type="button" role="tab" id="tab-quiz" aria-selected="true" aria-controls="mode-quiz">Quiz</button>
+    <button type="button" role="tab" id="tab-wissen" aria-selected="false" aria-controls="mode-wissen">Wissen</button>
+  </nav>
+
+  <div id="mode-wissen" class="mode" role="tabpanel" aria-labelledby="tab-wissen" hidden>
+    <section class="sec" aria-labelledby="h-story">
+      <div class="sec-head"><h2 id="h-story">Wissens-Video</h2><span class="tag" id="kTotal">0:00</span></div>
+      <div class="video">
+        <div class="cvwrap"><canvas id="kcanvas" width="1080" height="1920" aria-label="Wissens-Video Vorschau"></canvas><div class="safe" hidden><i class="z-top"></i><i class="z-bot"></i><i class="z-rail"></i><i class="z-l"></i><i class="z-r"></i></div></div>
+        <div class="sec">
+          <div class="grid">
+            <label for="kStory">Vorlage<select id="kStory"></select></label>
+            <label for="kWpm">Sprechtempo<select id="kWpm"><option value="130">Ruhig · 130 Wörter/min</option><option value="150" selected>Normal · 150 Wörter/min</option><option value="170">Schnell · 170 Wörter/min</option></select></label>
+          </div>
+          <label class="check"><input type="checkbox" id="grid2" class="gridToggle"> TikTok-Raster einblenden (nur Vorschau)</label>
+          <label class="check"><input type="checkbox" id="kSubs" checked> Sprechtext als Untertitel einblenden</label>
+          <p class="badge" id="kBadge"></p>
+          <div class="row">
+            <button class="btn ghost" id="kPlay" type="button">Vorschau abspielen</button>
+            <button class="btn" id="kRecord" type="button">Video exportieren</button>
+          </div>
+          <p class="status" id="kStatus" role="status"></p>
+          <button class="btn" id="kSaveVideo" type="button" hidden>Video sichern</button>
+          <p class="hint">Ablauf zum Einsprechen: Video ohne Ton speichern, in CapCut öffnen, den Sprechtext von unten als Voice-over aufnehmen. Die Szenenlängen richten sich nach deinem Sprechtext, deshalb passt das Timing ziemlich genau.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="h-scenes">
+      <div class="sec-head"><h2 id="h-scenes">Szenen</h2><button class="mini" id="kAdd" type="button">+ Szene</button></div>
+      <details class="help">
+        <summary>So funktionieren die Felder</summary>
+        <dl>
+          <dt>Kamera</dt><dd>Wohin die Karte fliegt: ein Land (<code>Chile</code>, <code>CHL</code>), mehrere (<code>Spanien, Portugal</code>), eine Region (<code>welt</code>, <code>europa</code>, <code>afrika</code>, <code>asien</code>, <code>südamerika</code>, <code>nordamerika</code>, <code>ozeanien</code>) oder <code>box: West, Süd, Ost, Nord</code>. Leer heißt: Kamera bleibt.</dd>
+          <dt>Markieren</dt><dd>Länder, die pink leuchten, mit Komma getrennt. <code>afrika</code> markiert den ganzen Kontinent.</dd>
+          <dt>Aktion · Umriss</dt><dd>Land, dessen Grenze nachgezeichnet wird: <code>Chile</code></dd>
+          <dt>Aktion · Verschieben</dt><dd>Eine Zeile pro Land, es behält seine echte Größe: <code>Grönland -&gt; afrika</code> oder <code>USA -&gt; 24, 8</code> (Breite, Länge)</dd>
+          <dt>Aktion · Pins</dt><dd>Eine Zeile pro Pin: <code>-33.45, -70.67 | Santiago</code>. Eine Zeile <code>linie</code> verbindet die Pins mit Entfernung in km.</dd>
+          <dt>Aktion · Ranking</dt><dd>Eine Zeile pro Platz, wird nacheinander aufgedeckt: <code>China | 14 Nachbarn</code></dd>
+          <dt>Dauer</dt><dd>Leer lassen für automatisch nach Sprechtext.</dd>
+        </dl>
+      </details>
+      <div id="kScenes" class="scenes"></div>
+    </section>
+
+    <section class="sec" aria-labelledby="h-script">
+      <div class="sec-head">
+        <h2 id="h-script">Sprechtext-Skript</h2>
+        <div class="row"><button class="mini" id="kCopy" type="button">Kopieren</button><button class="mini" id="kSaveMd" type="button">Als Notiz speichern (.md)</button></div>
+      </div>
+      <textarea id="kScript" aria-label="Skript" readonly></textarea>
+    </section>
+  </div>
+
+  <div id="mode-quiz" class="mode" role="tabpanel" aria-labelledby="tab-quiz">
+  <section class="sec" aria-labelledby="h-setup">
+    <div class="sec-head"><h2 id="h-setup">Quiz einstellen</h2></div>
+    <div class="panel">
+      <div class="gen">
+        <label for="genRegion">Neues Quiz aus der Länder-Datenbank<select id="genRegion"><option value="europe">Europa</option><option value="africa">Afrika</option><option value="asia">Asien</option><option value="samerica">Südamerika</option><option value="namerica">Nordamerika &amp; Karibik</option><option value="oceania">Ozeanien</option><option value="world">Ganze Welt</option></select></label>
+        <button class="btn" id="genBtn" type="button">Neues Quiz würfeln</button>
+      </div>
+      <p class="info" id="genInfo"></p>
+      <div class="grid">
+        <label for="preset">Quiz-Set<select id="preset"></select></label>
+        <label for="ep">Folge Nr.<input id="ep" type="number" min="1" value="1"></label>
+        <label for="think">Bedenkzeit pro Land<select id="think"><option value="3">3 Sekunden</option><option value="5">5 Sekunden</option><option value="7">7 Sekunden</option><option value="10">10 Sekunden</option></select></label>
+        <label for="handle">Handle<input id="handle" type="text" value="@geofy" autocomplete="off"></label>
+        <label>Sprache
+          <div class="seg" role="group" aria-label="Sprache">
+            <button type="button" id="lang-de" aria-pressed="true">Deutsch</button>
+            <button type="button" id="lang-en" aria-pressed="false">English</button>
+          </div>
+        </label>
+      </div>
+      <div class="slots" id="slots"></div>
+      <p class="hint">Die Reihenfolge ist die Schwierigkeit: Land 1 ist leicht, Land 5 ist für Profis. Jede Änderung baut Slides und Video sofort neu.</p>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="h-car">
+    <div class="sec-head">
+      <h2 id="h-car">Foto-Carousel · 7 Slides</h2>
+      <div class="row"><button class="btn" id="saveZip" type="button">Alle 7 Slides speichern</button></div>
+    </div>
+    <p class="hint">Am Handy öffnet „Speichern“ das Teilen-Menü, dort „Bilder sichern“. In TikTok dann „Foto“ wählen und die 7 Bilder in dieser Reihenfolge einfügen. Inhalte bleiben im oberen und linken Bereich, damit die TikTok-Buttons nichts verdecken.</p>
+    <div class="strip" id="strip"></div>
+    <p class="status" id="carStatus" role="status"></p>
+  </section>
+
+  <section class="sec" aria-labelledby="h-vid">
+    <div class="sec-head"><h2 id="h-vid">Video · <span id="vLen">ca. 45 Sekunden</span></h2></div>
+    <div class="video">
+      <div class="cvwrap"><canvas id="vcanvas" width="1080" height="1920" aria-label="Video-Vorschau"></canvas><div class="safe" hidden><i class="z-top"></i><i class="z-bot"></i><i class="z-rail"></i><i class="z-l"></i><i class="z-r"></i></div></div>
+      <div class="sec">
+        <p class="hint">Ablauf: Intro, dann pro Land ein Kartenflug, Countdown mit deiner Bedenkzeit und Auflösung. Zum Schluss die Kommentar-Frage. In TikTok oder CapCut legst du einen Trend-Sound darunter.</p>
+        <div class="row">
+          <button class="btn ghost" id="play" type="button">Vorschau abspielen</button>
+          <button class="btn" id="record" type="button">Video exportieren</button>
+          <button class="btn ghost" id="copyCap2" type="button">Caption kopieren</button>
+        </div>
+        <label class="check"><input type="checkbox" id="grid1" class="gridToggle"> TikTok-Raster einblenden (nur Vorschau)</label>
+        <label class="check"><input type="checkbox" id="sfx" checked> Soundeffekte: Ticken während der Bedenkzeit, Gong bei der Auflösung</label>
+        <p class="status" id="vidStatus" role="status"></p>
+        <button class="btn" id="saveVideo" type="button" hidden>Video sichern</button>
+        <p class="hint">Falls dein Gerät keine Aufnahme erlaubt: Vorschau im Vollbild abspielen und mit der Bildschirmaufnahme mitschneiden.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="h-cap">
+    <div class="sec-head">
+      <h2 id="h-cap">Caption &amp; Hashtags für diese Folge</h2>
+      <button class="mini" id="copyCap" type="button">Kopieren</button>
+    </div>
+    <textarea id="caption" aria-label="Caption"></textarea>
+  </section>
+  </div>
+
+  <section class="sec" aria-labelledby="h-brand">
+    <div class="sec-head"><h2 id="h-brand">Corporate Design</h2><span class="tag">geofy. · v1</span></div>
+    <div class="swatches">
+      <div class="sw"><div style="background:var(--tiefsee)"></div><p>Tiefsee<code>#0B1C2A</code></p></div>
+      <div class="sw"><div style="background:var(--ozean)"></div><p>Ozean<code>#10283B</code></p></div>
+      <div class="sw"><div style="background:var(--pergament)"></div><p>Pergament<code>#E9DFC7</code></p></div>
+      <div class="sw"><div style="background:var(--signal)"></div><p>Signal-Pink<code>#FF3B7F</code></p></div>
+      <div class="sw"><div style="background:var(--lagune)"></div><p>Lagune<code>#33D1B0</code></p></div>
+      <div class="sw"><div style="background:var(--ink)"></div><p>Papier<code>#F6F1E7</code></p></div>
+    </div>
+    <div class="type">
+      <div><span class="d">Bricolage Grotesque</span><small>Headlines · ExtraBold</small></div>
+      <div><span class="b">Hanken Grotesk für Fließtext und Untertitel</span><small>Text · Regular / Bold</small></div>
+      <div><span class="m">47.6° N · 14.1° E</span><small>JetBrains Mono · Labels, Nummern</small></div>
+    </div>
+    <p class="hint">Regel: Pink markiert immer das gesuchte Land und sonst nichts. Lagune zeigt immer die Lösung. So lernen Zuschauer das Format nach zwei Videos auswendig.</p>
+  </section>
+</div>
+
+<button class="update" id="updateBtn" type="button" hidden>Neue Version verfügbar · neu laden</button>
+<script src="vendor/d3.min.js"></script>
+<script src="vendor/mp4-muxer.min.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
