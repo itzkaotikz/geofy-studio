@@ -2,7 +2,7 @@
 const {chromium}=require('/opt/npm-tools/node_modules/playwright'); const fs=require('fs'); const {spawn}=require('child_process');
 (async()=>{const [page,out,fpsArg,previews]=process.argv.slice(2); const fps=+fpsArg||30;
 const b=await chromium.launch(); const p=await b.newPage(); const errs=[]; p.on('pageerror',e=>errs.push(e.message)); p.on('console',m=>{if(m.type()==='error')errs.push(m.text())});
-await p.goto('http://localhost:8766/kvwork/'+page); const info=await p.evaluate(()=>window.ready); if(errs.length) console.log(errs.join('\n'));
+await p.goto('http://localhost:8766/kvwork/'+page+(process.env.STYLE?'?style='+process.env.STYLE:'')); const info=await p.evaluate(()=>window.ready); if(errs.length) console.log(errs.join('\n'));
 fs.writeFileSync(out.replace(/\.mp4$/,'.json'),JSON.stringify(info,null,1)); console.log('total',info.total.toFixed(2));
 if(previews){for(const t of previews.split(',')){const d=await p.evaluate(t=>frame(+t,0.9),t); fs.writeFileSync(out.replace(/\.mp4$/,`_t${t}.jpg`),Buffer.from(d.split(',')[1],'base64'));} await b.close(); console.log(errs.join('\n')||'ok'); return;}
 const n=Math.ceil(info.total*fps);

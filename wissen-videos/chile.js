@@ -1,15 +1,15 @@
 // Story: Warum ist Chile so lang?  (facts: Wikipedia "Geography of Chile", "Litoral Department", Boundary Treaty 1881)
 function makeChile(){
-const {C,FD,FB,FM,L,KB,clamp,ease,eout,lerp,viewBox,viewObj,mainPart,label,icon,rr,fit,wrapLines}=KV;
+const {C,FD,FB,FM,L,KB,clamp,ease,eout,lerp,viewBox,viewObj,mainPart,label,icon,rr,fit,wrapLines,hl,tintK}=KV;
 const chl=KV.byId().get('CHL'), chMain=mainPart('CHL'), ring=chMain.geometry.coordinates[0];
 // east/west edge of mainland Chile at a given latitude
 function edge(lat,side){let best=null; for(let i=0;i<ring.length-1;i++){const [x1,y1]=ring[i],[x2,y2]=ring[i+1]; if((y1-lat)*(y2-lat)>0||y1===y2) continue; const x=x1+(lat-y1)/(y2-y1)*(x2-x1); if(best===null||(side==='e'?x>best:x<best)) best=x;} return best;}
 const lats=[]; for(let la=-18;la>=-52;la-=1.25) lats.push(la);
 const east=lats.map(la=>[edge(la,'e'),la]).filter(p=>p[0]!==null), west=lats.map(la=>[edge(la,'w'),la]).filter(p=>p[0]!==null);
-const LEFTBOX=[100,470,400,830];
+const LEFTBOX=[80,420,520,1000];
 const vSA=viewBox([-90,-56,-34,8]), vEU=viewBox([-12,27,42,72]), vCL=viewObj(chMain,LEFTBOX,0.03), vPl=viewBox([-104,-50,-56,-16]), vNo=viewBox([-77,-26,-61,-14.5]), vWorld=viewBox([-175,-58,180,78],KB,0.0);
 let Ssc=null; const wt=(sc,frag)=>{const i=sc.say.indexOf(frag); return 0.25+(i<0?0:i)/sc.say.length*sc.speak;};
-const fillCountry=(env,id,col,a)=>{if(a<=0) return; const {ctx,path}=env; ctx.save(); ctx.globalAlpha=a; ctx.beginPath(); path(KV.byId().get(id)); ctx.fillStyle=col; ctx.fill(); ctx.restore();};
+const fillCountry=(env,id,col,a)=>hl(env,id,col,a);
 const P=(env,ll)=>env.proj(ll);
 
 const scenes=[
@@ -25,7 +25,7 @@ const scenes=[
   over:[e=>{const {ctx,path,u,sc}=e; const c=d3.geoCentroid(chMain), k=ease(clamp((u-0.9)/2.2)); const to=d3.geoInterpolate([15,14],[15,53])(k);
    const r1=d3.geoRotation([-c[0],-c[1]]), r2=d3.geoRotation([-to[0],-to[1]]); const mp=x=>typeof x[0]==='number'?r2.invert(r1(x)):x.map(mp);
    const g={type:'Feature',geometry:{type:'Polygon',coordinates:mp(ring===null?[]:chMain.geometry.coordinates)}};
-   ctx.beginPath(); path(g); ctx.fillStyle='rgba(255,59,127,0.88)'; ctx.fill(); ctx.strokeStyle=C.bg; ctx.lineWidth=3; ctx.stroke();
+   ctx.beginPath(); path(g); ctx.fillStyle='rgba(255,59,127,0.8)'; ctx.fill(); ctx.strokeStyle='#fff'; ctx.lineWidth=3; ctx.stroke();
    const b=d3.geoBounds(g); const pt=P(e,[b[1][0],b[1][1]]), pb=P(e,[b[0][0],b[0][1]]);
    const a1=clamp((u-wt(sc,'Nordnorwegen'))/0.4), a2=clamp((u-wt(sc,'Nordafrika'))/0.4);
    if(k>0.95){label(ctx,'Nordnorwegen',pt[0]+30,pt[1]+20,{alpha:a1}); label(ctx,'Nordafrika',pb[0]+40,pb[1]-10,{alpha:a2});}}]},
@@ -67,14 +67,14 @@ const scenes=[
     ctx.save(); ctx.globalAlpha=a; ctx.beginPath(); path({type:'LineString',coordinates:pts}); ctx.strokeStyle=C.ok; ctx.lineWidth=8; ctx.lineCap='round'; ctx.stroke(); ctx.restore();
     const m=P(e,[-66,-32]); label(ctx,'1881: Grenze',m[0]+10,m[1]-40,{color:C.ok,alpha:a*clamp((u-t1)/0.4),font:`800 32px ${FD}`}); label(ctx,'über die höchsten Gipfel',m[0]+10,m[1]+16,{alpha:a*clamp((u-t1-0.3)/0.4),font:`700 26px ${FB}`});}
    const tp=wt(sc,'Peru'), tb=wt(sc,'Bolivien'); const bands=[[-21.43,-18.35,C.sand,tp,'Peru: Tarapacá'],[-24,-21.43,C.ok,tb,'Bolivien: Küste']];
-   bands.forEach(([s,n,col,tt,txt])=>{const a=clamp((u-tt+0.3)/0.5); if(a<=0) return; ctx.save(); ctx.beginPath(); path(chl); ctx.clip(); const y1=P(e,[-70,n])[1], y2=P(e,[-70,s])[1]; ctx.globalAlpha=0.95*a; ctx.fillStyle=col; ctx.fillRect(0,y1,1080,y2-y1); ctx.restore();
+   bands.forEach(([s,n,col,tt,txt])=>{const a=clamp((u-tt+0.3)/0.5); if(a<=0) return; ctx.save(); ctx.beginPath(); path(chl); ctx.clip(); const y1=P(e,[-70,n])[1], y2=P(e,[-70,s])[1]; ctx.globalAlpha=0.95*a*tintK(); ctx.fillStyle=col; ctx.fillRect(0,y1,1080,y2-y1); ctx.restore();
     const q=P(e,[-67.5,(s+n)/2]); label(ctx,txt,q[0]+20,q[1]+8,{color:col,alpha:a,font:`800 30px ${FD}`});});
    if(u>tb){fillCountry(e,'BOL','rgba(51,209,176,0.25)',clamp((u-tb)/0.5));}}],
   top:[]},
  {head:'Fast alle Klimazonen', view:vCL, min:11,
   say:'Das Ergebnis: Chile hat fast alle Klimazonen. Im Norden die Atacama, eine der trockensten Wüsten der Welt. In der Mitte mildes Klima rund um Santiago. Und im Süden Gletscher und Fjorde, fast bis zur Antarktis.',
   under:[e=>{const {ctx,u,sc,path}=e; const zones=[[-17.4,-27,C.sand,'Im Norden'],[-27,-38,C.green,'In der Mitte'],[-38,-56,C.ice,'Und im Süden']];
-   zones.forEach(([n,s,col,frag])=>{const a=clamp((u-wt(sc,frag)+0.2)/0.5); ctx.save(); ctx.beginPath(); path(chl); ctx.clip(); const y1=e.proj([-70,n])[1], y2=e.proj([-70,s])[1]; ctx.globalAlpha=0.35+0.6*a; ctx.fillStyle=a>0?col:C.target; ctx.fillRect(0,y1,1080,y2-y1); ctx.restore();});}],
+   zones.forEach(([n,s,col,frag])=>{const a=clamp((u-wt(sc,frag)+0.2)/0.5); ctx.save(); ctx.beginPath(); path(chl); ctx.clip(); const y1=e.proj([-70,n])[1], y2=e.proj([-70,s])[1]; ctx.globalAlpha=(0.35+0.6*a)*tintK(); ctx.fillStyle=a>0?col:C.target; ctx.fillRect(0,y1,1080,y2-y1); ctx.restore();});}],
   over:[e=>{const {ctx,u,sc}=e; const items=[['sun',[-69.6,-23.8],'Atacama','eine der trockensten Wüsten','Im Norden',C.sand],['city',[-70.67,-33.45],'Santiago','mildes Klima','In der Mitte',C.green],['snow',[-73.3,-49.5],'Patagonien','Gletscher & Fjorde','Und im Süden',C.ice]];
    items.forEach(([k,ll,t1,t2,frag,col])=>{const a=clamp((u-wt(sc,frag))/0.35); if(a<=0) return; const q=P(e,ll); icon(ctx,k,q[0],q[1],0.7+0.3*eout(a),a);
     label(ctx,t1,q[0]+70,q[1]-12,{color:col,alpha:a,font:`800 34px ${FD}`}); label(ctx,t2,q[0]+70,q[1]+44,{alpha:a,font:`700 26px ${FB}`});});}]},

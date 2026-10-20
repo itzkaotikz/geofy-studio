@@ -6,6 +6,7 @@ body{margin:0;background:#000}</style></head><body><canvas id="c" width="1080" h
 <script src="/geofy-studio/vendor/d3.min.js"></script><script src="kv-engine.js"></script><script src="chile.js"></script>
 <script>
 window.ready=(async()=>{const w=await (await fetch('/geofy-studio/data/world.json')).json(); KV.setWorld(w);
+ const style=new URLSearchParams(location.search).get('style')||'studio'; if(style!=='studio'){const im=new Image(); im.src='tex/'+style+'.jpg'; await im.decode(); KV.setStyle(style,im);}
  await Promise.all(['800 40px "Bricolage Grotesque"','700 30px "Hanken Grotesk"','700 30px "JetBrains Mono"','500 30px "Hanken Grotesk"'].map(f=>document.fonts.load(f)));
  const st=makeChile(); const S=KV.build(st,window.WPM||158); S.tag=st.tag;
  S.scenes.forEach(sc=>{ // pops on visible moments
