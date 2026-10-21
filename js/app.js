@@ -1,5 +1,5 @@
 (async function(){
-const APP_VERSION='1.1.0';
+const APP_VERSION='1.2.0';
 const W=1080,H=1920;
 const C={bg:'#0B1C2A',ocean:'#10283B',grat:'rgba(246,241,231,0.07)',land:'#E9DFC7',landDim:'#B9B09B',target:'#FF3B7F',ok:'#33D1B0',ink:'#F6F1E7',mute:'#8CA3B6',line:'#1F4360'};
 const FD='"Bricolage Grotesque", "Hanken Grotesk", sans-serif', FB='"Hanken Grotesk", sans-serif', FM='"JetBrains Mono", monospace';
@@ -46,22 +46,22 @@ const PRESETS=[
 const T={
  de:{eyebrow:(r,e)=>`GEO-QUIZ · ${r.toUpperCase()} · #${String(e).padStart(3,'0')}`,title:'Erkennst du alle 5 Länder?',sub:'Von leicht bis Profi. Zähl mit und verrat uns dein Ergebnis in den Kommentaren.',swipe:'Wischen zum Start',
   q:i=>`LAND ${i} / 5`,ask:'Welches Land ist markiert?',later:'Auflösung auf der letzten Slide',levels:['Leicht','Leicht','Mittel','Schwer','Profi'],
-  sol:'Auflösung',how:'Wie viele hattest du?',comment:'Schreib dein Ergebnis in die Kommentare',follow:h=>`Folge ${h} für das nächste Quiz`,go:'LOS',
+  sol:'Auflösung',how:'Wie viele hattest du?',comment:'Schreib deine Lösung in die Kommentare',cta:'Gib dem Video ein Like, schreib deine Lösung in die Kommentare und schick es jemandem, der sein Wissen testen soll.',follow:h=>`Folge ${h} für das nächste Quiz`,go:'LOS',
   caption:c=>{const H=['Wie viele der 5 Länder erkennst du?','Schaffst du 5/5? Die letzten beiden haben es in sich.','Nur echte Geo-Profis erkennen alle 5.'];
-   const tags=['#geografie','#geoquiz','#länderquiz',...c.tags,'#quiz','#allgemeinwissen','#lernenmittiktok'];
+   const tags=['#geoquiz',c.tags[1]||c.tags[0]||'#länderquiz','#geografie','#länderquiz','#lernenmittiktok']; // 5, most relevant first
    return `#${c.ep} · ${c.region}${c.level?' · '+c.level:''} 🌍
 ${H[(c.n-1)%H.length]}
-Zähl mit und schreib dein Ergebnis in die Kommentare: 3/5, 4/5 oder 5/5?
+Zähl mit: 3/5, 4/5 oder 5/5? Gib dem Video ein Like, schreib deine Lösung in die Kommentare und schick es jemandem, der sein Wissen testen soll.
 
 ${tags.join(' ')}`;}},
  en:{eyebrow:(r,e)=>`GEO QUIZ · ${r.toUpperCase()} · #${String(e).padStart(3,'0')}`,title:'Can you name all 5 countries?',sub:'Easy to expert. Keep score and drop your result in the comments.',swipe:'Swipe to start',
   q:i=>`COUNTRY ${i} / 5`,ask:'Which country is highlighted?',later:'Answers on the last slide',levels:['Easy','Easy','Medium','Hard','Expert'],
-  sol:'Answers',how:'How many did you get?',comment:'Drop your score in the comments',follow:h=>`Follow ${h} for the next quiz`,go:'GO',
+  sol:'Answers',how:'How many did you get?',comment:'Drop your answer in the comments',cta:'Like the video, drop your answer in the comments and send it to someone who should test their knowledge.',follow:h=>`Follow ${h} for the next quiz`,go:'GO',
   caption:c=>{const H=['How many of these 5 countries can you name?','Can you get 5/5? The last two are tough.','Only real geography pros get all 5.'];
-   const tags=['#geography','#geoquiz','#mapquiz',...c.tags,'#quiz','#trivia','#learnontiktok'];
+   const tags=['#geoquiz',c.tags[1]||c.tags[0]||'#mapquiz','#geography','#mapquiz','#learnontiktok']; // 5, most relevant first
    return `#${c.ep} · ${c.region}${c.level?' · '+c.level:''} 🌍
 ${H[(c.n-1)%H.length]}
-Keep score and drop your result in the comments: 3/5, 4/5 or 5/5?
+Keep score: 3/5, 4/5 or 5/5? Like the video, drop your answer in the comments and send it to someone who should test their knowledge.
 
 ${tags.join(' ')}`;}}
 };
@@ -259,8 +259,8 @@ function drawVideo(ctx,tt){const t=T[state.lang], r=REGIONS[state.region];
  ctx.globalAlpha=k;
  ctx.font=`800 92px ${FD}`; ctx.fillStyle=C.ink; wrap(ctx,t.how,LEFT,440,MAPW,96);
  ctx.font=`800 280px ${FD}`; ctx.fillStyle=C.target; ctx.fillText('?/5',LEFT-8,830);
- ctx.font=`500 38px ${FB}`; ctx.fillStyle=C.ink; wrap(ctx,t.comment,LEFT,950,MAPW,50);
- ctx.font=`500 30px ${FB}`; ctx.fillStyle=C.mute; ctx.fillText(t.follow(state.handle),LEFT,1090);
+ ctx.font=`600 38px ${FB}`; ctx.fillStyle=C.ink; const nl=wrap(ctx,t.cta,LEFT,950,MAPW,50);
+ ctx.font=`500 30px ${FB}`; ctx.fillStyle=C.mute; ctx.fillText(t.follow(state.handle),LEFT,950+nl*50+40);
  ctx.globalAlpha=1; brand(ctx,1300);
 }
 

@@ -1,5 +1,5 @@
 // Geofy Studio service worker: app works offline, and always picks up the newest version when online.
-const VERSION = 'geofy-1.1.0';
+const VERSION = 'geofy-1.2.0';
 const SHELL = ['./', 'index.html', 'js/app.js', 'manifest.webmanifest'];
 const STATIC = ['vendor/d3.min.js', 'vendor/mp4-muxer.min.js', 'data/world.json',
   'fonts/BricolageGrotesque.ttf', 'fonts/HankenGrotesk.ttf', 'fonts/JetBrainsMono.ttf',
