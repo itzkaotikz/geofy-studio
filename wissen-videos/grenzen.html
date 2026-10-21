@@ -1,0 +1,29 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:"Bricolage Grotesque";src:url(/geofy-studio/fonts/BricolageGrotesque.ttf);font-weight:200 800}
+@font-face{font-family:"Hanken Grotesk";src:url(/geofy-studio/fonts/HankenGrotesk.ttf);font-weight:100 900}
+@font-face{font-family:"JetBrains Mono";src:url(/geofy-studio/fonts/JetBrainsMono.ttf);font-weight:100 800}
+body{margin:0;background:#000}</style></head><body><script type="text/plain" id="script">Warum sehen so viele Grenzen in Afrika aus, als hätte jemand sie mit dem Lineal gezogen? Fast die Hälfte von ihnen folgt einfach Breiten- oder Längengraden.
+
+Die Antwort führt nach Berlin. 1884 lud Otto von Bismarck zur sogenannten Kongokonferenz ein. Vierzehn Staaten saßen am Tisch. Kein einziger afrikanischer Herrscher war eingeladen.
+
+Dort legten die Kolonialmächte Regeln fest, wie sie Afrika unter sich aufteilen. In den Jahren danach zogen sie die Grenzen auf Landkarten, oft quer durch Gebiete, die kein Europäer je betreten hatte. Da war eine gerade Linie am einfachsten.
+
+Ein Beispiel ist die Grenze zwischen Ägypten und dem Sudan. Sie folgt fast genau dem 22. Breitengrad, mitten durch die Wüste.
+
+Das Problem: Die Linien nahmen keine Rücksicht auf die Menschen, die dort lebten. Die Massai leben heute in Kenia und Tansania, die Somali verteilen sich auf mehrere Länder.
+
+Warum hat man die Grenzen nach der Unabhängigkeit nicht geändert? 1964 beschlossen die afrikanischen Staaten, sie beizubehalten. Sie wollten Kriege um neue Grenzen vermeiden.
+
+Wusstest du das schon? Gib dem Video ein Like, schreib in die Kommentare, ob du es wusstest, und schick es jemandem, den das auch interessiert.</script><canvas id="c" width="1080" height="1920"></canvas>
+<script src="/geofy-studio/vendor/d3.min.js"></script><script src="kv-engine.js"></script><script src="grenzen.js"></script>
+<script>
+window.ready=(async()=>{const w=await (await fetch('/geofy-studio/data/world.json')).json(); KV.setWorld(w); 
+ const style=new URLSearchParams(location.search).get('style')||'studio'; if(style!=='studio'){const im=new Image(); im.src='tex/'+style+'.jpg'; await im.decode(); KV.setStyle(style,im);}
+ await Promise.all(['800 40px "Bricolage Grotesque"','700 30px "Hanken Grotesk"','700 30px "JetBrains Mono"','500 30px "Hanken Grotesk"'].map(f=>document.fonts.load(f)));
+ const st=makeStory(); const tf=new URLSearchParams(location.search).get('timing'); const timing=tf?await (await fetch(tf)).json():null; const S=KV.build(st,window.WPM||158,timing); S.tag=st.tag;
+ S.scenes.forEach(sc=>{ // pops on visible moments
+  ['Lineal','Fast die Hälfte','Berlin','Kongokonferenz','Vierzehn','Kein einziger','Landkarten','gerade Linie','Ägypten','22.','Massai','Somali','1964','beizubehalten'].forEach(f=>{if(sc.say.includes(f)) S.events.push({t:sc.start+st.wt(sc,f),kind:'pop'});});});
+ window.S=S; return {total:S.total,scenes:S.scenes.map(s=>({head:s.head,start:+s.start.toFixed(2),dur:+s.dur.toFixed(2),say:s.say})),events:S.events};})();
+const ctx=document.getElementById('c').getContext('2d');
+window.frame=(t,q)=>{KV.draw(ctx,t); return document.getElementById('c').toDataURL('image/jpeg',q||0.93);};
+</script></body></html>
