@@ -100,7 +100,7 @@ textarea{font:15px/1.5 var(--f-body);color:var(--ink);background:var(--ozean);bo
 .tabs{display:flex;gap:6px;background:var(--ozean);border:1px solid var(--linie);border-radius:999px;padding:5px;align-self:flex-start}
 .tabs button{border:0;background:none;color:var(--mute);font:700 15px var(--f-body);padding:9px 22px;border-radius:999px;cursor:pointer}
 .tabs button[aria-selected="true"]{background:var(--ink);color:var(--tiefsee)}
-#kcanvas{width:100%;max-width:300px;aspect-ratio:9/16;border-radius:14px;border:1px solid var(--linie);background:var(--tiefsee);display:block}
+#wcanvas{width:100%;max-width:300px;aspect-ratio:9/16;border-radius:14px;border:1px solid var(--linie);background:var(--tiefsee);display:block}
 .check{flex-direction:row;align-items:center;gap:10px;text-transform:none;letter-spacing:0;font-family:var(--f-body);font-size:14.5px;color:var(--ink)}
 .check input{width:auto}
 .badge{margin:0;font-family:var(--f-mono);font-size:12.5px;padding:7px 12px;border-radius:999px;border:1px solid var(--linie);align-self:flex-start;color:var(--mute)}
@@ -148,58 +148,75 @@ select#channel{width:auto;padding:6px 10px;font-size:13px}
   </nav>
 
   <div id="mode-wissen" class="mode" role="tabpanel" aria-labelledby="tab-wissen" hidden>
-    <section class="sec" aria-labelledby="h-story">
-      <div class="sec-head"><h2 id="h-story">Wissens-Video</h2><span class="tag" id="kTotal">0:00</span></div>
+    <section class="sec" aria-labelledby="h-wnew">
+      <div class="sec-head"><h2 id="h-wnew">Neues Wissens-Video</h2><span class="tag">Wissen 2.0</span></div>
+      <div class="panel">
+        <div class="grid">
+          <label for="wSeries">Serie<select id="wSeries"></select></label>
+          <label for="wEp">Folge Nr.<input id="wEp" type="number" min="1" value="1"></label>
+          <label for="wExample">Beispiel laden<select id="wExample"><option value="">– Skript wählen –</option></select></label>
+        </div>
+        <label for="wTitle">Titel (erste Überschrift und Cover)<input id="wTitle" type="text" placeholder="z. B. Warum ist Gambia nur ein Fluss?" autocomplete="off"></label>
+        <label for="wScript">Skript · eine Leerzeile zwischen den Szenen<textarea id="wScript" rows="12" placeholder="Absatz 1 = Szene 1 (Hook) …&#10;&#10;Absatz 2 = Szene 2 …&#10;&#10;Letzter Absatz: Wusstest du das schon? Gib dem Video ein Like …"></textarea></label>
+        <div class="gen">
+          <label for="wVoice">Stimme (MP3 aus ElevenLabs)<input id="wVoice" type="file" accept="audio/*,.mp3,.m4a,.wav"></label>
+          <span class="info" id="wVoiceInfo">keine Stimme</span>
+        </div>
+        <div class="row"><button class="btn" id="wBuild" type="button">Video bauen</button></div>
+        <p class="status" id="wStatus" role="status"></p>
+        <details class="help">
+          <summary>So erkennt die App, was animiert wird</summary>
+          <dl>
+            <dt>Länder</dt><dd>Jedes genannte Land wird im Moment des Wortes markiert, die Kamera fliegt hin. Mehrere Länder in einer Szene: Am Ende zoomt die Kamera auf alle zusammen.</dd>
+            <dt>Städte, Meere, Regionen</dt><dd>Großstädte bekommen einen Pin, Meere ein Label, Kontinente und Regionen (z. B. <code>Afrika</code>, <code>Alpen</code>, <code>Karibik</code>) einen Kameraschwenk.</dd>
+            <dt>Zahlen</dt><dd><code>4.000 Kilometer</code>, <code>55 Prozent</code>, <code>27-mal</code> erscheinen als Einblendung, Jahreszahlen wie <code>1869</code> groß in der Mitte.</dd>
+            <dt>Größenvergleich</dt><dd>Ein Satz mit zwei Ländern und Wörtern wie „groß“, „passt“, „Fläche“: Das kleinere Land wird in echter Größe neben das größere geschoben.</dd>
+            <dt>Route</dt><dd>„von Singapur nach Rotterdam“ oder „zwischen X und Y“: Linie mit Entfernung.</dd>
+            <dt>Outro</dt><dd>Ein letzter Absatz mit „Wusstest du das schon? Gib dem Video ein Like …“ wird zur Outro-Karte.</dd>
+          </dl>
+        </details>
+      </div>
+    </section>
+
+    <div id="wOut" class="mode" hidden>
+    <section class="sec" aria-labelledby="h-wvid">
+      <div class="sec-head"><h2 id="h-wvid">Video</h2><span class="tag" id="wLen">0:00</span></div>
       <div class="video">
-        <div class="cvwrap"><canvas id="kcanvas" width="1080" height="1920" aria-label="Wissens-Video Vorschau"></canvas><div class="safe" hidden><i class="z-top"></i><i class="z-bot"></i><i class="z-rail"></i><i class="z-l"></i><i class="z-r"></i></div></div>
+        <div class="cvwrap"><canvas id="wcanvas" width="1080" height="1920" aria-label="Wissens-Video Vorschau"></canvas><div class="safe" hidden><i class="z-top"></i><i class="z-bot"></i><i class="z-rail"></i><i class="z-l"></i><i class="z-r"></i></div></div>
         <div class="sec">
-          <div class="grid">
-            <label for="kStory">Vorlage<select id="kStory"></select></label>
-            <label for="kWpm">Sprechtempo<select id="kWpm"><option value="130">Ruhig · 130 Wörter/min</option><option value="150" selected>Normal · 150 Wörter/min</option><option value="170">Schnell · 170 Wörter/min</option></select></label>
-          </div>
-          <label class="check"><input type="checkbox" id="grid2" class="gridToggle"> TikTok-Raster einblenden (nur Vorschau)</label>
-          <label class="check"><input type="checkbox" id="kSubs" checked> Sprechtext als Untertitel einblenden</label>
-          <p class="badge" id="kBadge"></p>
+          <p class="badge" id="wBadge"></p>
           <div class="row">
-            <button class="btn ghost" id="kPlay" type="button">Vorschau abspielen</button>
-            <button class="btn" id="kRecord" type="button">Video exportieren</button>
+            <button class="btn ghost" id="wPlay" type="button">Vorschau abspielen</button>
+            <button class="btn" id="wExport" type="button">Video exportieren</button>
           </div>
-          <p class="status" id="kStatus" role="status"></p>
-          <button class="btn" id="kSaveVideo" type="button" hidden>Video sichern</button>
-          <p class="hint">Ablauf zum Einsprechen: Video ohne Ton speichern, in CapCut öffnen, den Sprechtext von unten als Voice-over aufnehmen. Die Szenenlängen richten sich nach deinem Sprechtext, deshalb passt das Timing ziemlich genau.</p>
+          <button class="btn" id="wSave" type="button" hidden>Video sichern</button>
+          <label class="check"><input type="checkbox" id="grid2" class="gridToggle"> TikTok-Raster einblenden (nur Vorschau)</label>
+          <p class="hint">Das Video enthält Stimme, leise Effekte und wortgenaue Untertitel. Export rendert Bild für Bild (30 fps) und dauert je nach Gerät 1–4 Minuten, bitte die Seite offen lassen.</p>
         </div>
       </div>
     </section>
 
-  <section class="sec" aria-labelledby="h-kcover">
-      <div class="sec-head"><h2 id="h-kcover">Cover / Thumbnail</h2><button class="btn ghost" id="ksaveThumb" type="button">Cover sichern</button></div>
-      <div class="coverbox"><img id="kthumbImg" alt="Cover-Vorschau"><p class="hint">Wird automatisch passend zum Video erzeugt. In TikTok beim Posten auf „Cover bearbeiten“ tippen und das Bild aus deinen Fotos hinzufügen. Das Wichtigste liegt in der Mitte, damit es auch im 3:4-Raster deines Profils gut aussieht.</p></div>
-      <p class="status" id="kthumbStatus" role="status"></p>
-    </section>
-    <section class="sec" aria-labelledby="h-scenes">
-      <div class="sec-head"><h2 id="h-scenes">Szenen</h2><button class="mini" id="kAdd" type="button">+ Szene</button></div>
-      <details class="help">
-        <summary>So funktionieren die Felder</summary>
-        <dl>
-          <dt>Kamera</dt><dd>Wohin die Karte fliegt: ein Land (<code>Chile</code>, <code>CHL</code>), mehrere (<code>Spanien, Portugal</code>), eine Region (<code>welt</code>, <code>europa</code>, <code>afrika</code>, <code>asien</code>, <code>südamerika</code>, <code>nordamerika</code>, <code>ozeanien</code>) oder <code>box: West, Süd, Ost, Nord</code>. Leer heißt: Kamera bleibt.</dd>
-          <dt>Markieren</dt><dd>Länder, die pink leuchten, mit Komma getrennt. <code>afrika</code> markiert den ganzen Kontinent.</dd>
-          <dt>Aktion · Umriss</dt><dd>Land, dessen Grenze nachgezeichnet wird: <code>Chile</code></dd>
-          <dt>Aktion · Verschieben</dt><dd>Eine Zeile pro Land, es behält seine echte Größe: <code>Grönland -&gt; afrika</code> oder <code>USA -&gt; 24, 8</code> (Breite, Länge)</dd>
-          <dt>Aktion · Pins</dt><dd>Eine Zeile pro Pin: <code>-33.45, -70.67 | Santiago</code>. Eine Zeile <code>linie</code> verbindet die Pins mit Entfernung in km.</dd>
-          <dt>Aktion · Ranking</dt><dd>Eine Zeile pro Platz, wird nacheinander aufgedeckt: <code>China | 14 Nachbarn</code></dd>
-          <dt>Dauer</dt><dd>Leer lassen für automatisch nach Sprechtext.</dd>
-        </dl>
-      </details>
-      <div id="kScenes" class="scenes"></div>
+    <section class="sec" aria-labelledby="h-wscenes">
+      <div class="sec-head"><h2 id="h-wscenes">Szenen</h2></div>
+      <p class="hint">Alles ist automatisch erkannt. Du kannst pro Szene Überschrift, markierte Länder und Effekt ändern, das Video baut sich sofort neu.</p>
+      <div id="wScenes" class="scenes"></div>
     </section>
 
-    <section class="sec" aria-labelledby="h-script">
-      <div class="sec-head">
-        <h2 id="h-script">Sprechtext-Skript</h2>
-        <div class="row"><button class="mini" id="kCopy" type="button">Kopieren</button><button class="mini" id="kSaveMd" type="button">Als Notiz speichern (.md)</button></div>
-      </div>
-      <textarea id="kScript" aria-label="Skript" readonly></textarea>
+    <section class="sec" aria-labelledby="h-wcover">
+      <div class="sec-head"><h2 id="h-wcover">Cover / Thumbnail</h2><button class="btn ghost" id="wSaveCover" type="button">Cover sichern</button></div>
+      <div class="coverbox"><img id="wCoverImg" alt="Cover-Vorschau">
+        <div class="sec">
+          <label for="wCover">Cover-Text · Zeilen mit | trennen, letzte Zeile wird pink<input id="wCover" type="text" placeholder="automatisch aus dem Titel"></label>
+          <label for="wCoverAt">Hintergrund aus<select id="wCoverAt"><option value="0">Szene 1</option></select></label>
+        </div></div>
+      <p class="status" id="wCoverStatus" role="status"></p>
     </section>
+
+    <section class="sec" aria-labelledby="h-wcap">
+      <div class="sec-head"><h2 id="h-wcap">Caption &amp; 5 Hashtags</h2><div class="row"><button class="mini" id="wCopyCap" type="button">Kopieren</button><button class="mini" id="wSaveMd" type="button">Skript als Notiz (.md)</button></div></div>
+      <textarea id="wCaption" aria-label="Caption"></textarea>
+    </section>
+    </div>
   </div>
 
   <div id="mode-quiz" class="mode" role="tabpanel" aria-labelledby="tab-quiz">
@@ -294,6 +311,9 @@ select#channel{width:auto;padding:6px 10px;font-size:13px}
 <button class="update" id="updateBtn" type="button" hidden>Neue Version verfügbar · neu laden</button>
 <script src="vendor/d3.min.js"></script>
 <script src="vendor/mp4-muxer.min.js"></script>
+<script src="js/kv-engine.js"></script>
+<script src="js/align.js"></script>
+<script src="js/wissen.js"></script>
 <script src="js/app.js"></script>
 </body>
 </html>

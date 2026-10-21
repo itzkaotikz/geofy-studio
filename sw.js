@@ -1,7 +1,7 @@
 // Geofy Studio service worker: app works offline, and always picks up the newest version when online.
-const VERSION = 'geofy-1.2.0';
-const SHELL = ['./', 'index.html', 'js/app.js', 'manifest.webmanifest'];
-const STATIC = ['vendor/d3.min.js', 'vendor/mp4-muxer.min.js', 'data/world.json',
+const VERSION = 'geofy-2.0.0';
+const SHELL = ['./', 'index.html', 'js/app.js', 'js/kv-engine.js', 'js/align.js', 'js/wissen.js', 'manifest.webmanifest'];
+const STATIC = ['vendor/d3.min.js', 'vendor/mp4-muxer.min.js', 'data/world.json', 'data/places.json',
   'fonts/BricolageGrotesque.ttf', 'fonts/HankenGrotesk.ttf', 'fonts/JetBrainsMono.ttf',
   'icons/icon-192.png', 'icons/icon-512.png', 'icons/apple-touch-icon.png'];
 
@@ -17,7 +17,7 @@ self.addEventListener('fetch', e => {
   const req = e.request;
   if (req.method !== 'GET' || new URL(req.url).origin !== location.origin) return;
   const path = new URL(req.url).pathname;
-  const isShell = req.mode === 'navigate' || path.endsWith('/app.js') || path.endsWith('.html') || path.endsWith('.webmanifest');
+  const isShell = req.mode === 'navigate' || path.endsWith('.js') || path.endsWith('.html') || path.endsWith('.webmanifest');
   if (isShell) {
     // network first: online you always get the latest studio, offline the cached one
     e.respondWith(fetch(req).then(res => { const copy = res.clone(); caches.open(VERSION).then(c => c.put(req, copy)); return res; })

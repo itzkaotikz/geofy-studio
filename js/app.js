@@ -1,5 +1,5 @@
 (async function(){
-const APP_VERSION='1.2.0';
+const APP_VERSION='2.0.0';
 const W=1080,H=1920;
 const C={bg:'#0B1C2A',ocean:'#10283B',grat:'rgba(246,241,231,0.07)',land:'#E9DFC7',landDim:'#B9B09B',target:'#FF3B7F',ok:'#33D1B0',ink:'#F6F1E7',mute:'#8CA3B6',line:'#1F4360'};
 const FD='"Bricolage Grotesque", "Hanken Grotesk", sans-serif', FB='"Hanken Grotesk", sans-serif', FM='"JetBrains Mono", monospace';
@@ -139,10 +139,7 @@ function coordLabel(id){const f=byId.get(id); if(!f) return ''; const g=d3.geoCe
  return `${Math.abs(g[1]).toFixed(1)}° ${g[1]>=0?'N':'S'}  ·  ${Math.abs(g[0]).toFixed(1)}° ${g[0]>=0?'E':'W'}`;}
 
 function bg(ctx){ctx.fillStyle=C.bg;ctx.fillRect(0,0,W,H);
- // faint survey grid on the ground
- ctx.strokeStyle='rgba(246,241,231,0.035)';ctx.lineWidth=2;
- for(let x=60;x<W;x+=120){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
- for(let y=60;y<H;y+=120){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}}
+ const g=ctx.createRadialGradient(W/2,880,80,W/2,880,1250); g.addColorStop(0,'#123049'); g.addColorStop(1,'#081521'); ctx.fillStyle=g; ctx.fillRect(0,0,W,H);}
 function brand(ctx,y=1390){
  ctx.font=`800 46px ${FD}`; ctx.fillStyle=C.ink; ctx.textBaseline='alphabetic'; ctx.textAlign='left';
  ctx.fillText(CH.name,LEFT,y); const w=ctx.measureText(CH.name).width; ctx.fillStyle=C.target; ctx.fillText('.',LEFT+w+2,y);
@@ -155,34 +152,41 @@ const LEFT=100, MAPW=780, SAFE_TOP=300, SAFE_BOTTOM=1440;
 const regionView=()=>{const r=REGIONS[state.region]; return viewFor({type:'MultiPoint',coordinates:r.box},[LEFT,520,MAPW,860],0.02);};
 function qView(id,box){const f=byId.get(id); return viewFor(mainPart(f),box,0.3,3400);}
 
-// ---------- static slides ----------
+// ---------- shared layout (identical to the knowledge videos) ----------
+// watermark row y 292 · headline y 368 · content card y 440–1340 · bottom line centred at x 555, baseline 1560
+const ROW_Y=292, HEAD_Y=368, QB=[100,440,780,900], SUB_X=555, SUB_Y=1560, SUB_W=660;
 function fitFont(ctx,text,weight,max,min,maxW,fam){let z=max; ctx.font=`${weight} ${z}px ${fam}`; while(z>min&&ctx.measureText(text).width>maxW){z-=4; ctx.font=`${weight} ${z}px ${fam}`;} return z;}
-// Every readable element stays inside x 100–880, y 300–1440 (see SAFE_* above)
+function mark(ctx){ctx.save(); ctx.globalAlpha=0.55; ctx.font=`800 30px ${FD}`; ctx.fillStyle=C.ink; ctx.textAlign='left'; ctx.fillText(CH.name,LEFT,ROW_Y); const w=ctx.measureText(CH.name).width; ctx.fillStyle=C.target; ctx.fillText('.',LEFT+2+w,ROW_Y); ctx.restore();}
+function rowRight(ctx,text,n){ctx.save(); ctx.textAlign='right'; ctx.font=`700 24px ${FM}`; ctx.fillStyle=C.mute; ctx.fillText(text,n!=null?LEFT+MAPW-190:LEFT+MAPW,ROW_Y-2); ctx.restore(); if(n!=null) pips(ctx,LEFT+MAPW-146,ROW_Y-10,n);}
+function headline(ctx,text,col=C.ink,alpha=1){if(!text) return; ctx.save(); ctx.globalAlpha=alpha; ctx.shadowColor='rgba(0,0,0,0.45)'; ctx.shadowBlur=14; ctx.textAlign='left';
+ const z=fitFont(ctx,text,800,66,46,MAPW,FD); ctx.fillStyle=col; const ls=[]; let l=''; for(const w of text.split(' ')){const t=l?l+' '+w:w; if(ctx.measureText(t).width>MAPW&&l){ls.push(l);l=w;} else l=t;} ls.push(l);
+ ls.slice(0,2).forEach((x,i)=>ctx.fillText(x,LEFT,HEAD_Y+i*(z+6))); ctx.restore();}
+// bottom line in subtitle style; hi = index of the word drawn pink (-1 none, 'all' all pink)
+function subLine(ctx,text,{hi=-1,col=C.ink,hiCol=C.target,size=58,alpha=1}={}){if(!text) return; ctx.save(); ctx.globalAlpha=alpha; ctx.font=`800 ${size}px ${FD}`; ctx.textAlign='left';
+ const ls=[]; let l=''; for(const w of text.split(' ')){const t=l?l+' '+w:w; if(ctx.measureText(t).width>SUB_W&&l){ls.push(l);l=w;} else l=t;} ls.push(l);
+ const base=SUB_Y-(ls.length-1)*(size+12); let wi=0; ctx.lineJoin='round'; ctx.lineWidth=12; ctx.strokeStyle='rgba(6,16,26,0.92)';
+ ls.forEach((x,li)=>{const lw=ctx.measureText(x).width; let px=SUB_X-lw/2; const y=base+li*(size+12); for(const w of x.split(' ')){ctx.strokeText(w,px,y); ctx.fillStyle=(hi==='all'||hi===wi)?hiCol:col; ctx.fillText(w,px,y); px+=ctx.measureText(w+' ').width; wi++;}}); ctx.restore();}
+const SUBT={de:{intro:'Zähl mit: Wie viele schaffst du?',swipe:'Wischen zum Start →'},en:{intro:'Keep score: how many can you get?',swipe:'Swipe to start →'}};
+// ---------- static slides ----------
 function slideCover(ctx){const t=T[state.lang], r=REGIONS[state.region][state.lang];
- bg(ctx);
- ctx.font=`700 28px ${FM}`; ctx.fillStyle=C.target; ctx.textAlign='left'; ctx.fillText(t.eyebrow(r,state.ep),LEFT,340);
- ctx.font=`800 90px ${FD}`; ctx.fillStyle=C.ink; wrap(ctx,t.title,LEFT,440,MAPW,94);
- const box=[LEFT,600,MAPW,600]; drawMap(ctx,box,viewFor({type:'MultiPoint',coordinates:REGIONS[state.region].box},box,0.02),{landColor:C.landDim});
- ctx.beginPath(); ctx.arc(LEFT+MAPW-90,600+90,68,0,Math.PI*2); ctx.fillStyle=C.target; ctx.fill();
- ctx.font=`800 98px ${FD}`; ctx.fillStyle='#fff'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText('5',LEFT+MAPW-90,600+96); ctx.textBaseline='alphabetic'; ctx.textAlign='left';
- ctx.font=`500 34px ${FB}`; ctx.fillStyle=C.mute; wrap(ctx,t.sub,LEFT,1270,MAPW,46);
- ctx.font=`700 28px ${FM}`; ctx.fillStyle=C.ok; ctx.fillText(t.swipe.toUpperCase()+'  →',LEFT,1410);
+ bg(ctx); mark(ctx); rowRight(ctx,t.eyebrow(r,state.ep));
+ headline(ctx,t.title);
+ const box=[LEFT,QB[1]+60,MAPW,QB[3]-60]; drawMap(ctx,box,viewFor({type:'MultiPoint',coordinates:REGIONS[state.region].box},box,0.02),{landColor:C.landDim});
+ ctx.beginPath(); ctx.arc(LEFT+MAPW-90,box[1]+90,68,0,Math.PI*2); ctx.fillStyle=C.target; ctx.fill();
+ ctx.font=`800 98px ${FD}`; ctx.fillStyle='#fff'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText('5',LEFT+MAPW-90,box[1]+96); ctx.textBaseline='alphabetic'; ctx.textAlign='left';
+ subLine(ctx,SUBT[state.lang].swipe,{hi:'all',hiCol:C.ok,size:52});
 }
 function slideQuestion(ctx,i){const t=T[state.lang], id=state.ids[i];
- bg(ctx);
- ctx.font=`700 30px ${FM}`; ctx.fillStyle=C.ink; ctx.textAlign='left'; ctx.fillText(t.q(i+1),LEFT,340);
- pips(ctx,LEFT+MAPW-146,330,i+1);
- ctx.font=`500 24px ${FM}`; ctx.fillStyle=C.mute; ctx.textAlign='right'; ctx.fillText(t.levels[i].toUpperCase(),LEFT+MAPW-178,340); ctx.textAlign='left';
- fitFont(ctx,t.ask,800,70,48,MAPW,FD); ctx.fillStyle=C.ink; ctx.fillText(t.ask,LEFT,440);
- const box=[LEFT,490,MAPW,860]; drawMap(ctx,box,qView(id,box),{target:id});
- ctx.font=`500 24px ${FM}`; ctx.fillStyle=C.ink; ctx.globalAlpha=.75; ctx.fillText(coordLabel(id),LEFT+28,490+860-30); ctx.globalAlpha=1;
- ctx.font=`500 28px ${FB}`; ctx.fillStyle=C.mute; ctx.fillText(t.later,LEFT,1415);
+ bg(ctx); mark(ctx); rowRight(ctx,t.q(i+1)+' · '+t.levels[i].toUpperCase(),i+1);
+ headline(ctx,t.ask);
+ drawMap(ctx,QB,qView(id,QB),{target:id});
+ ctx.font=`500 24px ${FM}`; ctx.fillStyle=C.ink; ctx.globalAlpha=.75; ctx.fillText(coordLabel(id),LEFT+28,QB[1]+QB[3]-30); ctx.globalAlpha=1;
+ subLine(ctx,t.later,{col:'rgba(246,241,231,0.75)',size:44});
 }
 function slideAnswers(ctx){const t=T[state.lang];
- bg(ctx);
- ctx.font=`700 28px ${FM}`; ctx.fillStyle=C.ok; ctx.textAlign='left'; ctx.fillText(t.sol.toUpperCase(),LEFT,330);
- fitFont(ctx,t.how,800,76,52,MAPW,FD); ctx.fillStyle=C.ink; ctx.fillText(t.how,LEFT,415);
- const rowH=140, top=455;
+ bg(ctx); mark(ctx); rowRight(ctx,t.sol.toUpperCase());
+ headline(ctx,t.how);
+ const rowH=140, top=QB[1];
  state.ids.forEach((id,i)=>{const y=top+i*(rowH+12); const box=[LEFT,y,rowH,rowH];
   drawMap(ctx,box,viewFor(mainPart(byId.get(id)),box,0.22,2600),{target:id,radius:18,border:1.4});
   ctx.font=`700 22px ${FM}`; ctx.fillStyle=C.mute; ctx.fillText(`${i+1} · ${t.levels[i].toUpperCase()}`,LEFT+rowH+28,y+50);
@@ -191,28 +195,22 @@ function slideAnswers(ctx){const t=T[state.lang];
  const y2=top+5*(rowH+12)+14;
  ctx.fillStyle=C.target; rr(ctx,LEFT,y2,MAPW,100,50); ctx.fill();
  fitFont(ctx,t.comment,800,40,28,MAPW-60,FD); ctx.fillStyle='#fff'; ctx.textAlign='center'; ctx.fillText(t.comment,LEFT+MAPW/2,y2+64); ctx.textAlign='left';
- ctx.font=`500 26px ${FB}`; ctx.fillStyle=C.mute; ctx.fillText(t.follow(state.handle),LEFT,y2+150);
+ subLine(ctx,t.follow(state.handle),{col:'rgba(246,241,231,0.75)',size:40});
 }
-// ---------- cover / thumbnail ----------
-// Key content sits in the middle so it also reads in TikTok's 3:4 profile grid (y≈240–1680)
+// ---------- cover / thumbnail (same layout as the knowledge covers) ----------
 function drawThumb(ctx){const r=REGIONS[state.region]||REGIONS.europe, de=state.lang==='de';
  bg(ctx); ctx.textAlign='left'; ctx.textBaseline='alphabetic';
  const glow=ctx.createRadialGradient(W/2,1100,60,W/2,1100,700); glow.addColorStop(0,'rgba(255,59,127,0.16)'); glow.addColorStop(1,'rgba(255,59,127,0)'); ctx.fillStyle=glow; ctx.fillRect(0,0,W,H);
- ctx.font=`700 30px ${FM}`; ctx.fillStyle=C.target; ctx.fillText(`${de?'GEO-QUIZ':'GEO QUIZ'} · #${String(state.ep).padStart(3,'0')}`,LEFT,400);
- ctx.font=`800 132px ${FD}`; ctx.fillStyle=C.ink; ctx.fillText(de?'Erkennst du':'Can you name',LEFT,530);
- const a=de?'alle ':'all ', w=ctx.measureText(a).width; ctx.fillText(a,LEFT,660); ctx.fillStyle=C.target; ctx.fillText('5',LEFT+w,660); const w5=ctx.measureText('5').width; ctx.fillStyle=C.ink; ctx.fillText('?',LEFT+w+w5,660);
- // difficulty pill
- ctx.font=`700 28px ${FM}`; const lab=de?'LEICHT  →  PROFI':'EASY  →  EXPERT'; const lw=ctx.measureText(lab).width+48;
- ctx.fillStyle='rgba(51,209,176,0.14)'; rr(ctx,LEFT,705,lw,56,28); ctx.fill(); ctx.fillStyle=C.ok; ctx.fillText(lab,LEFT+24,743);
- const box=[LEFT,800,MAPW,600]; const tg=state.ids.map(id=>byId.get(id)).filter(Boolean).map(mainPart); const v=tg.length?viewFor({type:'FeatureCollection',features:tg},box,0.16,2400):viewFor({type:'MultiPoint',coordinates:r.box},box,0.04); const proj=drawMap(ctx,box,v,{landColor:C.landDim});
+ const box=[LEFT,860,MAPW,560]; const tg=state.ids.map(id=>byId.get(id)).filter(Boolean).map(mainPart); const v=tg.length?viewFor({type:'FeatureCollection',features:tg},box,0.16,2400):viewFor({type:'MultiPoint',coordinates:r.box},box,0.04); const proj=drawMap(ctx,box,v,{landColor:C.landDim});
  ctx.save(); rr(ctx,box[0],box[1],box[2],box[3],36); ctx.clip();
  state.ids.forEach((id,i)=>{const f=byId.get(id); if(!f) return; const p=proj(d3.geoCentroid(mainPart(f))); if(!p) return;
   ctx.beginPath(); ctx.arc(p[0],p[1],50,0,Math.PI*2); ctx.fillStyle='rgba(255,59,127,0.25)'; ctx.fill();
   ctx.beginPath(); ctx.arc(p[0],p[1],30,0,Math.PI*2); ctx.fillStyle=C.target; ctx.fill(); ctx.lineWidth=5; ctx.strokeStyle=C.ink; ctx.stroke();
   ctx.font=`800 34px ${FD}`; ctx.fillStyle='#fff'; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(String(i+1),p[0],p[1]+2); ctx.textAlign='left'; ctx.textBaseline='alphabetic';});
  ctx.restore();
+ ctx.font=`700 30px ${FM}`; ctx.fillStyle=C.ok; ctx.fillText(`${de?'GEO-QUIZ':'GEO QUIZ'} · ${r[state.lang].toUpperCase()} · #${String(state.ep).padStart(3,'0')}`,LEFT,400);
+ const ls=de?['Erkennst du','alle 5','Länder?']:['Can you name','all 5','countries?']; ls.forEach((l,i)=>{ctx.font=`800 120px ${FD}`; ctx.fillStyle=i===ls.length-1?C.target:C.ink; ctx.fillText(l,LEFT,525+i*126,860);});
  ctx.font=`800 44px ${FD}`; ctx.fillStyle=C.ink; ctx.fillText(CH.name,LEFT,1500); const bw=ctx.measureText(CH.name).width; ctx.fillStyle=C.target; ctx.fillText('.',LEFT+bw+2,1500);
- ctx.font=`500 28px ${FB}`; ctx.fillStyle=C.mute; ctx.fillText(`${r[state.lang]} · ${de?'Kommentiere dein Ergebnis':'Comment your score'}`,LEFT,1550);
 }
 const thumbCanvas=document.createElement('canvas'); thumbCanvas.width=W; thumbCanvas.height=H; let thumbBlob=null;
 function renderThumb(){drawThumb(thumbCanvas.getContext('2d')); const du=thumbCanvas.toDataURL('image/png'); $('thumbImg').src=du; thumbBlob=dataURLtoBlob(du);}
@@ -224,15 +222,15 @@ function renderSlides(){const out=[];
 const INTRO=2.6, OUTRO=3.4, FLY=1.0, REV=1.4; const perQ=()=>FLY+state.think+REV; const totalV=()=>INTRO+5*perQ()+OUTRO;
 function drawVideo(ctx,tt){const t=T[state.lang], r=REGIONS[state.region];
  bg(ctx); ctx.textAlign='left'; ctx.textBaseline='alphabetic';
- const mapBox=[LEFT,490,MAPW,890];
+ const mapBox=QB;
  const rv=viewFor({type:'MultiPoint',coordinates:r.box},mapBox,0.02);
+ mark(ctx);
  if(tt<INTRO){const k=ease(clamp(tt/0.7));
-  ctx.font=`700 28px ${FM}`; ctx.fillStyle=C.target; ctx.fillText(t.eyebrow(r[state.lang],state.ep),LEFT,340);
-  ctx.font=`800 84px ${FD}`; ctx.fillStyle=C.ink; wrap(ctx,t.title,LEFT,435,MAPW,88);
-  const ib=[LEFT,600,MAPW,700]; const iv=viewFor({type:'MultiPoint',coordinates:r.box},ib,0.02);
-  drawMap(ctx,ib,{...iv,scale:iv.scale*(0.94+0.06*k)},{landColor:C.landDim});
-  const p=clamp((tt-1.6)/0.6); if(p>0){ctx.font=`800 ${Math.round(200*ease(p))}px ${FD}`; ctx.fillStyle=C.target; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(t.go,LEFT+MAPW/2,ib[1]+ib[3]/2); ctx.textAlign='left'; ctx.textBaseline='alphabetic';}
-  brand(ctx,1370); return;}
+  rowRight(ctx,t.eyebrow(r[state.lang],state.ep)); headline(ctx,t.title);
+  drawMap(ctx,mapBox,{...rv,scale:rv.scale*(0.94+0.06*k)},{landColor:C.landDim});
+  const p=clamp((tt-1.6)/0.6); if(p>0){ctx.font=`800 ${Math.round(200*ease(p))}px ${FD}`; ctx.fillStyle=C.target; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(t.go,mapBox[0]+mapBox[2]/2,mapBox[1]+mapBox[3]/2); ctx.textAlign='left'; ctx.textBaseline='alphabetic';}
+  subLine(ctx,SUBT[state.lang].intro,{hi:Math.min(5,Math.floor(tt/0.35))});
+  return;}
  let s=tt-INTRO;
  const PER=perQ(), TH=state.think;
  if(s<5*PER){const i=Math.floor(s/PER), u=s-i*PER, id=state.ids[i];
@@ -240,28 +238,33 @@ function drawVideo(ctx,tt){const t=T[state.lang], r=REGIONS[state.region];
   const fly=ease(clamp(u/FLY)); const v=lerpView(prev,target,fly);
   const reveal=u>=FLY+TH; const ta=clamp((u-0.7)/0.3);
   drawMap(ctx,mapBox,v,{target:id,targetAlpha:ta,outline:reveal?C.ok:null});
-  ctx.font=`700 30px ${FM}`; ctx.fillStyle=C.ink; ctx.fillText(t.q(i+1),LEFT,330); pips(ctx,LEFT+MAPW-146,320,i+1);
-  ctx.font=`500 24px ${FM}`; ctx.fillStyle=C.mute; ctx.textAlign='right'; ctx.fillText(t.levels[i].toUpperCase(),LEFT+MAPW-178,330); ctx.textAlign='left';
-  ctx.fillStyle='rgba(246,241,231,0.12)'; ctx.fillRect(LEFT,354,MAPW,8); ctx.fillStyle=C.target; ctx.fillRect(LEFT,354,MAPW*clamp(s/(5*PER)),8);
+  rowRight(ctx,t.q(i+1)+' · '+t.levels[i].toUpperCase(),i+1);
   if(!reveal){
-   fitFont(ctx,t.ask,800,70,48,MAPW,FD); ctx.fillStyle=C.ink; ctx.fillText(t.ask,LEFT,450);
+   headline(ctx,t.ask);
    if(u>FLY){const c=u-FLY, n=Math.ceil(TH-c), f=c/TH;
     const cx=LEFT+96, cy=mapBox[1]+mapBox[3]-96; ctx.beginPath(); ctx.arc(cx,cy,68,0,Math.PI*2); ctx.fillStyle='rgba(11,28,42,0.9)'; ctx.fill();
     ctx.beginPath(); ctx.arc(cx,cy,68,-Math.PI/2,-Math.PI/2+Math.PI*2*(1-f)); ctx.strokeStyle=C.target; ctx.lineWidth=11; ctx.lineCap='round'; ctx.stroke();
     ctx.font=`800 84px ${FD}`; ctx.fillStyle=C.ink; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(String(Math.max(1,n)),cx,cy+6); ctx.textAlign='left'; ctx.textBaseline='alphabetic';}
+   subLine(ctx,state.lang==='de'?'Schreib deine Antwort in die Kommentare':'Drop your answer in the comments',{col:'rgba(246,241,231,0.7)',size:44});
   } else {const k=ease(clamp((u-FLY-TH)/0.35));
-   ctx.save(); ctx.globalAlpha=k; ctx.translate(0,(1-k)*20);
-   fitFont(ctx,nameOf(id),800,92,48,MAPW,FD); ctx.fillStyle=C.ok; ctx.fillText(nameOf(id),LEFT,458);
-   ctx.font=`700 26px ${FM}`; ctx.fillStyle=C.ok; ctx.fillText(coordLabel(id),LEFT+28,mapBox[1]+mapBox[3]-30);
-   ctx.restore();}
+   headline(ctx,t.ask,C.ink,1-k*0.6);
+   ctx.save(); ctx.globalAlpha=k; ctx.font=`700 26px ${FM}`; ctx.fillStyle=C.ok; ctx.fillText(coordLabel(id),LEFT+28,mapBox[1]+mapBox[3]-30); ctx.restore();
+   ctx.save(); ctx.globalAlpha=k; ctx.translate(0,(1-k)*16); subLine(ctx,nameOf(id),{hi:'all',hiCol:C.ok,size:84}); ctx.restore();}
   return;}
  s-=5*PER; const k=ease(clamp(s/0.6));
  ctx.globalAlpha=k;
- ctx.font=`800 92px ${FD}`; ctx.fillStyle=C.ink; wrap(ctx,t.how,LEFT,440,MAPW,96);
- ctx.font=`800 280px ${FD}`; ctx.fillStyle=C.target; ctx.fillText('?/5',LEFT-8,830);
- ctx.font=`600 38px ${FB}`; ctx.fillStyle=C.ink; const nl=wrap(ctx,t.cta,LEFT,950,MAPW,50);
- ctx.font=`500 30px ${FB}`; ctx.fillStyle=C.mute; ctx.fillText(t.follow(state.handle),LEFT,950+nl*50+40);
- ctx.globalAlpha=1; brand(ctx,1300);
+ headline(ctx,t.how);
+ ctx.fillStyle='rgba(19,47,69,0.95)'; rr(ctx,LEFT,560,MAPW,560,32); ctx.fill();
+ ctx.font=`800 220px ${FD}`; ctx.fillStyle=C.target; ctx.textAlign='center'; ctx.fillText('?/5',LEFT+MAPW/2,790); ctx.textAlign='left';
+ const rows=state.lang==='de'?[['heart','Like da lassen'],['bubble','Lösung in die Kommentare'],['share','Teilen zum Mitraten']]:[['heart','Leave a like'],['bubble','Answer in the comments'],['share','Share to play along']];
+ rows.forEach(([ic,txt],i)=>{const ai=clamp((s-0.5-i*0.5)/0.35); if(ai<=0) return; const y=880+i*80, x=LEFT+70; ctx.save(); ctx.globalAlpha=k*ai; ctx.translate(x,y-14);
+  ctx.fillStyle=C.target; ctx.strokeStyle=C.target; ctx.lineWidth=5; ctx.lineJoin='round'; ctx.lineCap='round';
+  if(ic==='heart'){ctx.beginPath(); ctx.moveTo(0,16); ctx.bezierCurveTo(-30,-4,-18,-28,0,-12); ctx.bezierCurveTo(18,-28,30,-4,0,16); ctx.fill();}
+  if(ic==='bubble'){rr(ctx,-24,-20,48,34,10); ctx.fill(); ctx.beginPath(); ctx.moveTo(-10,12); ctx.lineTo(-16,26); ctx.lineTo(4,13); ctx.fill();}
+  if(ic==='share'){ctx.beginPath(); ctx.moveTo(-20,18); ctx.quadraticCurveTo(-18,-8,14,-8); ctx.stroke(); ctx.beginPath(); ctx.moveTo(10,-22); ctx.lineTo(26,-8); ctx.lineTo(10,6); ctx.closePath(); ctx.fill();}
+  ctx.restore(); ctx.save(); ctx.globalAlpha=k*ai; ctx.font=`800 40px ${FD}`; ctx.fillStyle=C.ink; ctx.fillText(txt,x+60,y,600); ctx.restore();});
+ ctx.globalAlpha=1;
+ subLine(ctx,t.follow(state.handle),{col:'rgba(246,241,231,0.75)',size:40,alpha:k});
 }
 
 // ---------- UI ----------
@@ -423,7 +426,6 @@ async function renderClean({canvas,draw,duration,audio,codecs,onProgress}){
  muxer.finalize(); return new Blob([muxer.target.buffer],{type:'video/mp4'});}
 
 $('saveThumb').addEventListener('click',()=>{if(thumbBlob) save(fname(0,'png').replace('_00.png','_cover.png'),thumbBlob,$('thumbStatus'));});
-$('ksaveThumb').addEventListener('click',()=>{if(kThumbBlob) save(`${CH.id}_wissen_${K.story}_cover.png`,kThumbBlob,$('kthumbStatus'));});
 let pendingVideo=null;
 $('saveVideo').addEventListener('click',()=>{if(pendingVideo) save(pendingVideo.name,pendingVideo.blob,$('vidStatus'));});
 $('record').addEventListener('click',async()=>{const el=$('vidStatus'); if(playing) return; $('saveVideo').hidden=true;
@@ -440,233 +442,11 @@ $('copyCap2').addEventListener('click',async()=>{const ta=$('caption'); try{awai
 
 $('copyCap').addEventListener('click',async()=>{const ta=$('caption'); try{await navigator.clipboard.writeText(ta.value); $('copyCap').textContent='Kopiert';}catch(e){ta.select(); $('copyCap').textContent='Markiert';} setTimeout(()=>$('copyCap').textContent='Kopieren',1600);});
 
-// =================== Wissens-Modus ===================
-NAMES.GRL=['Grönland','Greenland'];
-const AFRIKA='DZA AGO BEN BWA BFA BDI CMR CAF TCD COG COD CIV DJI EGY GNQ ERI ETH GAB GMB GHA GIN GNB KEN LSO LBR LBY MDG MWI MLI MRT MAR MOZ NAM NER NGA RWA SEN SLE SOM ZAF SSD SDN SWZ TZA TGO TUN UGA ZMB ZWE ESH'.split(' ');
-const GROUPS={afrika:AFRIKA,africa:AFRIKA};
-const BOXES={welt:[-170,-56,180,78],world:[-170,-56,180,78],europa:[-25,34,45,71],europe:[-25,34,45,71],afrika:[-20,-36,53,38],africa:[-20,-36,53,38],asien:[25,-11,150,56],asia:[25,-11,150,56],'südamerika':[-82,-56,-34,13],nordamerika:[-170,7,-50,72],ozeanien:[110,-48,180,0]};
-const KB=[100,580,780,700]; // where the subject sits: upper middle, clear of TikTok's right rail and caption zone
-const MOVE_COL=['#33D1B0','#F6F1E7','#FF3B7F'];
-function resolveCountry(tok){tok=(tok||'').trim(); if(!tok) return []; const low=tok.toLowerCase();
- if(GROUPS[low]) return GROUPS[low].filter(id=>byId.has(id));
- const up=tok.toUpperCase(); if(byId.has(up)) return [up];
- for(const [id,n] of Object.entries(NAMES)){ if(n[0].toLowerCase()===low||n[1].toLowerCase()===low) return byId.has(id)?[id]:[]; }
- const f=features.find(f=>(f.properties.en||'').toLowerCase()===low||(f.properties.de||'').toLowerCase()===low); return f?[f.id]:[];}
-const resolveList=s=>(s||'').split(',').flatMap(resolveCountry);
-function groupCentroid(ids){return d3.geoCentroid({type:'FeatureCollection',features:ids.map(id=>mainPart(byId.get(id)))});}
-function camView(cam){const s=(cam||'').trim(); if(!s) return null; const low=s.toLowerCase();
- let b=BOXES[low]; const m=low.match(/^box\s*:?\s*(-?[\d.]+)\s*,\s*(-?[\d.]+)\s*,\s*(-?[\d.]+)\s*,\s*(-?[\d.]+)/);
- if(m) b=[+m[1],+m[2],+m[3],+m[4]];
- if(b) return viewFor({type:'MultiPoint',coordinates:[[b[0],b[1]],[b[2],b[3]]]},KB,0.02);
- const ids=resolveList(s); if(!ids.length) return null;
- return viewFor({type:'FeatureCollection',features:ids.map(id=>mainPart(byId.get(id)))},KB,ids.length>1?0.05:0.18,4200);}
-function projAt(v){const p=d3.geoMercator().scale(v.scale).translate([0,0]); const q=p([v.lon,v.lat]); return p.translate([KB[0]+KB[2]/2-q[0],KB[1]+KB[3]/2-q[1]]);}
-function moveGeom(geom,from,to){const r1=d3.geoRotation([-from[0],-from[1]]), r2=d3.geoRotation([-to[0],-to[1]]);
- const mp=c=>typeof c[0]==='number'?r2.invert(r1(c)):c.map(mp); return {type:geom.type,coordinates:mp(geom.coordinates)};}
-const lines=s=>(s||'').split('\n').map(l=>l.trim()).filter(Boolean);
-function parseLatLon(s){const m=s.match(/^(-?[\d.]+)\s*,\s*(-?[\d.]+)$/); return m?[+m[2],+m[1]]:null;}
-function parseAct(sc){
- if(sc.type==='verschieben') return lines(sc.act).map(l=>{const [a,b]=l.split(/->|→/); if(!b) return null; const ids=resolveCountry(a); if(!ids.length) return null;
-   const id=ids[0], to=parseLatLon(b.trim())||(resolveList(b).length?groupCentroid(resolveList(b)):null); if(!to) return null;
-   return {id,from:d3.geoCentroid(mainPart(byId.get(id))),to,geom:mainPart(byId.get(id)).geometry};}).filter(Boolean);
- if(sc.type==='pins'){const out={pins:[],line:false}; lines(sc.act).forEach(l=>{if(/^(linie|line)$/i.test(l)){out.line=true;return;} const [p,label]=l.split('|'); const ll=parseLatLon((p||'').trim()); if(ll) out.pins.push({p:ll,label:(label||'').trim()});}); return out;}
- if(sc.type==='ranking') return lines(sc.act).map(l=>{const [a,label]=l.split('|'); const ids=resolveCountry(a); return ids.length?{id:ids[0],label:(label||'').trim()}:null;}).filter(Boolean);
- if(sc.type==='umriss') return resolveList(sc.act||sc.mark);
- return null;}
-
-const STORIES=[
- {id:'afrika',label:'Wie groß ist Afrika wirklich?',scenes:[
-  {type:'karte',cam:'box: -80, -38, 65, 80',mark:'Grönland, afrika',head:'Grönland vs. Afrika',text:'Auf den meisten Weltkarten sehen Grönland und Afrika fast gleich groß aus. In Wahrheit ist Afrika rund 14-mal so groß.',act:'',dur:0},
-  {type:'verschieben',cam:'',mark:'afrika',head:'Die Mercator-Falle',text:'Schuld ist die Mercator-Projektion. Je weiter ein Land vom Äquator entfernt ist, desto stärker wird es auf der Karte aufgeblasen. Am Äquator schrumpft Grönland auf seine echte Größe.',act:'Grönland -> afrika',dur:0},
-  {type:'verschieben',cam:'box: -10, 5, 65, 45',mark:'Saudi-Arabien',head:'So groß wie Saudi-Arabien',text:'Grönland ist ungefähr so groß wie Saudi-Arabien. Auf der Karte wirkt es aber größer als ganz Südamerika.',act:'Grönland -> 23, 28',dur:0},
-  {type:'verschieben',cam:'afrika',mark:'afrika',head:'Alles passt rein',text:'Und Afrika selbst wird unterschätzt. Die USA, China und Indien zusammen sind immer noch kleiner als der afrikanische Kontinent.',act:'USA -> 24, 9\nChina -> -2, 24\nIndien -> -24, 27',dur:0},
-  {type:'verschieben',cam:'box: -60, -45, 120, 75',mark:'afrika',head:'Und Russland?',text:'Selbst Russland, das größte Land der Erde, ist nur gut halb so groß wie Afrika. Am Äquator sieht man das sofort.',act:'Russland -> 2, 20',dur:0},
-  {type:'verschieben',cam:'nordamerika',mark:'USA',head:'Deutschland in den USA',text:'Zum Vergleich: Deutschland passt rund 27-mal in die USA.',act:'Deutschland -> 39, -98',dur:0},
-  {type:'karte',cam:'welt',mark:'',head:'Was hat dich überrascht?',text:'Welcher Vergleich hat dich am meisten überrascht? Schreib es in die Kommentare und folge für mehr Karten-Fakten.',act:'',dur:0}]},
- {id:'chile',label:'Warum ist Chile so lang?',scenes:[
-  {type:'karte',cam:'südamerika',mark:'Chile',head:'Warum ist Chile so lang?',text:'Chile ist über 4.000 Kilometer lang, aber im Schnitt nur etwa 180 Kilometer breit.',act:'',dur:0},
-  {type:'umriss',cam:'Chile',mark:'',head:'Zwischen Anden und Pazifik',text:'Im Osten liegen die Anden, im Westen der Pazifik. Dazwischen bleibt nur ein schmaler Streifen Land.',act:'Chile',dur:0},
-  {type:'verschieben',cam:'europa',mark:'',head:'Chile auf Europa gelegt',text:'Legt man Chile auf Europa, reicht es von Skandinavien bis fast nach Nordafrika.',act:'Chile -> 48, 10',dur:0},
-  {type:'pins',cam:'Chile',mark:'Chile',head:'Fast alle Klimazonen',text:'Deshalb hat Chile fast alle Klimazonen: von einer der trockensten Wüsten der Welt im Norden bis zu Gletschern in Patagonien.',act:'-23.6, -70.4 | Atacama-Wüste\n-33.45, -70.67 | Santiago\n-53.16, -70.92 | Punta Arenas\nlinie',dur:0},
-  {type:'karte',cam:'welt',mark:'Chile',head:'Welches Land als Nächstes?',text:'Welches Land soll ich als Nächstes erklären? Schreib es in die Kommentare.',act:'',dur:0}]},
- {id:'nachbarn',label:'Welches Land hat die meisten Nachbarn?',scenes:[
-  {type:'ranking',cam:'welt',mark:'',head:'Welches Land hat die meisten Nachbarn?',text:'Welches Land grenzt an die meisten anderen Länder? Hier kommt das Ranking.',act:'Deutschland | Platz 4 · 9 Nachbarn\nDR Kongo | Platz 4 · 9 Nachbarn\nBrasilien | Platz 3 · 10 Nachbarn\nRussland | Platz 1 · 14 Nachbarn\nChina | Platz 1 · 14 Nachbarn',dur:14},
-  {type:'karte',cam:'China, Russland',mark:'China, Russland',head:'Gleichstand!',text:'China und Russland teilen sich Platz eins mit jeweils 14 Nachbarländern. Hättest du das gewusst? Schreib es in die Kommentare.',act:'',dur:0}]}
-];
-const TYPES=[['karte','Karte'],['umriss','Umriss'],['verschieben','Verschieben'],['pins','Pins'],['ranking','Ranking'],['titel','Titel']];
-const K={story:'afrika',wpm:150,subs:true,scenes:JSON.parse(JSON.stringify(STORIES[0].scenes))};
-try{const s=JSON.parse(localStorage.getItem('geofy-wissen')||'null'); if(s&&Array.isArray(s.scenes)) Object.assign(K,s);}catch(e){}
-const kPersist=()=>{try{localStorage.setItem('geofy-wissen',JSON.stringify(K));}catch(e){}};
-const words=t=>(t||'').trim().split(/\s+/).filter(Boolean).length;
-let kd={durs:[],views:[],acts:[],total:0};
-function kRebuild(){
- const worldV=camView('welt'); const durs=[],views=[],acts=[];
- K.scenes.forEach((sc,i)=>{acts.push(parseAct(sc));
-  const auto=Math.max(3.5,words(sc.text)*60/K.wpm+1.5, sc.type==='ranking'?(acts[i]||[]).length*2.2+1.5:0);
-  durs.push(sc.dur>0?+sc.dur:auto);
-  views.push(sc.type==='titel'?(views[i-1]||worldV):(camView(sc.cam)||views[i-1]||worldV));});
- kd={durs,views,acts,total:durs.reduce((a,b)=>a+b,0)};
-}
-const fmt=s=>`${Math.floor(s/60)}:${String(Math.round(s%60)).padStart(2,'0')}`;
-
-function drawK(ctx,tt){
- const S=K.scenes; ctx.textAlign='left'; ctx.textBaseline='alphabetic';
- if(!S.length){bg(ctx);return;}
- let acc=0,i=0; for(;i<S.length-1;i++){if(tt<acc+kd.durs[i]) break; acc+=kd.durs[i];}
- const sc=S[i], d=kd.durs[i], u=clamp(tt-acc,0,d), prev=S[i-1];
- const vPrev=i>0?kd.views[i-1]:kd.views[0], fl=Math.min(1.2,d*0.3);
- const v=lerpView(vPrev,kd.views[i],ease(clamp(u/fl)));
- const proj=projAt(v), path=d3.geoPath(proj,ctx);
- ctx.fillStyle=C.ocean; ctx.fillRect(0,0,W,H);
- ctx.beginPath(); path(grat); ctx.strokeStyle=C.grat; ctx.lineWidth=2; ctx.stroke();
- const land=landPath(proj,[0,0,W,H],v.scale); ctx.fillStyle=C.land; ctx.fill(land);
- // persistent marks
- const marks=resolveList(sc.mark); const same=prev&&prev.mark===sc.mark;
- const ma=(same?1:clamp((u-fl*0.6)/0.45))*(sc.type==='verschieben'||sc.type==='ranking'?0.5:0.92);
- if(marks.length&&ma>0){ctx.globalAlpha=ma; ctx.beginPath(); for(const id of marks) path(byId.get(id)); ctx.fillStyle=C.target; ctx.fill(); ctx.globalAlpha=1;}
- ctx.strokeStyle=C.bg; ctx.lineWidth=2.2; ctx.lineJoin='round'; ctx.stroke(land);
- const act=kd.acts[i], work=Math.max(0.5,d-fl);
- if(sc.type==='umriss'&&act){const p=clamp((u-fl)/Math.max(1.4,work*0.55));
-  for(const id of act){const g=mainPart(byId.get(id)).geometry; const polys=g.type==='Polygon'?[g.coordinates]:g.coordinates;
-   for(const poly of polys){const pts=poly[0].map(c=>proj(c)).filter(Boolean); let L=0; const seg=[0]; for(let k=1;k<pts.length;k++){L+=Math.hypot(pts[k][0]-pts[k-1][0],pts[k][1]-pts[k-1][1]); seg.push(L);}
-    const lim=L*p; ctx.beginPath(); ctx.moveTo(pts[0][0],pts[0][1]);
-    for(let k=1;k<pts.length;k++){ if(seg[k]<=lim) ctx.lineTo(pts[k][0],pts[k][1]); else {const r=(lim-seg[k-1])/(seg[k]-seg[k-1]||1); ctx.lineTo(lerp(pts[k-1][0],pts[k][0],r),lerp(pts[k-1][1],pts[k][1],r)); break;}}
-    ctx.strokeStyle=C.target; ctx.lineWidth=8; ctx.lineCap='round'; ctx.stroke();}
-   const fa=clamp((u-fl-Math.max(1.4,work*0.55))/0.5)*0.85; if(fa>0){ctx.globalAlpha=fa; ctx.beginPath(); path(byId.get(id)); ctx.fillStyle=C.target; ctx.fill(); ctx.globalAlpha=1;}}}
- if(sc.type==='verschieben'&&act){const m=ease(clamp((u-fl)/Math.min(2.6,work*0.6)));
-  act.forEach((it,k)=>{const col=MOVE_COL[k%MOVE_COL.length];
-   ctx.save(); ctx.setLineDash([10,9]); ctx.beginPath(); path({type:'Feature',geometry:it.geom}); ctx.strokeStyle='rgba(246,241,231,0.7)'; ctx.lineWidth=3; ctx.stroke(); ctx.restore();
-   const c=d3.geoInterpolate(it.from,it.to)(m); const g={type:'Feature',geometry:moveGeom(it.geom,it.from,c)};
-   ctx.beginPath(); path(g); ctx.globalAlpha=.88; ctx.fillStyle=col; ctx.fill(); ctx.globalAlpha=1; ctx.strokeStyle=C.bg; ctx.lineWidth=3; ctx.stroke();
-   const pc=proj(c); if(pc){ctx.font=`800 40px ${FD}`; const t=nameOf(it.id); const w=ctx.measureText(t).width; const x=clamp(pc[0]-w/2,100,880-w);
-    ctx.lineWidth=10; ctx.strokeStyle=C.bg; ctx.lineJoin='round'; ctx.strokeText(t,x,pc[1]+14); ctx.fillStyle=C.ink; ctx.fillText(t,x,pc[1]+14);}});}
- if(sc.type==='pins'&&act){const n=act.pins.length||1, gap=work*0.6/n;
-  if(act.line){for(let k=1;k<act.pins.length;k++){const t0=fl+k*gap; const a=clamp((u-t0)/0.6); if(a<=0) continue;
-    const ip=d3.geoInterpolate(act.pins[k-1].p,act.pins[k].p); ctx.save(); ctx.setLineDash([16,12]); ctx.beginPath(); path({type:'LineString',coordinates:d3.range(0,1.0001,0.05).map(x=>ip(x*a))}); ctx.strokeStyle=C.ok; ctx.lineWidth=6; ctx.stroke(); ctx.restore();
-    if(a>=1){const mid=proj(ip(0.5)); if(mid){const km=Math.round(d3.geoDistance(act.pins[k-1].p,act.pins[k].p)*6371).toLocaleString('de-DE')+' km'; ctx.font=`700 30px ${FM}`; const w=ctx.measureText(km).width; ctx.fillStyle=C.ok; rr(ctx,mid[0]+18,mid[1]-26,w+28,48,24); ctx.fill(); ctx.fillStyle=C.bg; ctx.fillText(km,mid[0]+32,mid[1]+8);}}}}
-  act.pins.forEach((pin,k)=>{const a=clamp((u-fl-k*gap)/0.35); if(a<=0) return; const pt=proj(pin.p); if(!pt) return;
-   ctx.beginPath(); ctx.arc(pt[0],pt[1],14*ease(a),0,Math.PI*2); ctx.fillStyle=C.target; ctx.fill(); ctx.lineWidth=5; ctx.strokeStyle=C.ink; ctx.stroke();
-   if(pin.label){ctx.globalAlpha=a; ctx.font=`700 34px ${FB}`; const w=ctx.measureText(pin.label).width; const left=pt[0]+w+70>880; const x=left?pt[0]-w-56:pt[0]+28;
-    ctx.fillStyle='rgba(11,28,42,0.88)'; rr(ctx,x,pt[1]-30,w+28,58,16); ctx.fill(); ctx.fillStyle=C.ink; ctx.fillText(pin.label,x+14,pt[1]+11); ctx.globalAlpha=1;}});}
- if(sc.type==='ranking'&&act&&act.length){const seg=work/act.length; const k=Math.min(act.length-1,Math.floor(Math.max(0,u-fl)/seg));
-  if(u>fl){act.forEach((it,j)=>{if(j>k) return; ctx.globalAlpha=j===k?1:0.45; ctx.beginPath(); path(byId.get(it.id)); ctx.fillStyle=C.target; ctx.fill(); ctx.globalAlpha=1; if(j===k){ctx.strokeStyle=C.ink; ctx.lineWidth=4; ctx.stroke();}});
-   const it=act[k], a=ease(clamp((u-fl-k*seg)/0.4)); ctx.globalAlpha=a; ctx.fillStyle='rgba(11,28,42,0.92)'; rr(ctx,100,1080,780,160,28); ctx.fill();
-   ctx.font=`700 28px ${FM}`; ctx.fillStyle=C.ok; ctx.fillText(it.label.toUpperCase(),136,1130); fitFont(ctx,nameOf(it.id),800,66,40,710,FD); ctx.fillStyle=C.ink; ctx.fillText(nameOf(it.id),136,1206); ctx.globalAlpha=1;}}
- // title card
- if(sc.type==='titel'){ctx.fillStyle='rgba(11,28,42,0.86)'; ctx.fillRect(0,0,W,H);}
- // top band: brand line, progress, headline
- const gr=ctx.createLinearGradient(0,0,0,660); gr.addColorStop(0,'rgba(11,28,42,0.96)'); gr.addColorStop(0.7,'rgba(11,28,42,0.75)'); gr.addColorStop(1,'rgba(11,28,42,0)'); ctx.fillStyle=gr; ctx.fillRect(0,0,W,660);
- ctx.font=`800 32px ${FD}`; ctx.fillStyle=C.ink; ctx.fillText(CH.name,100,332); const bw=ctx.measureText(CH.name).width; ctx.fillStyle=C.target; ctx.fillText('.',102+bw,332);
- ctx.font=`700 24px ${FM}`; ctx.fillStyle=C.mute; ctx.fillText('WISSEN',100+bw+30,330);
- ctx.fillStyle='rgba(246,241,231,0.14)'; ctx.fillRect(100,356,780,6); ctx.fillStyle=C.target; ctx.fillRect(100,356,780*clamp(tt/kd.total),6);
- if(sc.head){const ha=prev&&prev.head===sc.head?1:ease(clamp(u/0.45)); ctx.save(); ctx.globalAlpha=ha; ctx.translate(0,(1-ha)*24);
-  ctx.font=`800 ${sc.type==='titel'?96:70}px ${FD}`; ctx.fillStyle=C.ink; wrap(ctx,sc.head,100,sc.type==='titel'?760:450,780,sc.type==='titel'?100:76); ctx.restore();}
- // subtitles from the spoken text
- const sent=K.subs&&sc.text?(sc.text.match(/[^.!?]+[.!?]*/g)||[]).map(s=>s.trim()).filter(Boolean):[];
- if(sent.length){const tw=sent.map(words); const sum=tw.reduce((a,b)=>a+b,0)||1;
-  const span=Math.max(0.5,d-0.6); let t0=0.3,j=0; for(;j<sent.length-1;j++){const len=span*tw[j]/sum; if(u<t0+len) break; t0+=len;}
-  ctx.font=`700 46px ${FB}`; const ls=[]; let line=''; for(const w of sent[j].split(' ')){const t=line?line+' '+w:w; if(ctx.measureText(t).width>700&&line){ls.push(line);line=w;} else line=t;} ls.push(line);
-  const bh=ls.length*60+44, by=1440-bh; ctx.fillStyle='rgba(11,28,42,0.9)'; rr(ctx,100,by,780,bh,26); ctx.fill();
-  ctx.fillStyle=C.ink; ls.forEach((l,q)=>ctx.fillText(l,140,by+70+q*60));}
-}
-
-const kc=$('kcanvas'), kctx=kc.getContext('2d'); let kPlaying=false;
-function kPlay(from,to,onDone){kPlaying=true; const t0=performance.now();
- const step=now=>{const tt=from+(now-t0)/1000; drawK(kctx,Math.min(tt,to)); if(tt<to) requestAnimationFrame(step); else {kPlaying=false; onDone&&onDone();}};
- requestAnimationFrame(step);}
-function kStart(i){let a=0; for(let k=0;k<i;k++) a+=kd.durs[k]; return a;}
-
-function kScript(){const st=STORIES.find(s=>s.id===K.story); let t=0; const out=[`# Skript: ${st?st.label:'Eigenes Wissens-Video'}`,'',`Länge: ${fmt(kd.total)} · Tempo ${K.wpm} Wörter/min`,''];
- K.scenes.forEach((sc,i)=>{out.push(`## Szene ${i+1} · ${fmt(t)}–${fmt(t+kd.durs[i])}${sc.head?' · '+sc.head:''}`); out.push(sc.text||'(kein Sprechtext)'); out.push(''); t+=kd.durs[i];});
- return out.join('\n');}
-
-
-// Wissen cover: the first scene's map, darkened, with the story title large in the middle
-const kThumbCanvas=document.createElement('canvas'); kThumbCanvas.width=W; kThumbCanvas.height=H; let kThumbBlob=null;
-function renderKThumb(){if(!K.scenes.length) return; const ctx=kThumbCanvas.getContext('2d');
- const s0=K.scenes[0], head=s0.head, subs=K.subs; s0.head=''; K.subs=false;
- try{drawK(ctx,kd.durs[0]*0.9);}finally{s0.head=head; K.subs=subs;}
- const g=ctx.createLinearGradient(0,0,0,H); g.addColorStop(0,'rgba(11,28,42,1)'); g.addColorStop(0.2,'rgba(11,28,42,1)'); g.addColorStop(0.45,'rgba(11,28,42,0.6)'); g.addColorStop(0.75,'rgba(11,28,42,0.25)'); g.addColorStop(1,'rgba(11,28,42,0.9)'); ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
- const st=STORIES.find(s=>s.id===K.story); const title=st?st.label:(head||'Geo-Wissen');
- ctx.textAlign='left'; ctx.font=`700 30px ${FM}`; ctx.fillStyle=C.ok; ctx.fillText('GEO-WISSEN',LEFT,400);
- let z=128; ctx.font=`800 ${z}px ${FD}`; const words=title.split(' '); const lines=()=>{const L=[];let l='';for(const w of words){const t=l?l+' '+w:w; if(ctx.measureText(t).width>MAPW&&l){L.push(l);l=w;} else l=t;} L.push(l); return L;};
- let L=lines(); while(L.length>4&&z>80){z-=8; ctx.font=`800 ${z}px ${FD}`; L=lines();}
- ctx.fillStyle=C.ink; L.forEach((l,i)=>{ if(i===L.length-1){ctx.fillStyle=C.target;} ctx.fillText(l,LEFT,520+i*(z+6)); ctx.fillStyle=C.ink;});
- ctx.font=`800 44px ${FD}`; ctx.fillStyle=C.ink; ctx.fillText(CH.name,LEFT,1500); const bw=ctx.measureText(CH.name).width; ctx.fillStyle=C.target; ctx.fillText('.',LEFT+bw+2,1500);
- const du=kThumbCanvas.toDataURL('image/png'); $('kthumbImg').src=du; kThumbBlob=dataURLtoBlob(du);}
-function kRender(){kRebuild(); kPersist(); renderKThumb();
- $('kTotal').textContent=fmt(kd.total);
- const b=$('kBadge'); const ok=kd.total>60; b.textContent=ok?`${fmt(kd.total)} · über 1 Minute, zählt für Creator Rewards`:`${fmt(kd.total)} · unter 1 Minute, zählt nicht für Creator Rewards`; b.classList.toggle('ok',ok);
- $('kScript').value=kScript();
- document.querySelectorAll('.scene').forEach((el,i)=>{const d=el.querySelector('.dur'); if(d) d.textContent=`${fmt(kStart(i))} · ${kd.durs[i].toFixed(1).replace('.',',')} s`;});
- if(!kPlaying) drawK(kctx,Math.min(kd.total,kStart(0)+kd.durs[0]*0.85));}
-
-function kCards(){const box=$('kScenes'); box.innerHTML='';
- K.scenes.forEach((sc,i)=>{const el=document.createElement('div'); el.className='scene';
-  const opts=TYPES.map(([v,l])=>`<option value="${v}"${v===sc.type?' selected':''}>${l}</option>`).join('');
-  el.innerHTML=`<div class="scene-top"><strong>SZENE ${i+1}</strong><span class="dur"></span>
-   <select aria-label="Typ Szene ${i+1}" data-f="type">${opts}</select>
-   <button class="mini" type="button" data-a="view">Ansehen</button>
-   <button class="mini" type="button" data-a="up" aria-label="Nach oben"${i===0?' disabled':''}>↑</button>
-   <button class="mini" type="button" data-a="down" aria-label="Nach unten"${i===K.scenes.length-1?' disabled':''}>↓</button>
-   <button class="mini" type="button" data-a="del" aria-label="Löschen">✕</button></div>
-   <label>Überschrift<input data-f="head" id="k-head-${i}" type="text"></label>
-   <label>Sprechtext<textarea data-f="text" id="k-text-${i}"></textarea></label>
-   <div class="two"><label>Kamera<input data-f="cam" id="k-cam-${i}" type="text" placeholder="bleibt"></label>
-   <label>Markieren<input data-f="mark" id="k-mark-${i}" type="text" placeholder="keine"></label>
-   <label>Dauer (s)<input data-f="dur" id="k-dur-${i}" type="number" min="0" step="0.5" placeholder="auto"></label></div>
-   <label data-actwrap>Aktion<textarea data-f="act" id="k-act-${i}"></textarea></label>`;
-  el.querySelector('[data-f=head]').value=sc.head||''; el.querySelector('[data-f=text]').value=sc.text||'';
-  el.querySelector('[data-f=cam]').value=sc.cam||''; el.querySelector('[data-f=mark]').value=sc.mark||'';
-  el.querySelector('[data-f=dur]').value=sc.dur>0?sc.dur:''; el.querySelector('[data-f=act]').value=sc.act||'';
-  const ph={umriss:'Chile',verschieben:'Grönland -> afrika\nUSA -> 24, 8',pins:'-33.45, -70.67 | Santiago\nlinie',ranking:'China | 14 Nachbarn'};
-  const aw=el.querySelector('[data-actwrap]'); aw.hidden=!ph[sc.type]; el.querySelector('[data-f=act]').placeholder=ph[sc.type]||'';
-  el.addEventListener('input',e=>{const f=e.target.dataset.f; if(!f) return; sc[f]=f==='dur'?(parseFloat(e.target.value)||0):e.target.value;
-   if(f==='type'){K.story='custom'; $('kStory').value='custom'; kCards();} else K.story==='custom'||($('kStory').value='custom',K.story='custom'); kRender();});
-  el.addEventListener('click',e=>{const a=e.target.dataset&&e.target.dataset.a; if(!a) return;
-   if(a==='view'){ if(kPlaying) return; kPlay(kStart(i),kStart(i)+kd.durs[i]); kc.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'}); return;}
-   if(a==='up'&&i>0){[K.scenes[i-1],K.scenes[i]]=[K.scenes[i],K.scenes[i-1]];}
-   if(a==='down'&&i<K.scenes.length-1){[K.scenes[i+1],K.scenes[i]]=[K.scenes[i],K.scenes[i+1]];}
-   if(a==='del'){K.scenes.splice(i,1);}
-   K.story='custom'; $('kStory').value='custom'; kCards(); kRender();});
-  box.appendChild(el);});}
-
-const kStory=$('kStory'); STORIES.forEach(s=>{const o=document.createElement('option');o.value=s.id;o.textContent=s.label;kStory.appendChild(o);});
-{const o=document.createElement('option');o.value='custom';o.textContent='Eigenes Video';kStory.appendChild(o);}
-kStory.value=K.story; $('kWpm').value=String(K.wpm); $('kSubs').checked=K.subs;
-kStory.addEventListener('change',()=>{const s=STORIES.find(s=>s.id===kStory.value); K.story=kStory.value; if(s) K.scenes=JSON.parse(JSON.stringify(s.scenes)); kCards(); kRender();});
-$('kWpm').addEventListener('change',()=>{K.wpm=+$('kWpm').value; kRender();});
-$('kSubs').addEventListener('change',()=>{K.subs=$('kSubs').checked; kRender();});
-$('kAdd').addEventListener('click',()=>{K.scenes.push({type:'karte',cam:'',mark:'',head:'',text:'',act:'',dur:0}); K.story='custom'; kStory.value='custom'; kCards(); kRender();});
-$('kPlay').addEventListener('click',()=>{if(!kPlaying) kPlay(0,kd.total);});
-function kLegacyRecord(){const el=$('kStatus'); if(kPlaying) return;
- const types=['video/mp4;codecs=avc1.42E01E','video/mp4','video/webm;codecs=vp9','video/webm'];
- const mt=window.MediaRecorder&&kc.captureStream?types.find(t=>MediaRecorder.isTypeSupported(t)):null;
- if(!mt){status(el,'Aufnahme wird auf diesem Gerät nicht unterstützt. Nutze die Bildschirmaufnahme.',true);return;}
- const rec=new MediaRecorder(kc.captureStream(30),{mimeType:mt,videoBitsPerSecond:8_000_000}); const chunks=[];
- rec.ondataavailable=e=>{if(e.data&&e.data.size) chunks.push(e.data);};
- rec.onstop=()=>{const ext=mt.includes('mp4')?'mp4':'webm'; const blob=new Blob(chunks,{type:mt.split(';')[0]}); $('kRecord').disabled=false;
-  status(el,`Fertig (${(blob.size/1e6).toFixed(1)} MB). Speichern …`); (kPending={name:`${CH.id}_wissen_${K.story}.${ext}`,blob},$('kSaveVideo').hidden=false);};
- $('kRecord').disabled=true; status(el,`Nimmt auf … bitte die Seite offen lassen (${fmt(kd.total)}).`); rec.start(1000);
- kPlay(0,kd.total+1.2,()=>{try{rec.requestData();}catch(e){} setTimeout(()=>rec.stop(),700);});}
-let kPending=null;
-$('kSaveVideo').addEventListener('click',()=>{if(kPending) save(kPending.name,kPending.blob,$('kStatus'));});
-$('kRecord').addEventListener('click',async()=>{const el=$('kStatus'); if(kPlaying) return; $('kSaveVideo').hidden=true;
- let codecs=null; try{codecs=await pickCodecs(false);}catch(e){}
- if(!codecs){status(el,'Sauberer Export wird hier nicht unterstützt, nehme live auf …'); return kLegacyRecord();}
- kPlaying=true; $('kRecord').disabled=true; status(el,'Rendere Video … 0 %');
- try{const blob=await renderClean({canvas:kc,draw:t=>drawK(kctx,Math.min(t,kd.total)),duration:kd.total+1.2,audio:null,codecs,onProgress:p=>status(el,`Rendere Video … ${Math.round(p*100)} %`)});
-  kPending={name:`${CH.id}_wissen_${K.story}.mp4`,blob}; status(el,`Fertig: ${(blob.size/1e6).toFixed(1)} MB, 30 fps. Jetzt sichern.`); $('kSaveVideo').hidden=false;}
- catch(e){status(el,'Export fehlgeschlagen ('+((e&&e.message)||e)+'). Nutze „Vorschau abspielen“ + Bildschirmaufnahme.',true);}
- finally{kPlaying=false; $('kRecord').disabled=false; kRender();}});
-
-$('kCopy').addEventListener('click',async()=>{const ta=$('kScript'); try{await navigator.clipboard.writeText(ta.value); $('kCopy').textContent='Kopiert';}catch(e){ta.select(); $('kCopy').textContent='Markiert';} setTimeout(()=>$('kCopy').textContent='Kopieren',1600);});
-$('kSaveMd').addEventListener('click',()=>save(`Skript – ${(STORIES.find(s=>s.id===K.story)||{label:'Eigenes Wissens-Video'}).label.replace(/[?\/]/g,'')}.md`,$('kScript').value,$('kStatus')));
-
+// =================== Wissen 2.0 (js/wissen.js) ===================
+window.GEO={world,features,byId,NAMES,pickCodecs,renderClean,save,status,dataURLtoBlob};
 function setMode(m){const w=m==='wissen'; $('mode-wissen').hidden=!w; $('mode-quiz').hidden=w; $('tab-wissen').setAttribute('aria-selected',w); $('tab-quiz').setAttribute('aria-selected',!w);
- try{localStorage.setItem('geofy-mode',m);}catch(e){} if(w) kRender();}
+ try{localStorage.setItem('geofy-mode',m);}catch(e){} if(w&&window.WISSEN) window.WISSEN.show();}
 $('tab-quiz').addEventListener('click',()=>setMode('quiz')); $('tab-wissen').addEventListener('click',()=>setMode('wissen'));
-kCards();
 let startMode='quiz'; try{startMode=localStorage.getItem('geofy-mode')||'quiz';}catch(e){}
 if(location.hash==='#wissen') startMode='wissen';
 
@@ -680,5 +460,5 @@ if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').then(
  navigator.serviceWorker.addEventListener('controllerchange',()=>location.reload());}
 try{await Promise.all(['800 100px "Bricolage Grotesque"','500 30px "Hanken Grotesk"','700 30px "JetBrains Mono"','500 30px "JetBrains Mono"'].map(f=>document.fonts.load(f)));}catch(e){}
 refresh(); setMode(startMode);
-document.fonts&&document.fonts.ready.then(()=>{refresh(); kRender();});
+document.fonts&&document.fonts.ready.then(()=>{refresh();});
 })();
