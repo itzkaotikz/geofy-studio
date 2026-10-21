@@ -1,0 +1,29 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:"Bricolage Grotesque";src:url(/geofy-studio/fonts/BricolageGrotesque.ttf);font-weight:200 800}
+@font-face{font-family:"Hanken Grotesk";src:url(/geofy-studio/fonts/HankenGrotesk.ttf);font-weight:100 900}
+@font-face{font-family:"JetBrains Mono";src:url(/geofy-studio/fonts/JetBrainsMono.ttf);font-weight:100 800}
+body{margin:0;background:#000}</style></head><body><script type="text/plain" id="script">Diese kleine Insel gehört ein halbes Jahr zu Spanien und ein halbes Jahr zu Frankreich. Jedes Jahr wieder, und das seit über 350 Jahren.
+
+Sie heißt Fasaneninsel und liegt im Grenzfluss Bidasoa, zwischen dem spanischen Irun und dem französischen Hendaye. Sie ist nur rund 200 Meter lang und 40 Meter breit.
+
+Von Februar bis Ende Juli ist Spanien zuständig. Von August bis Ende Januar übernimmt Frankreich. Damit gilt sie als kleinstes Kondominium der Welt, also als Gebiet, das sich zwei Länder teilen.
+
+Warum ausgerechnet hier? 1659 verhandelten Frankreich und Spanien auf der Insel über Frieden. Weil sie mitten im Fluss liegt, musste keine Seite das Land der anderen betreten. Das Ergebnis war der Pyrenäenfrieden.
+
+Ein Jahr später verabschiedete sich hier die spanische Prinzessin Maria Theresia von ihrem Vater. Danach ging sie nach Frankreich, um König Ludwig den Vierzehnten zu heiraten.
+
+Und heute? Die Insel ist unbewohnt und darf meistens nicht betreten werden. Gepflegt wird sie abwechselnd von den Städten Irun und Hendaye.
+
+Wusstest du das schon? Gib dem Video ein Like, schreib in die Kommentare, ob du es wusstest, und schick es jemandem, den das auch interessiert.</script><canvas id="c" width="1080" height="1920"></canvas>
+<script src="/geofy-studio/vendor/d3.min.js"></script><script src="kv-engine.js"></script><script src="fasan.js"></script>
+<script>
+window.ready=(async()=>{const w=await (await fetch('/geofy-studio/data/world.json')).json(); KV.setWorld(w); 
+ const style=new URLSearchParams(location.search).get('style')||'studio'; if(style!=='studio'){const im=new Image(); im.src='tex/'+style+'.jpg'; await im.decode(); KV.setStyle(style,im);}
+ await Promise.all(['800 40px "Bricolage Grotesque"','700 30px "Hanken Grotesk"','700 30px "JetBrains Mono"','500 30px "Hanken Grotesk"'].map(f=>document.fonts.load(f)));
+ const st=makeStory(); const tf=new URLSearchParams(location.search).get('timing'); const timing=tf?await (await fetch(tf)).json():null; const S=KV.build(st,window.WPM||158,timing); S.tag=st.tag;
+ S.scenes.forEach(sc=>{ // pops on visible moments
+  ['halbes Jahr','350','Fasaneninsel','Irun','Hendaye','200 Meter','Spanien zuständig','Frankreich.','Kondominium','1659','keine Seite','Pyrenäenfrieden','Prinzessin','Ludwig','unbewohnt','abwechselnd'].forEach(f=>{if(sc.say.includes(f)) S.events.push({t:sc.start+st.wt(sc,f),kind:'pop'});});});
+ window.S=S; return {total:S.total,scenes:S.scenes.map(s=>({head:s.head,start:+s.start.toFixed(2),dur:+s.dur.toFixed(2),say:s.say})),events:S.events};})();
+const ctx=document.getElementById('c').getContext('2d');
+window.frame=(t,q)=>{KV.draw(ctx,t); return document.getElementById('c').toDataURL('image/jpeg',q||0.93);};
+</script></body></html>
