@@ -1,0 +1,30 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:"Bricolage Grotesque";src:url(/geofy-studio/fonts/BricolageGrotesque.ttf);font-weight:200 800}
+@font-face{font-family:"Hanken Grotesk";src:url(/geofy-studio/fonts/HankenGrotesk.ttf);font-weight:100 900}
+@font-face{font-family:"JetBrains Mono";src:url(/geofy-studio/fonts/JetBrainsMono.ttf);font-weight:100 800}
+body{margin:0;background:#000}</style></head><body><script type="text/plain" id="script">Mitten in der EU liegt ein Stück Russland. Es grenzt an Polen und Litauen, aber nicht an den Rest von Russland. Das ist Kaliningrad.
+
+Die Region ist etwas kleiner als Schleswig-Holstein und hat rund eine Million Einwohner. Wer von hier mit dem Auto nach Moskau will, muss durch andere Länder. Und Flugzeuge nehmen den Umweg über die Ostsee.
+
+Früher hieß die Stadt Königsberg und war die Hauptstadt von Ostpreußen. Hier lebte auch der berühmte Philosoph Immanuel Kant.
+
+Nach dem Zweiten Weltkrieg kam das Gebiet 1945 an die Sowjetunion. Die deutsche Bevölkerung musste gehen, und 1946 wurde Königsberg in Kaliningrad umbenannt.
+
+Solange es die Sowjetunion gab, war die Lage kein Problem, denn Litauen gehörte damals dazu. Doch 1991 wurde Litauen unabhängig, und Kaliningrad war plötzlich vom Rest Russlands abgeschnitten.
+
+Heute ist die Region für Russland trotzdem sehr wichtig. Im Hafen Baltijsk liegt die Ostseeflotte. Und hier lagern rund 90 Prozent des weltweiten Bernsteins.
+
+Kennst du noch mehr Gebiete, die vom eigenen Land abgeschnitten sind? Schreib es in die Kommentare.
+</script><canvas id="c" width="1080" height="1920"></canvas>
+<script src="/geofy-studio/vendor/d3.min.js"></script><script src="kv-engine.js"></script><script src="kaliningrad.js"></script>
+<script>
+window.ready=(async()=>{const w=await (await fetch('/geofy-studio/data/world.json')).json(); KV.setWorld(w); window.SHAPE_SH=await (await fetch('sh.json')).json(); window.SHAPE_KAL=await (await fetch('kal10.json')).json();
+ const style=new URLSearchParams(location.search).get('style')||'studio'; if(style!=='studio'){const im=new Image(); im.src='tex/'+style+'.jpg'; await im.decode(); KV.setStyle(style,im);}
+ await Promise.all(['800 40px "Bricolage Grotesque"','700 30px "Hanken Grotesk"','700 30px "JetBrains Mono"','500 30px "Hanken Grotesk"'].map(f=>document.fonts.load(f)));
+ const st=makeStory(); const tf=new URLSearchParams(location.search).get('timing'); const timing=tf?await (await fetch(tf)).json():null; const S=KV.build(st,window.WPM||158,timing); S.tag=st.tag;
+ S.scenes.forEach(sc=>{ // pops on visible moments
+  ['Polen','Litauen','Kaliningrad.','Schleswig','eine Million','mit dem Auto','Flugzeuge','Königsberg','Kant','1945','umbenannt','1991','abgeschnitten','Baltijsk','Bernstein'].forEach(f=>{if(sc.say.includes(f)) S.events.push({t:sc.start+st.wt(sc,f),kind:'pop'});});});
+ window.S=S; return {total:S.total,scenes:S.scenes.map(s=>({head:s.head,start:+s.start.toFixed(2),dur:+s.dur.toFixed(2),say:s.say})),events:S.events};})();
+const ctx=document.getElementById('c').getContext('2d');
+window.frame=(t,q)=>{KV.draw(ctx,t); return document.getElementById('c').toDataURL('image/jpeg',q||0.93);};
+</script></body></html>
