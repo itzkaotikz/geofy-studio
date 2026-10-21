@@ -1,11 +1,13 @@
 import json, re, numpy as np, sys
-scenes=[s['say'] for s in json.load(open('out/chile.json'))['scenes']]
-SPOKEN={'4.270':'viertausendzweihundertsiebzig','177':'hundertsiebenundsiebzig','6.000':'sechstausend','1960':'neunzehnhundertsechzig','9,5':'neun komma fünf','1881':'achtzehnhunderteinundachtzig'}
+import sys, re as _re
+SCRIPT=sys.argv[1] if len(sys.argv)>1 else None; DB=sys.argv[2] if len(sys.argv)>2 else 'db.npy'; OUT=sys.argv[3] if len(sys.argv)>3 else 'timing_chile.json'
+scenes=[_re.sub(r'\s+',' ',p).strip() for p in open(SCRIPT).read().strip().split('\n\n')] if SCRIPT else [s['say'] for s in json.load(open('out/chile.json'))['scenes']]
+SPOKEN={'4.270':'viertausendzweihundertsiebzig','177':'hundertsiebenundsiebzig','6.000':'sechstausend','1960':'neunzehnhundertsechzig','9,5':'neun komma fünf','1881':'achtzehnhunderteinundachtzig','14-mal':'vierzehnmal','1569':'fünfzehnhundertneunundsechzig','23':'dreiundzwanzig'}
 def syl(w):
     core=re.sub(r'[^\wäöüÄÖÜß.,]','',w); core=core.strip('.,:?!')
     s=SPOKEN.get(core,core).lower()
     return max(1,len(re.findall(r'[aeiouyäöü]+',s)))
-db=np.load('db.npy'); hop=0.01
+db=np.load(DB); hop=0.01
 # speech onset / offset
 thr=db.max()-38; act=np.where(db>thr)[0]; t_on=act[0]*hop; t_off=act[-1]*hop+0.02
 # pauses (start,end)
@@ -83,7 +85,7 @@ out=[]
 for si in range(len(scenes)):
     ws=[dict(w=toks[k]['w'],t0=times[k][0],t1=times[k][1]) for k in range(len(toks)) if toks[k]['scene']==si]
     out.append(dict(words=ws,speechStart=ws[0]['t0'],speechEnd=ws[-1]['t1']))
-json.dump(dict(audio=float(len(db)*hop),onset=t_on,offset=t_off,scenes=out),open('timing_chile.json','w'),indent=1)
+json.dump(dict(audio=float(len(db)*hop),onset=t_on,offset=t_off,scenes=out),open(OUT,'w'),indent=1)
 for si,o in enumerate(out): print(si+1, o['speechStart'], o['speechEnd'], ' '.join(w['w'] for w in o['words'][:4]))
 print('unmatched boundaries:',[ (toks[k]['w'],typ) for (k,typ,f),m in zip(B,match) if m is None])
 print('pauses used',sum(m is not None for m in match),'of',nP)

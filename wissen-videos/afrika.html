@@ -1,0 +1,30 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:"Bricolage Grotesque";src:url(/geofy-studio/fonts/BricolageGrotesque.ttf);font-weight:200 800}
+@font-face{font-family:"Hanken Grotesk";src:url(/geofy-studio/fonts/HankenGrotesk.ttf);font-weight:100 900}
+@font-face{font-family:"JetBrains Mono";src:url(/geofy-studio/fonts/JetBrainsMono.ttf);font-weight:100 800}
+body{margin:0;background:#000}</style></head><body><script type="text/plain" id="script">Auf dieser Karte sehen Grönland und Afrika fast gleich groß aus. In Wahrheit ist Afrika 14-mal so groß.
+
+Schuld ist die Mercator-Karte von 1569. Sie wurde für Seefahrer gemacht, denn Kurse lassen sich darauf als gerade Linien einzeichnen. Der Preis dafür: Je weiter ein Land vom Äquator entfernt ist, desto größer wird es dargestellt.
+
+Schieben wir Grönland zum Äquator, schrumpft es auf seine echte Größe. Algerien allein ist schon größer als Grönland. Und der Kongo auch.
+
+Wie groß ist Afrika also wirklich? Die USA, China, Indien und Japan passen gleichzeitig hinein. Zusammen über 23 Millionen Quadratkilometer. Und dann ist immer noch Platz für fast ganz Europa.
+
+Selbst Russland, das größte Land der Erde, wirkt auf der Karte riesig. Am Äquator sieht man: Afrika ist fast doppelt so groß.
+
+Deshalb gibt es flächentreue Karten, zum Beispiel die Equal-Earth-Projektion. Sie zeigt alle Kontinente in ihrer echten Größe. Und plötzlich sieht die Welt ganz anders aus.
+
+Welches Land soll ich als Nächstes in seiner echten Größe zeigen? Schreib es in die Kommentare.
+</script><canvas id="c" width="1080" height="1920"></canvas>
+<script src="/geofy-studio/vendor/d3.min.js"></script><script src="kv-engine.js"></script><script src="afrika.js"></script>
+<script>
+window.ready=(async()=>{const w=await (await fetch('/geofy-studio/data/world.json')).json(); KV.setWorld(w);
+ const style=new URLSearchParams(location.search).get('style')||'studio'; if(style!=='studio'){const im=new Image(); im.src='tex/'+style+'.jpg'; await im.decode(); KV.setStyle(style,im);}
+ await Promise.all(['800 40px "Bricolage Grotesque"','700 30px "Hanken Grotesk"','700 30px "JetBrains Mono"','500 30px "Hanken Grotesk"'].map(f=>document.fonts.load(f)));
+ const st=makeStory(); const tf=new URLSearchParams(location.search).get('timing'); const timing=tf?await (await fetch(tf)).json():null; const S=KV.build(st,window.WPM||158,timing); S.tag=st.tag;
+ S.scenes.forEach(sc=>{ // pops on visible moments
+  ['In Wahrheit','Kurse','Der Preis','Algerien','Kongo','USA','China','Indien','Japan','Zusammen','fast ganz Europa','Am Äquator','Equal-Earth'].forEach(f=>{if(sc.say.includes(f)) S.events.push({t:sc.start+st.wt(sc,f),kind:'pop'});});});
+ window.S=S; return {total:S.total,scenes:S.scenes.map(s=>({head:s.head,start:+s.start.toFixed(2),dur:+s.dur.toFixed(2),say:s.say})),events:S.events};})();
+const ctx=document.getElementById('c').getContext('2d');
+window.frame=(t,q)=>{KV.draw(ctx,t); return document.getElementById('c').toDataURL('image/jpeg',q||0.93);};
+</script></body></html>

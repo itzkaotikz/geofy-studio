@@ -89,7 +89,7 @@ function draw(ctx,t){
   (sc.under||[]).forEach(fn=>fn(env));
   ctx.strokeStyle='rgba(11,28,42,0.55)'; ctx.lineWidth=1.8; ctx.lineJoin='round'; ctx.stroke(land);
  } else {
-  ctx.fillStyle='#06101a'; ctx.fillRect(0,0,W,H); drawTexture(ctx,proj);
+  ctx.fillStyle='#0a1830'; ctx.fillRect(0,0,W,H); drawTexture(ctx,proj);
   (sc.under||[]).forEach(fn=>fn(env));
   land=landPath(proj,v.scale); ctx.strokeStyle='rgba(255,255,255,0.42)'; ctx.lineWidth=1.6; ctx.lineJoin='round'; ctx.stroke(land);
   const vg=ctx.createRadialGradient(W/2,880,420,W/2,880,1300); vg.addColorStop(0,'rgba(0,0,0,0)'); vg.addColorStop(1,'rgba(0,0,0,0.55)'); ctx.fillStyle=vg; ctx.fillRect(0,0,W,H);
