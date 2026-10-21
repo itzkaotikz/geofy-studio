@@ -15,15 +15,15 @@ function moved(geom,from,to){const r1=d3.geoRotation([-from[0],-from[1]]), r2=d3
 function drawShape(e,g,col,a,{fillA=0.82,stroke='#fff'}={}){if(a<=0) return; const {ctx,path}=e; ctx.save(); ctx.globalAlpha=a; ctx.beginPath(); path(g); ctx.globalAlpha=a*fillA; ctx.fillStyle=col; ctx.fill(); ctx.globalAlpha=a; ctx.strokeStyle=stroke; ctx.lineWidth=2.5; ctx.lineJoin='round'; ctx.stroke(); ctx.restore();}
 const group=(e,ids,col,a)=>ids.forEach(id=>hl(e,id,col,a,{outline:false}));
 const mp=id=>mainPart(id).geometry, cen=id=>d3.geoCentroid(mainPart(id));
-const vAtl=viewBox([-62,-37,62,83]), vAfr=viewBox([-22,-37,56,38]), vAfrW=viewBox([-32,-37,55,40]), vRusN=viewBox([25,38,179,80]), vRusA=viewBox([-55,-38,55,42]);
+const vGrl=viewBox([-78,57,-8,84]), vAfrC=viewBox([-22,-36,54,38]), vWide=viewBox([-105,-48,75,83]), vRoute=viewBox([-80,8,5,52]), vTissot=viewBox([-62,-12,4,84]), vAlg=viewBox([-26,-2,16,38]), vCongo=viewBox([-26,-14,34,24]), vAfrZ=viewBox([-12,-30,48,30]), vWorld2=viewBox([-125,-50,155,83]), vAtl=viewBox([-62,-37,62,83]), vAfr=viewBox([-22,-37,56,38]), vAfrW=viewBox([-32,-37,55,40]), vRusN=viewBox([25,38,179,80]), vRusA=viewBox([-55,-38,55,42]);
 const GRL=mp('GRL'), gFrom=cen('GRL');
 
 const scenes=[
- {head:'Wie groß ist Afrika wirklich?', headInstant:true, view:vAtl, say:S_say[0],
+ {head:'Wie groß ist Afrika wirklich?', headInstant:true, say:S_say[0], cams:[{at:0,view:vGrl},{at:sc=>wt(sc,'Afrika')-0.3,view:vAfrC,fly:1.4},{at:sc=>wt(sc,'In Wahrheit')-0.2,view:vAtl,fly:1.3}],
   under:[e=>{hl(e,'GRL',C.ok,1); group(e,AFR,C.target,0.9);}],
   over:[e=>{const {u,sc}=e; const g=P(e,[-42,72]), a=P(e,[18,4]); label(e.ctx,'Grönland',g[0]-20,g[1],{color:C.ok,font:`800 34px ${FD}`}); label(e.ctx,'Afrika',a[0]-60,a[1],{color:C.target,font:`800 34px ${FD}`});
    const k=clamp((u-wt(sc,'In Wahrheit'))/0.4); if(k>0) label(e.ctx,'Afrika = 14 × Grönland',L+40,1180,{color:'#fff',bg:'rgba(255,59,127,0.95)',font:`800 46px ${FD}`,alpha:k});}]},
- {head:'Die Mercator-Karte', view:vAtl, say:S_say[1],
+ {head:'Die Mercator-Karte', say:S_say[1], cams:[{at:0,view:vWide,fly:1.4},{at:sc=>wt(sc,'Kurse')-0.4,view:vRoute,fly:1.3},{at:sc=>wt(sc,'Der Preis')-0.2,view:vTissot,fly:1.4}],
   under:[e=>{hl(e,'GRL',C.ok,0.8); group(e,AFR,C.target,0.6);}],
   over:[e=>{const {ctx,u,sc,path}=e;
    // straight course line = constant compass bearing
@@ -35,14 +35,14 @@ const scenes=[
    const t0=wt(sc,'Der Preis'); [0,25,45,60,72].forEach((la,i)=>{const a=clamp((u-t0-i*0.35)/0.5); if(a<=0) return;
     const c=d3.geoCircle().center([-30,la]).radius(4.5)(); ctx.save(); ctx.globalAlpha=a; ctx.beginPath(); path(c); ctx.fillStyle='rgba(242,182,109,0.55)'; ctx.fill(); ctx.strokeStyle=C.sand; ctx.lineWidth=3; ctx.stroke(); ctx.restore();});
    const a2=clamp((u-t0-1.2)/0.5); const q=P(e,[-30,72]); label(ctx,'gleich groß – in echt',q[0]+70,q[1]+10,{color:C.sand,alpha:a2,font:`700 28px ${FB}`});}]},
- {head:'Grönland in echt', cams:[{at:0,view:vAtl},{at:0.6,view:vAfrW,fly:2.4}], say:S_say[2],
+ {head:'Grönland in echt', cams:[{at:0,view:vAtl},{at:0.6,view:vAfrW,fly:2.4},{at:sc=>wt(sc,'Algerien')-0.3,view:vAlg,fly:1.2},{at:sc=>wt(sc,'Kongo')-0.3,view:vCongo,fly:1.1}], say:S_say[2],
   under:[e=>{group(e,AFR,C.target,0.35); const {u,sc}=e; hl(e,'DZA',C.sand,clamp((u-wt(sc,'Algerien')+0.2)/0.4)); hl(e,'COD',C.ice,clamp((u-wt(sc,'Kongo')+0.2)/0.4));}],
   over:[e=>{const {u,sc,ctx}=e; const k=ease(clamp((u-0.5)/2.4)); const to=d3.geoInterpolate(gFrom,[-14,8])(k);
    hl(e,'GRL',C.ok,0.35*(1-k),{outline:false}); const g=moved(GRL,gFrom,to); drawShape(e,g,C.ok,1);
    const q=P(e,to); if(k>0.95) label(ctx,'Grönland · 2,17 Mio km²',q[0]-120,q[1]+150,{color:C.ok,font:`800 30px ${FD}`});
    const a1=clamp((u-wt(sc,'Algerien'))/0.4), qa=P(e,[3,36.5]); label(ctx,'Algerien · 2,38 Mio km²',qa[0]-60,qa[1]-40,{color:C.sand,alpha:a1,font:`800 30px ${FD}`});
    const a2=clamp((u-wt(sc,'Kongo'))/0.4), qc=P(e,[23,-3]); label(ctx,'DR Kongo · 2,34 Mio km²',qc[0]-60,qc[1]+60,{color:C.ice,alpha:a2,font:`800 30px ${FD}`});}]},
- {head:'Was alles in Afrika passt', view:vAfr, say:S_say[3],
+ {head:'Was alles in Afrika passt', say:S_say[3], cams:[{at:0,view:vAfr,fly:1.3},{at:sc=>wt(sc,'Zusammen')-0.3,view:vAfrZ,fly:1.4},{at:sc=>wt(sc,'fast ganz Europa')-0.4,view:vAfr,fly:1.2}],
   under:[e=>group(e,AFR,C.target,0.3)],
   over:[e=>{const {u,sc,ctx}=e; const items=[['USA','USA',[3,23],C.ok],['China','CHN',[22,1],C.ice],['Indien','IND',[24,-22],C.sand],['Japan','JPN',[42,7],C.green]];
    items.forEach(([frag,id,to,col],i)=>{const t=wt(sc,frag); const k=ease(clamp((u-t)/1.2)); if(k<=0) return; const from=cen(id); const cur=d3.geoInterpolate([to[0]+40,to[1]+25],to)(k);
@@ -57,7 +57,7 @@ const scenes=[
    hl(e,'RUS',C.ice,0.5*(1-k*0.6),{outline:false}); if(k>0) drawShape(e,moved(mp('RUS'),from,to),C.ice,1,{fillA:0.6});
    const a1=clamp((u-0.4)/0.5), qr=P(e,[100,64]); label(ctx,'Russland · 17,1 Mio km²',qr[0]-200,qr[1]-60,{color:C.ice,alpha:a1*(1-k),font:`800 30px ${FD}`});
    if(k>0.95){label(ctx,'Russland · 17,1',L+20,1170,{color:C.ice,font:`800 38px ${FD}`}); label(ctx,'Afrika · 30,4 Mio km²',L+20,1240,{color:C.target,font:`800 38px ${FD}`});}}]},
- {head:'Die Welt in echter Größe', view:vAtl, say:S_say[5],
+ {head:'Die Welt in echter Größe', say:S_say[5], cams:[{at:0,view:vWorld2,fly:1.6}],
   under:[e=>{hl(e,'GRL',C.ok,0.8); group(e,AFR,C.target,0.8);}],
   over:[e=>{const {u,sc,ctx}=e; const t=wt(sc,'Equal-Earth'); const a=clamp((u-t+0.3)/1.0); if(a<=0) return;
    // flat equal-area world drawn over the satellite map
@@ -67,7 +67,7 @@ const scenes=[
    ctx.beginPath(); AFR.forEach(id=>pth(BY.get(id))); ctx.fillStyle=C.target; ctx.fill(); ctx.beginPath(); pth(BY.get('GRL')); ctx.fillStyle=C.ok; ctx.fill();
    ctx.beginPath(); pth({type:'Sphere'}); ctx.strokeStyle='rgba(246,241,231,0.5)'; ctx.lineWidth=3; ctx.stroke(); ctx.restore();
    label(ctx,'Equal Earth · flächentreu',L+10,500,{color:C.ok,alpha:a,font:`800 32px ${FD}`});}]},
- {view:vAtl, say:S_say[6],
+ {say:S_say[6], cams:[{at:0,view:vAfrC,fly:1.0},{at:1.2,view:vAtl,fly:3.5}],
   under:[e=>group(e,AFR,C.target,0.9)],
   top:[e=>{const {ctx,u}=e; const a=eout(clamp((u-0.2)/0.6)); ctx.save(); ctx.globalAlpha=a; ctx.fillStyle='rgba(11,28,42,0.9)'; rr(ctx,L,600,780,470,32); ctx.fill();
    const q='Welches Land als Nächstes in echter Größe?'; const z=fit(ctx,q,800,76,52,700,FD); ctx.fillStyle=C.ink; wrapLines(ctx,q,700).forEach((l,i)=>ctx.fillText(l,L+40,710+i*(z+8)));

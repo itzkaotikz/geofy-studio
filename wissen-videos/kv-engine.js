@@ -62,7 +62,13 @@ function build(story,wpm,timing){let t=0; let scenes;
   sc.subs.forEach((x,i)=>{x.until=i<sc.subs.length-1?sc.subs[i+1].from:x.to+0.6;});});
  S={scenes,total:t,events:[]}; scenes.forEach(sc=>{S.events.push({t:sc.start,kind:'whoosh'}); (sc.pops||[]).forEach(p=>S.events.push({t:sc.start+p,kind:'pop'}));}); S.events.push({t:S.total-0.2,kind:'end'});
  return S;}
-function camAt(sc,u){let v=sc.prevView, from=0; for(const c of sc.cams){const fly=c.fly??1.2; if(u<c.at) break; const k=ease(clamp((u-c.at)/fly)); v=lerpView(v,c.view,k); from=c.at;} return v;}
+function camAt(sc,u){let v=sc.prevView, from=0; for(const c of sc.cams){const fly=c.fly??1.2; if(u<c.at) break; const k=ease(clamp((u-c.at)/fly)); v=lerpView(v,c.view,k); from=c.at;}
+ // gentle continuous camera breathing so the map never stands still
+ const t=sc.start+u; return keepInside({lon:v.lon+Math.sin(t*0.37)*0.6*(400/v.scale), lat:v.lat+Math.sin(t*0.29+1)*0.4*(400/v.scale), scale:v.scale*(1+0.035*Math.sin(t*0.45))});}
+// never show the empty area beyond the map texture (above ~83°N / below ~78°S)
+function keepInside(v){if(STYLE==='studio') return v; const cy=KB[1]+KB[3]/2, up=cy, down=H-cy, top=MY(83), bot=MY(-78);
+ let s=v.scale; const need=(up+down)/(top-bot); if(s<need) s=need; let ym=MY(v.lat); ym=Math.min(ym,top-up/s); ym=Math.max(ym,bot+down/s);
+ const lat=(2*Math.atan(Math.exp(ym))-Math.PI/2)*180/Math.PI; return {lon:v.lon,lat,scale:s};}
 
 let STYLE='studio', TEX=null;
 function setStyle(name,img){STYLE=name; TEX=img||null;}
