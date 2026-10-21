@@ -1,0 +1,27 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:"Bricolage Grotesque";src:url(/geofy-studio/fonts/BricolageGrotesque.ttf);font-weight:200 800}
+@font-face{font-family:"Hanken Grotesk";src:url(/geofy-studio/fonts/HankenGrotesk.ttf);font-weight:100 900}
+@font-face{font-family:"JetBrains Mono";src:url(/geofy-studio/fonts/JetBrainsMono.ttf);font-weight:100 800}
+body{margin:0;background:#000}</style></head><body><script type="text/plain" id="script">Auf fast jeder Weltkarte sieht Kanada riesig aus, viel größer als die USA. Aber stimmt das auch?
+
+Schuld ist wieder die Mercator-Karte. Kanada liegt weiter im Norden und wird deshalb stärker aufgebläht. Auf der Karte wirkt es mehr als doppelt so groß wie die USA.
+
+In echter Größe ist der Unterschied winzig. Kanada hat knapp zehn Millionen Quadratkilometer, die USA etwas mehr als neuneinhalb Millionen. Kanada ist also nur ein paar Prozent größer.
+
+Und jetzt wird es spannend: Fast neun Prozent von Kanada sind Wasser. Kein Land der Welt hat so viele Seen. Zählt man nur die Landfläche, haben die USA sogar ein kleines bisschen mehr.
+
+Auch bei den Menschen liegen Welten dazwischen. In den USA leben über 340 Millionen, in Kanada nur rund 41 Millionen. Und sieben von zehn Kanadiern wohnen weniger als 150 Kilometer von der Grenze zu den USA entfernt.
+
+Wusstest du das schon? Gib dem Video ein Like, schreib in die Kommentare, ob du es wusstest, und schick es jemandem, den das auch interessiert.</script><canvas id="c" width="1080" height="1920"></canvas>
+<script src="/geofy-studio/vendor/d3.min.js"></script><script src="kv-engine.js"></script><script src="kanada.js"></script>
+<script>
+window.ready=(async()=>{const w=await (await fetch('/geofy-studio/data/world.json')).json(); KV.setWorld(w); window.LAKES=await (await fetch('lakes_na.json')).json(); 
+ const style=new URLSearchParams(location.search).get('style')||'studio'; if(style!=='studio'){const im=new Image(); im.src='tex/'+style+'.jpg'; await im.decode(); KV.setStyle(style,im);}
+ await Promise.all(['800 40px "Bricolage Grotesque"','700 30px "Hanken Grotesk"','700 30px "JetBrains Mono"','500 30px "Hanken Grotesk"'].map(f=>document.fonts.load(f)));
+ const st=makeStory(); const tf=new URLSearchParams(location.search).get('timing'); const timing=tf?await (await fetch(tf)).json():null; const S=KV.build(st,window.WPM||158,timing); S.tag=st.tag;
+ S.scenes.forEach(sc=>{ // pops on visible moments
+  ['Kanada riesig','stimmt','Norden','doppelt','winzig','zehn Millionen','neuneinhalb','Wasser','Seen','Landfläche','340','41','sieben von zehn','150'].forEach(f=>{if(sc.say.includes(f)) S.events.push({t:sc.start+st.wt(sc,f),kind:'pop'});});});
+ window.S=S; return {total:S.total,scenes:S.scenes.map(s=>({head:s.head,start:+s.start.toFixed(2),dur:+s.dur.toFixed(2),say:s.say})),events:S.events};})();
+const ctx=document.getElementById('c').getContext('2d');
+window.frame=(t,q)=>{KV.draw(ctx,t); return document.getElementById('c').toDataURL('image/jpeg',q||0.93);};
+</script></body></html>
