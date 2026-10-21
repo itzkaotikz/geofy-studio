@@ -8,7 +8,7 @@ body{margin:0;background:#000}</style></head><body><canvas id="c" width="1080" h
 window.ready=(async()=>{const w=await (await fetch('/geofy-studio/data/world.json')).json(); KV.setWorld(w);
  const style=new URLSearchParams(location.search).get('style')||'studio'; if(style!=='studio'){const im=new Image(); im.src='tex/'+style+'.jpg'; await im.decode(); KV.setStyle(style,im);}
  await Promise.all(['800 40px "Bricolage Grotesque"','700 30px "Hanken Grotesk"','700 30px "JetBrains Mono"','500 30px "Hanken Grotesk"'].map(f=>document.fonts.load(f)));
- const st=makeChile(); const S=KV.build(st,window.WPM||158); S.tag=st.tag;
+ const st=makeChile(); const tf=new URLSearchParams(location.search).get('timing'); const timing=tf?await (await fetch(tf)).json():null; const S=KV.build(st,window.WPM||158,timing); S.tag=st.tag;
  S.scenes.forEach(sc=>{ // pops on visible moments
   ['Im Osten','Im Westen','Dazwischen','Nazca','1960','1881','Peru','Bolivien','Im Norden','In der Mitte','Und im Süden','Nordnorwegen','Nordafrika','aber'].forEach(f=>{if(sc.say.includes(f)) S.events.push({t:sc.start+st.wt(sc,f),kind:'pop'});});});
  window.S=S; return {total:S.total,scenes:S.scenes.map(s=>({head:s.head,start:+s.start.toFixed(2),dur:+s.dur.toFixed(2),say:s.say})),events:S.events};})();

@@ -47,10 +47,19 @@ function chunks(text){const words=text.split(/\s+/).filter(Boolean); const out=[
 
 // ---- story ----
 let S=null; // {scenes, total}
-function build(story,wpm){let t=0; const scenes=story.scenes.map(sc=>{const words=sc.say.split(/\s+/).filter(Boolean).length; const speak=words*60/wpm;
+function build(story,wpm,timing){let t=0; let scenes;
+ if(timing){ // real voice: scene starts shortly before its first spoken word, words carry exact times
+  const T=timing.scenes; const starts=T.map((x,i)=>i===0?0:Math.max(T[i-1].speechEnd+0.05,x.speechStart-0.35));
+  scenes=story.scenes.map((sc,i)=>{const start=starts[i], end=i<T.length-1?starts[i+1]:timing.offset+(sc.tail??1.8);
+   const words=T[i].words.map(w=>({w:w.w,t0:w.t0-start,t1:w.t1-start})); return {...sc,start,dur:end-start,speak:T[i].speechEnd-start,wordsT:words};});
+  t=scenes[scenes.length-1].start+scenes[scenes.length-1].dur;
+ } else scenes=story.scenes.map(sc=>{const words=sc.say.split(/\s+/).filter(Boolean).length; const speak=words*60/wpm;
   const dur=Math.max(sc.min||0,speak+(sc.pad??0.9)); const o={...sc,start:t,dur,speak}; t+=dur; return o;});
  scenes.forEach((sc,i)=>{sc.cams=(sc.cams||[{at:0,view:sc.view}]).map(c=>({at:typeof c.at==='function'?c.at(sc):c.at,view:c.view,fly:c.fly})); sc.prevView=i? scenes[i-1].cams[scenes[i-1].cams.length-1].view : sc.cams[0].view;
-  const ch=chunks(sc.say); const total=ch.reduce((a,c)=>a+c.join(' ').length,0); let acc=0; sc.subs=ch.map(c=>{const len=c.join(' ').length; const o={words:c,from:0.25+acc/total*sc.speak,to:0.25+(acc+len)/total*sc.speak}; acc+=len; return o;});});
+  const ch=chunks(sc.say);
+  if(sc.wordsT){let k=0; sc.subs=ch.map(c=>{const ws=sc.wordsT.slice(k,k+c.length); k+=c.length; return {words:c,from:ws[0].t0,to:ws[ws.length-1].t1,times:ws.map(w=>w.t0)};});}
+  else {const total=ch.reduce((a,c)=>a+c.join(' ').length,0); let acc=0; sc.subs=ch.map(c=>{const len=c.join(' ').length; const o={words:c,from:0.25+acc/total*sc.speak,to:0.25+(acc+len)/total*sc.speak}; acc+=len; return o;});}
+  sc.subs.forEach((x,i)=>{x.until=i<sc.subs.length-1?sc.subs[i+1].from:x.to+0.6;});});
  S={scenes,total:t,events:[]}; scenes.forEach(sc=>{S.events.push({t:sc.start,kind:'whoosh'}); (sc.pops||[]).forEach(p=>S.events.push({t:sc.start+p,kind:'pop'}));}); S.events.push({t:S.total-0.2,kind:'end'});
  return S;}
 function camAt(sc,u){let v=sc.prevView, from=0; for(const c of sc.cams){const fly=c.fly??1.2; if(u<c.at) break; const k=ease(clamp((u-c.at)/fly)); v=lerpView(v,c.view,k); from=c.at;} return v;}
@@ -96,9 +105,9 @@ function draw(ctx,t){
   ctx.shadowColor='rgba(0,0,0,0.55)'; ctx.shadowBlur=18; const z=fit(ctx,sc.head,800,66,46,MW,FD); ctx.fillStyle=C.ink; wrapLines(ctx,sc.head,MW).forEach((l,i)=>ctx.fillText(l,L,368+i*(z+6))); ctx.restore();}
  (sc.top||[]).forEach(fn=>fn(env));
  // subtitles: low, centred, no box; active word pink
- const sub=sc.subs.find(s=>u>=s.from-0.05&&u<s.to+0.25);
+ const sub=sc.subs.find(s=>u>=s.from-0.05&&u<Math.min(s.until,s.to+0.6));
  if(sub&&!sc.noSubs){ctx.font=`800 58px ${FD}`; const ls=wrapLines(ctx,sub.words.join(' '),660); const cx=555, base=1560-(ls.length-1)*70;
-  const prog=clamp((u-sub.from)/(sub.to-sub.from)); const nAct=Math.floor(prog*sub.words.length+0.0001); let wi=0;
+  let nAct; if(sub.times){nAct=0; sub.times.forEach((tt,i)=>{if(u>=tt-0.03) nAct=i;});} else {const prog=clamp((u-sub.from)/(sub.to-sub.from)); nAct=Math.floor(prog*sub.words.length+0.0001);} let wi=0;
   ctx.lineJoin='round'; ctx.lineWidth=12; ctx.strokeStyle='rgba(6,16,26,0.92)';
   ls.forEach((l,li)=>{const lw=ctx.measureText(l).width; let x=cx-lw/2; const y=base+li*70; for(const w of l.split(' ')){ctx.strokeText(w,x,y); ctx.fillStyle=wi===nAct?C.target:wi<nAct?C.ink:'rgba(246,241,231,0.62)'; ctx.fillText(w,x,y); x+=ctx.measureText(w+' ').width; wi++;}});}
 }

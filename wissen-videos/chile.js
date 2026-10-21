@@ -8,7 +8,9 @@ const lats=[]; for(let la=-18;la>=-52;la-=1.25) lats.push(la);
 const east=lats.map(la=>[edge(la,'e'),la]).filter(p=>p[0]!==null), west=lats.map(la=>[edge(la,'w'),la]).filter(p=>p[0]!==null);
 const LEFTBOX=[80,420,520,1000];
 const vSA=viewBox([-90,-56,-34,8]), vEU=viewBox([-12,27,42,72]), vCL=viewObj(chMain,LEFTBOX,0.03), vPl=viewBox([-104,-50,-56,-16]), vNo=viewBox([-77,-26,-61,-14.5]), vWorld=viewBox([-175,-58,180,78],KB,0.0);
-let Ssc=null; const wt=(sc,frag)=>{const i=sc.say.indexOf(frag); return 0.25+(i<0?0:i)/sc.say.length*sc.speak;};
+let Ssc=null; const wt=(sc,frag)=>{const i=Math.max(0,sc.say.indexOf(frag));
+ if(sc.wordsT){let pos=0; for(const w of sc.wordsT){const j=sc.say.indexOf(w.w,pos); if(j+w.w.length>i) return w.t0; pos=j+w.w.length;} return sc.wordsT[sc.wordsT.length-1].t0;}
+ return 0.25+i/sc.say.length*sc.speak;};
 const fillCountry=(env,id,col,a)=>hl(env,id,col,a);
 const P=(env,ll)=>env.proj(ll);
 
