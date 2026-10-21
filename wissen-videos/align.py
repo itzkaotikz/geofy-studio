@@ -2,7 +2,7 @@ import json, re, numpy as np, sys
 import sys, re as _re
 SCRIPT=sys.argv[1] if len(sys.argv)>1 else None; DB=sys.argv[2] if len(sys.argv)>2 else 'db.npy'; OUT=sys.argv[3] if len(sys.argv)>3 else 'timing_chile.json'
 scenes=[_re.sub(r'\s+',' ',p).strip() for p in open(SCRIPT).read().strip().split('\n\n')] if SCRIPT else [s['say'] for s in json.load(open('out/chile.json'))['scenes']]
-SPOKEN={'4.270':'viertausendzweihundertsiebzig','177':'hundertsiebenundsiebzig','6.000':'sechstausend','1960':'neunzehnhundertsechzig','9,5':'neun komma fünf','1881':'achtzehnhunderteinundachtzig','14-mal':'vierzehnmal','1569':'fünfzehnhundertneunundsechzig','23':'dreiundzwanzig','1945':'neunzehnhundertfünfundvierzig','1946':'neunzehnhundertsechsundvierzig','1991':'neunzehnhunderteinundneunzig','90':'neunzig'}
+SPOKEN={'4.270':'viertausendzweihundertsiebzig','177':'hundertsiebenundsiebzig','6.000':'sechstausend','1960':'neunzehnhundertsechzig','9,5':'neun komma fünf','1881':'achtzehnhunderteinundachtzig','14-mal':'vierzehnmal','1569':'fünfzehnhundertneunundsechzig','23':'dreiundzwanzig','1945':'neunzehnhundertfünfundvierzig','1946':'neunzehnhundertsechsundvierzig','1991':'neunzehnhunderteinundneunzig','90':'neunzig','Guadeloupe':'gwadelup','Réunion':'reünjon','Mayotte':'majot'}
 def syl(w):
     core=re.sub(r'[^\wäöüÄÖÜß.,]','',w); core=core.strip('.,:?!')
     s=SPOKEN.get(core,core).lower()

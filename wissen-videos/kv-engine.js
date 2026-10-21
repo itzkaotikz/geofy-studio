@@ -18,8 +18,8 @@ function mainPart(id){const f=byId.get(id), g=f.geometry; if(g.type!=='MultiPoly
 function viewBox(b,box=KB,pad=0.04){const [x,y,w,h]=box; const p=d3.geoMercator().fitExtent([[x+w*pad,y+h*pad],[x+w*(1-pad),y+h*(1-pad)]],{type:'MultiPoint',coordinates:[[b[0],b[1]],[b[2],b[3]]]});
  const c=p.invert([x+w/2,y+h/2]); return {lon:c[0],lat:c[1],scale:p.scale()};}
 function viewObj(obj,box=KB,pad=0.1){const [x,y,w,h]=box; const p=d3.geoMercator().fitExtent([[x+w*pad,y+h*pad],[x+w*(1-pad),y+h*(1-pad)]],obj); const c=p.invert([x+w/2,y+h/2]); return {lon:c[0],lat:c[1],scale:p.scale()};}
-function projAt(v,box=KB){const p=d3.geoMercator().scale(v.scale).translate([0,0]); const q=p([v.lon,v.lat]); return p.translate([box[0]+box[2]/2-q[0],box[1]+box[3]/2-q[1]]);}
-const lerpView=(a,b,t)=>({lon:lerp(a.lon,b.lon,t),lat:lerp(a.lat,b.lat,t),scale:Math.exp(lerp(Math.log(a.scale),Math.log(b.scale),t))});
+function projAt(v,box=KB){const lon=((v.lon+540)%360)-180; const p=d3.geoMercator().rotate([-lon,0]).scale(v.scale).translate([0,0]); const q=p([lon,v.lat]); return p.translate([box[0]+box[2]/2-q[0],box[1]+box[3]/2-q[1]]);}
+const lerpView=(a,b,t)=>({lon:a.lon+((((b.lon-a.lon)%360)+540)%360-180)*t,lat:lerp(a.lat,b.lat,t),scale:Math.exp(lerp(Math.log(a.scale),Math.log(b.scale),t))});
 function landPath(proj,scale){const pts=[[0,0],[W,0],[0,H],[W,H],[W/2,0],[W/2,H],[0,H/2],[W,H/2]].map(p=>proj.invert(p)).filter(p=>p&&isFinite(p[0]));
  let lo0=-180,lo1=180,la0=-90,la1=90; if(pts.length===8){lo0=Math.min(...pts.map(p=>p[0]))-1;lo1=Math.max(...pts.map(p=>p[0]))+1;la0=Math.min(...pts.map(p=>p[1]))-1;la1=Math.max(...pts.map(p=>p[1]))+1; if(lo1-lo0>300){lo0=-180;lo1=180;}}
  const p2=new Path2D(), path=d3.geoPath(proj,p2), lo=scale<1600;
@@ -74,11 +74,11 @@ let STYLE='studio', TEX=null;
 function setStyle(name,img){STYLE=name; TEX=img||null;}
 const tintK=()=>STYLE==='studio'?1:0.6;
 const MY=la=>Math.log(Math.tan(Math.PI/4+la*Math.PI/360)), TOP=MY(84), BOT=MY(-80);
-function drawTexture(ctx,proj){const s=proj.scale(), [tx,ty]=proj.translate(); const x0=tx-s*Math.PI, w=2*Math.PI*s, y0=ty-s*TOP, h=s*(TOP-BOT);
- const iw=TEX.width, ih=TEX.height; // visible source rect only
- const sx=clamp((0-x0)/w*iw,0,iw), ex=clamp((W-x0)/w*iw,0,iw), sy=clamp((0-y0)/h*ih,0,ih), ey=clamp((H-y0)/h*ih,0,ih);
- if(ex-sx<1||ey-sy<1) return; ctx.imageSmoothingQuality='high';
- ctx.drawImage(TEX,sx,sy,ex-sx,ey-sy,x0+sx/iw*w,y0+sy/ih*h,(ex-sx)/iw*w,(ey-sy)/ih*h);}
+function drawTexture(ctx,proj){const s=proj.scale(), [tx,ty]=proj.translate(), lonC=-proj.rotate()[0]; const w=2*Math.PI*s, y0=ty-s*TOP, h=s*(TOP-BOT);
+ const iw=TEX.width, ih=TEX.height; ctx.imageSmoothingQuality='high';
+ const base=tx+s*(-180-lonC)*Math.PI/180; // x of longitude -180, repeated so the map wraps around
+ for(const x0 of [base-w,base,base+w]){const sx=clamp((0-x0)/w*iw,0,iw), ex=clamp((W-x0)/w*iw,0,iw), sy=clamp((0-y0)/h*ih,0,ih), ey=clamp((H-y0)/h*ih,0,ih);
+  if(ex-sx<1||ey-sy<1) continue; ctx.drawImage(TEX,sx,sy,ex-sx,ey-sy,x0+sx/iw*w,y0+sy/ih*h,(ex-sx)/iw*w,(ey-sy)/ih*h);}}
 function hl(env,id,col,a,{outline=true}={}){if(a<=0) return; const {ctx,path}=env; const f=byId.get(id); ctx.save(); ctx.beginPath(); path(f);
  if(STYLE==='studio'){ctx.globalAlpha=a; ctx.fillStyle=col; ctx.fill();}
  else {ctx.globalAlpha=a*0.5; ctx.fillStyle=col; ctx.fill(); if(outline){ctx.globalAlpha=a; ctx.strokeStyle=col; ctx.lineWidth=5; ctx.lineJoin='round'; ctx.stroke();}}
