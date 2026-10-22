@@ -1,0 +1,29 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:"Bricolage Grotesque";src:url(/geofy-studio/fonts/BricolageGrotesque.ttf);font-weight:200 800}
+@font-face{font-family:"Hanken Grotesk";src:url(/geofy-studio/fonts/HankenGrotesk.ttf);font-weight:100 900}
+@font-face{font-family:"JetBrains Mono";src:url(/geofy-studio/fonts/JetBrainsMono.ttf);font-weight:100 800}
+body{margin:0;background:#000}</style></head><body><script type="text/plain" id="script">Auf der Weltkarte wirkt Indonesien wie ein paar Inseln am Rand von Asien. Doch legt man das Land auf Europa, reicht es von Irland bis hinter das Kaspische Meer.
+
+Der Grund: Indonesien liegt direkt am Äquator. Dort zeigt die Mercator-Karte die Länder fast in echter Größe. Europa liegt weiter im Norden und wird stark aufgebläht.
+
+Von Westen nach Osten misst Indonesien über 5.000 Kilometer. Das ist mehr als die USA von Küste zu Küste.
+
+Dazu kommen Tausende Inseln. Je nach Zählung sind es zwischen 13.000 und über 17.000. Bewohnt sind aber nur rund 900 davon.
+
+Und Indonesien ist nicht nur groß, sondern auch voll. Mit rund 288 Millionen Menschen hat es die viertmeisten Einwohner der Welt. Mehr als die Hälfte davon lebt auf einer einzigen Insel: Java.
+
+Auch deshalb baut Indonesien eine neue Hauptstadt auf Borneo. Sie heißt Nusantara und soll das überfüllte, langsam absinkende Jakarta entlasten.
+
+Wusstest du das schon? Gib dem Video ein Like, schreib in die Kommentare, ob du es wusstest, und schick es jemandem, den das auch interessiert.</script><canvas id="c" width="1080" height="1920"></canvas>
+<script src="/geofy-studio/vendor/d3.min.js"></script><script src="kv-engine.js"></script><script src="indonesien.js"></script>
+<script>
+window.ready=(async()=>{const w=await (await fetch('/geofy-studio/data/world.json')).json(); KV.setWorld(w);  
+ const style=new URLSearchParams(location.search).get('style')||'studio'; if(style!=='studio'){const im=new Image(); im.src='tex/'+style+'.jpg'; await im.decode(); KV.setStyle(style,im);}
+ await Promise.all(['800 40px "Bricolage Grotesque"','700 30px "Hanken Grotesk"','700 30px "JetBrains Mono"','500 30px "Hanken Grotesk"'].map(f=>document.fonts.load(f)));
+ const st=makeStory(); const tf=new URLSearchParams(location.search).get('timing'); const timing=tf?await (await fetch(tf)).json():null; const S=KV.build(st,window.WPM||158,timing); S.tag=st.tag;
+ S.scenes.forEach(sc=>{ // pops on visible moments
+  ['Europa','Irland','Äquator','aufgebläht','5.000','USA','Inseln','13.000','900','288','Java','Borneo','Nusantara'].forEach(f=>{if(sc.say.includes(f)) S.events.push({t:sc.start+st.wt(sc,f),kind:'pop'});});});
+ window.S=S; return {total:S.total,scenes:S.scenes.map(s=>({head:s.head,start:+s.start.toFixed(2),dur:+s.dur.toFixed(2),say:s.say})),events:S.events};})();
+const ctx=document.getElementById('c').getContext('2d');
+window.frame=(t,q)=>{KV.draw(ctx,t); return document.getElementById('c').toDataURL('image/jpeg',q||0.93);};
+</script></body></html>
