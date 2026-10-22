@@ -1,0 +1,29 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:"Bricolage Grotesque";src:url(/geofy-studio/fonts/BricolageGrotesque.ttf);font-weight:200 800}
+@font-face{font-family:"Hanken Grotesk";src:url(/geofy-studio/fonts/HankenGrotesk.ttf);font-weight:100 900}
+@font-face{font-family:"JetBrains Mono";src:url(/geofy-studio/fonts/JetBrainsMono.ttf);font-weight:100 800}
+body{margin:0;background:#000}</style></head><body><script type="text/plain" id="script">Dieses Land ist sechsmal so groß wie Deutschland. Und trotzdem gibt es dort keinen einzigen Fluss, der das ganze Jahr Wasser führt.
+
+Es ist Saudi-Arabien, das größte Land der Welt ohne dauerhaften Fluss. Statt Flüssen gibt es Wadis. Das sind Täler, die nur nach seltenem Regen kurz Wasser führen.
+
+Damit ist Saudi-Arabien nicht allein. Auf der ganzen Arabischen Halbinsel fließt kein einziger dauerhafter Fluss. Auch in Libyen gibt es keinen.
+
+Woher kommt dann das Wasser für über 30 Millionen Menschen? Etwa die Hälfte des Trinkwassers wird aus dem Meer gewonnen. Saudi-Arabien ist einer der größten Produzenten von entsalztem Wasser weltweit.
+
+Der Rest kommt vor allem aus uraltem Grundwasser tief unter der Wüste. Es hat sich vor Tausenden Jahren gebildet und füllt sich kaum wieder auf.
+
+In den 1980er- und 1990er-Jahren wurde damit sogar Weizen in der Wüste angebaut, in riesigen grünen Kreisen. Heute ist der Anbau weitgehend eingestellt, um Wasser zu sparen.
+
+Wusstest du das schon? Gib dem Video ein Like, schreib in die Kommentare, ob du es wusstest, und schick es jemandem, den das auch interessiert.</script><canvas id="c" width="1080" height="1920"></canvas>
+<script src="/geofy-studio/vendor/d3.min.js"></script><script src="kv-engine.js"></script><script src="saudi.js"></script>
+<script>
+window.ready=(async()=>{const w=await (await fetch('/geofy-studio/data/world.json')).json(); KV.setWorld(w); window.RIV=await (await fetch('rivers_me.json')).json(); 
+ const style=new URLSearchParams(location.search).get('style')||'studio'; if(style!=='studio'){const im=new Image(); im.src='tex/'+style+'.jpg'; await im.decode(); KV.setStyle(style,im);}
+ await Promise.all(['800 40px "Bricolage Grotesque"','700 30px "Hanken Grotesk"','700 30px "JetBrains Mono"','500 30px "Hanken Grotesk"'].map(f=>document.fonts.load(f)));
+ const st=makeStory(); const tf=new URLSearchParams(location.search).get('timing'); const timing=tf?await (await fetch(tf)).json():null; const S=KV.build(st,window.WPM||158,timing); S.tag=st.tag;
+ S.scenes.forEach(sc=>{ // pops on visible moments
+  ['sechsmal','Fluss','Saudi-Arabien,','Wadis','Arabischen','Libyen','30 Millionen','Hälfte','entsalztem','Grundwasser','Weizen','grünen Kreisen','eingestellt'].forEach(f=>{if(sc.say.includes(f)) S.events.push({t:sc.start+st.wt(sc,f),kind:'pop'});});});
+ window.S=S; return {total:S.total,scenes:S.scenes.map(s=>({head:s.head,start:+s.start.toFixed(2),dur:+s.dur.toFixed(2),say:s.say})),events:S.events};})();
+const ctx=document.getElementById('c').getContext('2d');
+window.frame=(t,q)=>{KV.draw(ctx,t); return document.getElementById('c').toDataURL('image/jpeg',q||0.93);};
+</script></body></html>
