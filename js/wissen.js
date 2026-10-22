@@ -14,7 +14,7 @@ const EXAMPLES=[
  ['chile','warum',1,'Warum ist Chile so lang?'],['afrika','karten',1,'Wie groß ist Afrika wirklich?'],['kaliningrad','grenz',1,'Kaliningrad'],
  ['zeitzonen','rekorde',1,'Die meisten Zeitzonen'],['kreis','wo',1,'Der Kreis der Menschheit'],['deutschland','karten',2,'So groß ist Deutschland wirklich'],
  ['grenzen','warum',2,'Warum sind Afrikas Grenzen so gerade?'],['fasan','grenz',2,'Die Fasaneninsel'],['eis','waswaere',1,'Was, wenn alles Eis schmilzt?'],
- ['suez','nadel',1,'Der Suezkanal'],['kanada','karten',3,'Kanada oder USA?'],['gambia','warum',3,'Warum ist Gambia nur ein Fluss?'],['baarle','grenz',3,'Baarle: zwei Länder, ein Ort'],['saudi','rekorde',2,'Das größte Land ohne Fluss'],['brasilia','haupt',1,'Warum wurde Brasília ins Nichts gebaut?'],['indonesien','karten',4,'Wie groß ist Indonesien wirklich?']];
+ ['suez','nadel',1,'Der Suezkanal'],['kanada','karten',3,'Kanada oder USA?'],['gambia','warum',3,'Warum ist Gambia nur ein Fluss?'],['baarle','grenz',3,'Baarle: zwei Länder, ein Ort'],['saudi','rekorde',2,'Das größte Land ohne Fluss'],['brasilia','haupt',1,'Warum wurde Brasília ins Nichts gebaut?'],['indonesien','karten',4,'Wie groß ist Indonesien wirklich?'],['alaska','warum',4,'Warum gehört Alaska zu den USA?']];
 const PAL=['#FF3B7F','#33D1B0','#F2B66D','#9FD8F5','#7FCB8F','#B79CFF'];
 const W={state:{series:'karten',ep:4,title:'',script:'',cover:'',coverAt:0}, timing:null, voice:null, voiceName:'', scenes:[], story:null, edits:{}};
 try{const s=JSON.parse(localStorage.getItem('geofy-wissen2')||'null'); if(s) Object.assign(W.state,s);}catch(e){}

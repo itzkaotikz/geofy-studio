@@ -1,0 +1,29 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:"Bricolage Grotesque";src:url(/geofy-studio/fonts/BricolageGrotesque.ttf);font-weight:200 800}
+@font-face{font-family:"Hanken Grotesk";src:url(/geofy-studio/fonts/HankenGrotesk.ttf);font-weight:100 900}
+@font-face{font-family:"JetBrains Mono";src:url(/geofy-studio/fonts/JetBrainsMono.ttf);font-weight:100 800}
+body{margin:0;background:#000}</style></head><body><script type="text/plain" id="script">Alaska ist der größte Bundesstaat der USA. Gekauft haben die USA ihn von Russland, für gerade einmal 7,2 Millionen Dollar.
+
+Das war 1867. Pro Quadratkilometer zahlten die USA damals weniger als fünf Dollar. Selbst in heutigem Geld wären es nur rund 130 Millionen Dollar.
+
+Warum verkaufte Russland? Nach dem Krimkrieg brauchte das Land dringend Geld. Alaska lag weit weg und wäre gegen die Briten im benachbarten Kanada kaum zu verteidigen gewesen. Und die Seeotter, wegen ihres Pelzes begehrt, waren fast ausgerottet.
+
+In den USA hielten viele den Kauf für Unsinn. Spötter nannten Alaska den Eisschrank von Außenminister Seward.
+
+Doch später fand man in Alaska Gold und Öl. Und heute ist der Bundesstaat mehr als viermal so groß wie Deutschland.
+
+Russland ist übrigens immer noch ganz nah. Zwischen den beiden Diomedes-Inseln liegen nur knapp vier Kilometer, aber fast ein ganzer Tag Zeitunterschied.
+
+Wusstest du das schon? Gib dem Video ein Like, schreib in die Kommentare, ob du es wusstest, und schick es jemandem, den das auch interessiert.</script><canvas id="c" width="1080" height="1920"></canvas>
+<script src="/geofy-studio/vendor/d3.min.js"></script><script src="kv-engine.js"></script><script src="alaska.js"></script>
+<script>
+window.ready=(async()=>{const w=await (await fetch('/geofy-studio/data/world.json')).json(); KV.setWorld(w);  
+ const style=new URLSearchParams(location.search).get('style')||'studio'; if(style!=='studio'){const im=new Image(); im.src='tex/'+style+'.jpg'; await im.decode(); KV.setStyle(style,im);}
+ await Promise.all(['800 40px "Bricolage Grotesque"','700 30px "Hanken Grotesk"','700 30px "JetBrains Mono"','500 30px "Hanken Grotesk"'].map(f=>document.fonts.load(f)));
+ const st=makeStory(); const tf=new URLSearchParams(location.search).get('timing'); const timing=tf?await (await fetch(tf)).json():null; const S=KV.build(st,window.WPM||158,timing); S.tag=st.tag;
+ S.scenes.forEach(sc=>{ // pops on visible moments
+  ['Russland','7,2','1867','130','Krimkrieg','weit weg','Briten','Seeotter','Spötter','Gold','Öl','viermal','Diomedes','ganzer Tag'].forEach(f=>{if(sc.say.includes(f)) S.events.push({t:sc.start+st.wt(sc,f),kind:'pop'});});});
+ window.S=S; return {total:S.total,scenes:S.scenes.map(s=>({head:s.head,start:+s.start.toFixed(2),dur:+s.dur.toFixed(2),say:s.say})),events:S.events};})();
+const ctx=document.getElementById('c').getContext('2d');
+window.frame=(t,q)=>{KV.draw(ctx,t); return document.getElementById('c').toDataURL('image/jpeg',q||0.93);};
+</script></body></html>
