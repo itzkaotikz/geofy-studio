@@ -1,0 +1,29 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:"Bricolage Grotesque";src:url(/geofy-studio/fonts/BricolageGrotesque.ttf);font-weight:200 800}
+@font-face{font-family:"Hanken Grotesk";src:url(/geofy-studio/fonts/HankenGrotesk.ttf);font-weight:100 900}
+@font-face{font-family:"JetBrains Mono";src:url(/geofy-studio/fonts/JetBrainsMono.ttf);font-weight:100 800}
+body{margin:0;background:#000}</style></head><body><script type="text/plain" id="script">In diesem Ort kannst du in Belgien schlafen und in den Niederlanden frühstücken. Ohne dein Haus zu verlassen. Willkommen in Baarle.
+
+Baarle liegt in den Niederlanden, kurz vor der Grenze zu Belgien. Doch mitten im Ort liegen 22 kleine Stücke Belgien. Und in einigen davon liegen wiederum Stücke der Niederlande.
+
+Wie kam es dazu? Im Mittelalter wurden hier Felder und Grundstücke immer wieder getauscht, verkauft und vererbt. Als Belgien und die Niederlande getrennte Länder wurden, wurde dieses Flickwerk einfach zur Staatsgrenze. Festgeschrieben wurde das 1843.
+
+Heute zeigen weiße Kreuze auf der Straße, wo die Grenze verläuft. Manchmal geht sie sogar mitten durch Häuser. Dann entscheidet die Haustür, zu welchem Land ein Haus gehört.
+
+Das sorgt für kuriose Situationen. Früher mussten Restaurants in den Niederlanden eher schließen als in Belgien. Manche Gäste wechselten dann einfach den Tisch, auf die belgische Seite.
+
+Und das letzte umstrittene Grundstück? Das wurde erst 1995 endgültig einem Land zugeordnet.
+
+Wusstest du das schon? Gib dem Video ein Like, schreib in die Kommentare, ob du es wusstest, und schick es jemandem, den das auch interessiert.</script><canvas id="c" width="1080" height="1920"></canvas>
+<script src="/geofy-studio/vendor/d3.min.js"></script><script src="kv-engine.js"></script><script src="baarle.js"></script>
+<script>
+window.ready=(async()=>{const w=await (await fetch('/geofy-studio/data/world.json')).json(); KV.setWorld(w);  
+ const style=new URLSearchParams(location.search).get('style')||'studio'; if(style!=='studio'){const im=new Image(); im.src='tex/'+style+'.jpg'; await im.decode(); KV.setStyle(style,im);}
+ await Promise.all(['800 40px "Bricolage Grotesque"','700 30px "Hanken Grotesk"','700 30px "JetBrains Mono"','500 30px "Hanken Grotesk"'].map(f=>document.fonts.load(f)));
+ const st=makeStory(); const tf=new URLSearchParams(location.search).get('timing'); const timing=tf?await (await fetch(tf)).json():null; const S=KV.build(st,window.WPM||158,timing); S.tag=st.tag;
+ S.scenes.forEach(sc=>{ // pops on visible moments
+  ['schlafen','frühstücken','Willkommen','22','wiederum','Mittelalter','Flickwerk','1843','weiße Kreuze','Haustür','Restaurants','wechselten','1995'].forEach(f=>{if(sc.say.includes(f)) S.events.push({t:sc.start+st.wt(sc,f),kind:'pop'});});});
+ window.S=S; return {total:S.total,scenes:S.scenes.map(s=>({head:s.head,start:+s.start.toFixed(2),dur:+s.dur.toFixed(2),say:s.say})),events:S.events};})();
+const ctx=document.getElementById('c').getContext('2d');
+window.frame=(t,q)=>{KV.draw(ctx,t); return document.getElementById('c').toDataURL('image/jpeg',q||0.93);};
+</script></body></html>

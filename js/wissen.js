@@ -14,7 +14,7 @@ const EXAMPLES=[
  ['chile','warum',1,'Warum ist Chile so lang?'],['afrika','karten',1,'Wie groß ist Afrika wirklich?'],['kaliningrad','grenz',1,'Kaliningrad'],
  ['zeitzonen','rekorde',1,'Die meisten Zeitzonen'],['kreis','wo',1,'Der Kreis der Menschheit'],['deutschland','karten',2,'So groß ist Deutschland wirklich'],
  ['grenzen','warum',2,'Warum sind Afrikas Grenzen so gerade?'],['fasan','grenz',2,'Die Fasaneninsel'],['eis','waswaere',1,'Was, wenn alles Eis schmilzt?'],
- ['suez','nadel',1,'Der Suezkanal'],['kanada','karten',3,'Kanada oder USA?'],['gambia','warum',3,'Warum ist Gambia nur ein Fluss?']];
+ ['suez','nadel',1,'Der Suezkanal'],['kanada','karten',3,'Kanada oder USA?'],['gambia','warum',3,'Warum ist Gambia nur ein Fluss?'],['baarle','grenz',3,'Baarle: zwei Länder, ein Ort']];
 const PAL=['#FF3B7F','#33D1B0','#F2B66D','#9FD8F5','#7FCB8F','#B79CFF'];
 const W={state:{series:'karten',ep:4,title:'',script:'',cover:'',coverAt:0}, timing:null, voice:null, voiceName:'', scenes:[], story:null, edits:{}};
 try{const s=JSON.parse(localStorage.getItem('geofy-wissen2')||'null'); if(s) Object.assign(W.state,s);}catch(e){}
@@ -39,7 +39,7 @@ const PLACES={ // Landmarken: [lon,lat,spanDeg]
  'victoriasee':[33,-1,7],'baikalsee':[108,53.5,11],'hawaii':[-157,20.5,9],'galápagos':[-90.5,-0.6,6],'sizilien':[14,37.5,5],'korsika':[9.1,42.1,4],
  'kreta':[24.9,35.2,5],'mallorca':[3,39.6,3],'tasmanien':[146.6,-42,7],'feuerland':[-68,-54,9],'nordpol':[0,84,50],'datumsgrenze':[180,0,70],
  'bir tawil':[33.7,21.9,6],'kaliningrad':[20.5,54.7,6],'fasaneninsel':[-1.77,43.34,4],'gambia':[-15.3,13.45,6],'yuxi':[102.54,24.35,10],'büsingen':[8.69,47.7,3],
- 'baarle':[4.93,51.44,3],'llívia':[1.98,42.46,3],'gibraltar':[-5.35,36.14,4],'ceuta':[-5.32,35.89,4],'melilla':[-2.94,35.29,4],'kleinwalsertal':[10.17,47.34,3],
+ 'baarle':[4.93,51.44,8],'llívia':[1.98,42.46,3],'gibraltar':[-5.35,36.14,4],'ceuta':[-5.32,35.89,4],'melilla':[-2.94,35.29,4],'kleinwalsertal':[10.17,47.34,3],
  'jungholz':[10.45,47.57,3],'point roberts':[-123.07,48.99,4],'alaska':[-150,63,30],'sibirien':[105,62,80]};
 const CONT={'europa':'Europe','afrika':'Africa','asien':'Asia','südamerika':'South America','nordamerika':'North America','ozeanien':'Oceania'};
 const ALIAS={'usa':'USA','vereinigte staaten':'USA','amerika':'USA','großbritannien':'GBR','england':'GBR','vereinigtes königreich':'GBR','holland':'NLD','dr kongo':'COD',
