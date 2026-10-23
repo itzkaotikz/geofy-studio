@@ -1,0 +1,29 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:"Bricolage Grotesque";src:url(/geofy-studio/fonts/BricolageGrotesque.ttf);font-weight:200 800}
+@font-face{font-family:"Hanken Grotesk";src:url(/geofy-studio/fonts/HankenGrotesk.ttf);font-weight:100 900}
+@font-face{font-family:"JetBrains Mono";src:url(/geofy-studio/fonts/JetBrainsMono.ttf);font-weight:100 800}
+body{margin:0;background:#000}</style></head><body><script type="text/plain" id="script">Das Mittelmeer ist schon einmal fast verschwunden. Vor rund sechs Millionen Jahren wurde die Straße von Gibraltar dicht, und der Atlantik kam nicht mehr nach.
+
+Das Mittelmeer verdunstet mehr Wasser, als Flüsse und Regen nachfüllen. Ohne Nachschub vom Atlantik schrumpfte es. Es verlor etwa 70 Prozent seines Wassers.
+
+Im Westen sank der Meeresspiegel um rund 850 Meter, im Osten sogar um bis zu zwei Kilometer. Wo heute Schiffe fahren, lagen Salzebenen und Salzseen. Die Salzschichten liegen bis heute unter dem Meeresboden.
+
+Dann brach der Atlantik wieder durch Gibraltar. Nach einer Modellrechnung stieg der Pegel zeitweise um zehn Meter pro Tag. Nach etwa zwei Jahren war das Becken wieder voll.
+
+Heute ist die Straße von Gibraltar rund 14 Kilometer breit. Das Mittelmeer verschwindet also nicht über Nacht. Aber Afrika driftet weiter auf Europa zu.
+
+In vielen Millionen Jahren könnte sich das Meer wieder schließen, und dann könnte es erneut austrocknen.
+
+Wusstest du das schon? Gib dem Video ein Like, schreib in die Kommentare, ob du es wusstest, und schick es jemandem, den das auch interessiert.</script><canvas id="c" width="1080" height="1920"></canvas>
+<script src="/geofy-studio/vendor/d3.min.js"></script><script src="kv-engine.js"></script><script src="mittelmeer.js"></script>
+<script>
+window.ready=(async()=>{const w=await (await fetch('/geofy-studio/data/world.json')).json(); KV.setWorld(w); window.SEAS=await (await fetch('med_seas.json')).json();  
+ const style=new URLSearchParams(location.search).get('style')||'studio'; if(style!=='studio'){const im=new Image(); im.src='tex/'+style+'.jpg'; await im.decode(); KV.setStyle(style,im);}
+ await Promise.all(['800 40px "Bricolage Grotesque"','700 30px "Hanken Grotesk"','700 30px "JetBrains Mono"','500 30px "Hanken Grotesk"'].map(f=>document.fonts.load(f)));
+ const st=makeStory(); const tf=new URLSearchParams(location.search).get('timing'); const timing=tf?await (await fetch(tf)).json():null; const S=KV.build(st,window.WPM||158,timing); S.tag=st.tag;
+ S.scenes.forEach(sc=>{ // pops on visible moments
+  ['sechs','70 Prozent','850','zwei Kilometer','zehn','zwei Jahren','14'].forEach(f=>{if(sc.say.includes(f)) S.events.push({t:sc.start+st.wt(sc,f),kind:'pop'});});});
+ window.S=S; return {total:S.total,scenes:S.scenes.map(s=>({head:s.head,start:+s.start.toFixed(2),dur:+s.dur.toFixed(2),say:s.say})),events:S.events};})();
+const ctx=document.getElementById('c').getContext('2d');
+window.frame=(t,q)=>{KV.draw(ctx,t); return document.getElementById('c').toDataURL('image/jpeg',q||0.93);};
+</script></body></html>
