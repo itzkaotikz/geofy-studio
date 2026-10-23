@@ -1,0 +1,29 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:"Bricolage Grotesque";src:url(/geofy-studio/fonts/BricolageGrotesque.ttf);font-weight:200 800}
+@font-face{font-family:"Hanken Grotesk";src:url(/geofy-studio/fonts/HankenGrotesk.ttf);font-weight:100 900}
+@font-face{font-family:"JetBrains Mono";src:url(/geofy-studio/fonts/JetBrainsMono.ttf);font-weight:100 800}
+body{margin:0;background:#000}</style></head><body><script type="text/plain" id="script">Auf der Weltkarte ist die Antarktis ein endloser weißer Streifen am unteren Rand. Wie groß ist sie wirklich?
+
+Das liegt an der Mercator-Karte. Je näher ein Ort am Pol liegt, desto stärker wird er in die Breite gezogen. Am Pol selbst wäre die Verzerrung unendlich. Deshalb schneiden viele Karten die Antarktis einfach ab.
+
+Auf dem Globus bleiben rund 14 Millionen Quadratkilometer. Das ist fast doppelt so viel wie Australien und mehr als ganz Europa.
+
+Fast alles davon ist Eis. 98 Prozent des Kontinents sind bedeckt, im Schnitt mit mehr als zwei Kilometern. In diesem Eis stecken etwa 70 Prozent des Süßwassers der Erde.
+
+Und niemandem gehört sie. Der Antarktis-Vertrag legt fest, dass der Kontinent nur für Frieden und Forschung genutzt wird.
+
+Die Antarktis ist sogar die größte Wüste der Erde, größer als die Sahara, nur eben aus Eis.
+
+Wusstest du das schon? Gib dem Video ein Like, schreib in die Kommentare, ob du es wusstest, und schick es jemandem, den das auch interessiert.</script><canvas id="c" width="1080" height="1920"></canvas>
+<script src="/geofy-studio/vendor/d3.min.js"></script><script src="kv-engine.js"></script><script src="antarktis.js"></script>
+<script>
+window.ready=(async()=>{const w=await (await fetch('/geofy-studio/data/world.json')).json(); KV.setWorld(w); window.WW=w; window.ATAG=await (await fetch('ata_10m.json')).json(); window.AUSG=await (await fetch('aus_10m.json')).json();   
+ const style=new URLSearchParams(location.search).get('style')||'studio'; if(style!=='studio'){const im=new Image(); im.src='tex/'+style+'.jpg'; await im.decode(); KV.setStyle(style,im);}
+ await Promise.all(['800 40px "Bricolage Grotesque"','700 30px "Hanken Grotesk"','700 30px "JetBrains Mono"','500 30px "Hanken Grotesk"'].map(f=>document.fonts.load(f)));
+ const st=makeStory(); const tf=new URLSearchParams(location.search).get('timing'); const timing=tf?await (await fetch(tf)).json():null; const S=KV.build(st,window.WPM||158,timing); S.tag=st.tag;
+ S.scenes.forEach(sc=>{ // pops on visible moments
+  ['Mercator','14 Millionen','98 Prozent','70 Prozent','Frieden','Wüste'].forEach(f=>{if(sc.say.includes(f)) S.events.push({t:sc.start+st.wt(sc,f),kind:'pop'});});});
+ window.S=S; return {total:S.total,scenes:S.scenes.map(s=>({head:s.head,start:+s.start.toFixed(2),dur:+s.dur.toFixed(2),say:s.say})),events:S.events};})();
+const ctx=document.getElementById('c').getContext('2d');
+window.frame=(t,q)=>{KV.draw(ctx,t); return document.getElementById('c').toDataURL('image/jpeg',q||0.93);};
+</script></body></html>
