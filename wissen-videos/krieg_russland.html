@@ -1,0 +1,29 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:"Bricolage Grotesque";src:url(/geofy-studio/fonts/BricolageGrotesque.ttf);font-weight:200 800}
+@font-face{font-family:"Hanken Grotesk";src:url(/geofy-studio/fonts/HankenGrotesk.ttf);font-weight:100 900}
+@font-face{font-family:"JetBrains Mono";src:url(/geofy-studio/fonts/JetBrainsMono.ttf);font-weight:100 800}
+body{margin:0;background:#000}</style></head><body><script type="text/plain" id="script">Zweimal wollte eine Großmacht Russland erobern, 1812 und 1941. Beide Armeen kamen bis kurz vor Moskau, und beide scheiterten. Warum?
+
+1812 überschritt Napoleon mit rund 615.000 Mann den Grenzfluss Njemen. Die russische Armee wich immer weiter zurück und verbrannte dabei Felder, Brücken und Vorräte.
+
+Der erste Gegner war die Weite. Die französischen Soldaten hatten bald nichts mehr zu essen, und der Nachschub kam kaum hinterher.
+
+Im September erreichte Napoleon Moskau. Die Stadt brannte, Frieden gab es nicht, und nach fünf Wochen befahl er den Rückzug. Dann kam der Winter, mit bis zu minus 30 Grad. Zurück kam nur ein Bruchteil der Armee, Schätzungen liegen um 100.000 Mann.
+
+1941 wiederholte sich vieles. Deutsche Truppen standen im Dezember kurz vor Moskau, noch in Sommeruniform. Es gab über 130.000 Erfrierungen. Dann griff die Rote Armee an und drängte sie um mehr als 200 Kilometer zurück.
+
+Der Winter allein war es also nicht. Weite, Nachschub und der Widerstand der Verteidiger kamen dazu. Unbesiegbar war Russland trotzdem nie: Die Mongolen eroberten im 13. Jahrhundert große Teile des Landes.
+
+Wusstest du das schon? Gib dem Video ein Like, folg uns für mehr, und schick es jemandem, den das auch interessiert.</script><canvas id="c" width="1080" height="1920"></canvas>
+<script src="/geofy-studio/vendor/d3.min.js"></script><script src="kv-engine.js"></script><script src="krieg_russland.js"></script>
+<script>
+window.ready=(async()=>{const w=await (await fetch('/geofy-studio/data/world.json')).json(); KV.setWorld(w); window.WW=w; window.G10=await (await fetch('canb_10m.json')).json();  
+ const style=new URLSearchParams(location.search).get('style')||'studio'; if(style!=='studio'){const im=new Image(); im.src='tex/'+style+'.jpg'; await im.decode(); KV.setStyle(style,im);}
+ await Promise.all(['800 40px "Bricolage Grotesque"','700 30px "Hanken Grotesk"','700 30px "JetBrains Mono"','500 30px "Hanken Grotesk"'].map(f=>document.fonts.load(f)));
+ const st=makeStory(); const tf=new URLSearchParams(location.search).get('timing'); const timing=tf?await (await fetch(tf)).json():null; const S=KV.build(st,window.WPM||158,timing); S.tag=st.tag;
+ S.scenes.forEach(sc=>{ // pops on visible moments
+  ['1812','1941','615.000','verbrannte','Weite','September','Winter','130.000','Rote Armee','Mongolen'].forEach(f=>{if(sc.say.includes(f)) S.events.push({t:sc.start+st.wt(sc,f),kind:'pop'});});});
+ window.S=S; return {total:S.total,scenes:S.scenes.map(s=>({head:s.head,start:+s.start.toFixed(2),dur:+s.dur.toFixed(2),say:s.say})),events:S.events};})();
+const ctx=document.getElementById('c').getContext('2d');
+window.frame=(t,q)=>{KV.draw(ctx,t); return document.getElementById('c').toDataURL('image/jpeg',q||0.93);};
+</script></body></html>
