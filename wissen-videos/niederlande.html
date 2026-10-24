@@ -1,0 +1,29 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:"Bricolage Grotesque";src:url(/geofy-studio/fonts/BricolageGrotesque.ttf);font-weight:200 800}
+@font-face{font-family:"Hanken Grotesk";src:url(/geofy-studio/fonts/HankenGrotesk.ttf);font-weight:100 900}
+@font-face{font-family:"JetBrains Mono";src:url(/geofy-studio/fonts/JetBrainsMono.ttf);font-weight:100 800}
+body{margin:0;background:#000}</style></head><body><script type="text/plain" id="script">Mehr als ein Viertel der Niederlande liegt unter dem Meeresspiegel. Der Name verrät es schon: Niederlande heißt „tiefliegende Länder“. Warum leben dort trotzdem Millionen Menschen?
+
+Das Land liegt im Mündungsgebiet von Rhein, Maas und Schelde. Der Boden ist flach und feucht, und die Nordsee ist nah. Schon früh bauten die Menschen Deiche, um sich zu schützen.
+
+Dann holten sie sich neues Land. Windmühlen pumpten seit dem 13. Jahrhundert Wasser ab, und so entstanden Polder, eingedeichte Flächen, die teils unter dem Meeresspiegel liegen.
+
+1932 wurde die Zuiderzee durch den 30 Kilometer langen Abschlussdeich vom Meer getrennt. Aus der Meeresbucht wurde das Süßwasser-IJsselmeer, und rundherum entstand neues Land.
+
+1953 kam die Katastrophe: Eine Sturmflut tötete rund 1.800 Menschen. Danach bauten die Niederländer die Deltawerke, ein System aus Dämmen und Sturmflutwehren, das 1997 fertig war.
+
+Heute lebt gut ein Fünftel der Einwohner unter dem Meeresspiegel, geschützt von Deichen, Pumpen und Wehren. Dieses Land ist also kein Zufall, sondern ein Bauwerk.
+
+Wusstest du das schon? Gib dem Video ein Like, folg uns für mehr, und schick es jemandem, den das auch interessiert.</script><canvas id="c" width="1080" height="1920"></canvas>
+<script src="/geofy-studio/vendor/d3.min.js"></script><script src="kv-engine.js"></script><script src="niederlande.js"></script>
+<script>
+window.ready=(async()=>{const w=await (await fetch('/geofy-studio/data/world.json')).json(); KV.setWorld(w); window.WW=w; window.G10=await (await fetch('nl_10m.json')).json();  
+ const style=new URLSearchParams(location.search).get('style')||'studio'; if(style!=='studio'){const im=new Image(); im.src='tex/'+style+'.jpg'; await im.decode(); KV.setStyle(style,im);}
+ await Promise.all(['800 40px "Bricolage Grotesque"','700 30px "Hanken Grotesk"','700 30px "JetBrains Mono"','500 30px "Hanken Grotesk"'].map(f=>document.fonts.load(f)));
+ const st=makeStory(); const tf=new URLSearchParams(location.search).get('timing'); const timing=tf?await (await fetch(tf)).json():null; const S=KV.build(st,window.WPM||158,timing); S.tag=st.tag;
+ S.scenes.forEach(sc=>{ // pops on visible moments
+  ['Viertel','tiefliegende','Rhein','Windmühlen','Polder','1932','Abschlussdeich','1953','Deltawerke','Fünftel'].forEach(f=>{if(sc.say.includes(f)) S.events.push({t:sc.start+st.wt(sc,f),kind:'pop'});});});
+ window.S=S; return {total:S.total,scenes:S.scenes.map(s=>({head:s.head,start:+s.start.toFixed(2),dur:+s.dur.toFixed(2),say:s.say})),events:S.events};})();
+const ctx=document.getElementById('c').getContext('2d');
+window.frame=(t,q)=>{KV.draw(ctx,t); return document.getElementById('c').toDataURL('image/jpeg',q||0.93);};
+</script></body></html>
