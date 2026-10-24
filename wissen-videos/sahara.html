@@ -1,0 +1,29 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:"Bricolage Grotesque";src:url(/geofy-studio/fonts/BricolageGrotesque.ttf);font-weight:200 800}
+@font-face{font-family:"Hanken Grotesk";src:url(/geofy-studio/fonts/HankenGrotesk.ttf);font-weight:100 900}
+@font-face{font-family:"JetBrains Mono";src:url(/geofy-studio/fonts/JetBrainsMono.ttf);font-weight:100 800}
+body{margin:0;background:#000}</style></head><body><script type="text/plain" id="script">Die Sahara ist heute die größte Hitzewüste der Erde. Aber vor rund 11.000 Jahren war sie grün, mit Savannen, Flüssen und Seen. Was wäre, wenn sie es wieder würde?
+
+Der Beweis sind Felsbilder, zum Beispiel im Tassili n'Ajjer in Algerien. Sie zeigen Elefanten, Giraffen, Nashörner und Nilpferde. Tiere, die ohne Wasser dort nie gelebt hätten.
+
+Schuld war die Erdbahn. Die Erdachse taumelt langsam wie ein Kreisel. Dadurch kam die Nordhalbkugel im Sommer der Sonne näher. Das verstärkte den Monsun, und der Regengürtel wanderte nach Norden.
+
+Dieser Zyklus wiederholt sich etwa alle 21.000 Jahre. In den letzten acht Millionen Jahren ist die Sahara über 230 Mal ergrünt.
+
+Vor rund 5.000 bis 6.000 Jahren endete die feuchte Phase. Der Regen blieb aus, die Seen schrumpften, und aus der Savanne wurde die Wüste, die wir heute kennen.
+
+Wann sie wieder grün wird, ist offen. Manche Forscher halten es für möglich, dass die Erwärmung den Monsun verstärken könnte. Sicher ist das aber nicht.
+
+Wusstest du das schon? Gib dem Video ein Like, folg uns für mehr, und schick es jemandem, den das auch interessiert.</script><canvas id="c" width="1080" height="1920"></canvas>
+<script src="/geofy-studio/vendor/d3.min.js"></script><script src="kv-engine.js"></script><script src="sahara.js"></script>
+<script>
+window.ready=(async()=>{const w=await (await fetch('/geofy-studio/data/world.json')).json(); KV.setWorld(w); window.WW=w; window.G10=await (await fetch('bus_10m.json')).json();  
+ const style=new URLSearchParams(location.search).get('style')||'studio'; if(style!=='studio'){const im=new Image(); im.src='tex/'+style+'.jpg'; await im.decode(); KV.setStyle(style,im);}
+ await Promise.all(['800 40px "Bricolage Grotesque"','700 30px "Hanken Grotesk"','700 30px "JetBrains Mono"','500 30px "Hanken Grotesk"'].map(f=>document.fonts.load(f)));
+ const st=makeStory(); const tf=new URLSearchParams(location.search).get('timing'); const timing=tf?await (await fetch(tf)).json():null; const S=KV.build(st,window.WPM||158,timing); S.tag=st.tag;
+ S.scenes.forEach(sc=>{ // pops on visible moments
+  ['Sahara','11.000','Erdachse','Das verstärkte','21.000','230','Savanne','Sicher'].forEach(f=>{if(sc.say.includes(f)) S.events.push({t:sc.start+st.wt(sc,f),kind:'pop'});});});
+ window.S=S; return {total:S.total,scenes:S.scenes.map(s=>({head:s.head,start:+s.start.toFixed(2),dur:+s.dur.toFixed(2),say:s.say})),events:S.events};})();
+const ctx=document.getElementById('c').getContext('2d');
+window.frame=(t,q)=>{KV.draw(ctx,t); return document.getElementById('c').toDataURL('image/jpeg',q||0.93);};
+</script></body></html>
