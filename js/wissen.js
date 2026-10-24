@@ -175,12 +175,13 @@ function makeStory(){const {C,FD,FB,L,clamp,ease,eout,label,rr,fit,hl}=KV; const
 
 function outroCard(e,sc){const {ctx,u}=e; const {C,FD,clamp,eout,rr,fit}=KV; const a=eout(clamp((u-0.2)/0.6));
  const wt=f=>{const i=sc.words.findIndex(w=>clean(w.w).toLowerCase().startsWith(f)); return i>=0?sc.words[i].t0:null;};
- const rows=[['heart','Like da lassen',wt('like')],['bubble','Kommentar: Wusstest du es?',wt('kommentar')],['share','Teilen mit jemandem',wt('schick')??wt('teil')]];
+ const rows=[['heart','Like da lassen',wt('like')],['follow','Folgen für mehr',wt('folg')],['share','Teilen mit jemandem',wt('schick')??wt('teil')]];
  const q=/^Wusstest du/i.test(sc.text)?'Wusstest du das schon?':(sc.text.split(/[.?!]/)[0]+'?');
  ctx.save(); ctx.globalAlpha=a; ctx.fillStyle='rgba(11,28,42,0.92)'; rr(ctx,100,560,780,470,32); ctx.fill(); const z=fit(ctx,q,800,76,48,700,FD); ctx.font=`800 ${z}px ${FD}`; ctx.fillStyle=C.ink; ctx.fillText(q,140,670,700);
  rows.forEach(([ic,txt,t],i)=>{const t0=t==null?1.2+i*0.9:t; const ai=clamp((u-t0+0.2)/0.35); if(ai<=0) return; const y=790+i*105, x=170; ctx.save(); ctx.globalAlpha=a*ai; ctx.translate(x,y-14); const s=1+0.25*Math.max(0,1-(u-t0)/0.4); ctx.scale(s,s);
   ctx.fillStyle=C.target; ctx.strokeStyle=C.target; ctx.lineWidth=5; ctx.lineJoin='round'; ctx.lineCap='round';
   if(ic==='heart'){ctx.beginPath(); ctx.moveTo(0,16); ctx.bezierCurveTo(-30,-4,-18,-28,0,-12); ctx.bezierCurveTo(18,-28,30,-4,0,16); ctx.fill();}
+  if(ic==='follow'){ctx.beginPath(); ctx.arc(0,-4,22,0,7); ctx.fill(); ctx.globalCompositeOperation='destination-out'; ctx.fillRect(-3,-16,6,26); ctx.fillRect(-13,-6,26,6); ctx.globalCompositeOperation='source-over';}
   if(ic==='bubble'){rr(ctx,-24,-20,48,34,10); ctx.fill(); ctx.beginPath(); ctx.moveTo(-10,12); ctx.lineTo(-16,26); ctx.lineTo(4,13); ctx.fill();}
   if(ic==='share'){ctx.beginPath(); ctx.moveTo(-20,18); ctx.quadraticCurveTo(-18,-8,14,-8); ctx.stroke(); ctx.beginPath(); ctx.moveTo(10,-22); ctx.lineTo(26,-8); ctx.lineTo(10,6); ctx.closePath(); ctx.fill();}
   ctx.restore(); ctx.save(); ctx.globalAlpha=a*ai; ctx.font=`800 42px ${FD}`; ctx.fillStyle=C.ink; ctx.fillText(txt,x+60,y,620); ctx.restore();});
@@ -221,7 +222,7 @@ function renderCards(){const box=$('wScenes'); box.innerHTML='';
   el.innerHTML=`<div class="scene-top"><strong>SZENE ${i+1}${sc.outro?' · OUTRO':''}</strong><span class="dur">${fmt(S.start)} · ${S.dur.toFixed(1).replace('.',',')} s</span>
    <button class="mini" type="button" data-a="view">Ansehen</button></div>
    <p class="hint" style="margin:0">${escapeHtml(sc.text)}</p>
-   ${sc.outro?'<p class="info">Outro-Karte: Like · Kommentar · Teilen, eingeblendet auf deine Worte.</p>':`
+   ${sc.outro?'<p class="info">Outro-Karte: Like · Folgen · Teilen, eingeblendet auf deine Worte.</p>':`
    <p class="info">Erkannt: ${det.length?escapeHtml(det.join(' · ')):'nichts – die Kamera zoomt langsam weiter'}</p>
    <div class="two"><label>Überschrift<input data-f="head" type="text" placeholder="keine"></label>
    <label>Länder markieren<input data-f="countries" type="text" placeholder="z. B. Chile, Peru"></label>
