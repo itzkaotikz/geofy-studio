@@ -1,0 +1,29 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:"Bricolage Grotesque";src:url(/geofy-studio/fonts/BricolageGrotesque.ttf);font-weight:200 800}
+@font-face{font-family:"Hanken Grotesk";src:url(/geofy-studio/fonts/HankenGrotesk.ttf);font-weight:100 900}
+@font-face{font-family:"JetBrains Mono";src:url(/geofy-studio/fonts/JetBrainsMono.ttf);font-weight:100 800}
+body{margin:0;background:#000}</style></head><body><script type="text/plain" id="script">Deutschlands Grenzen haben sich im 20. Jahrhundert mehrfach verschoben. Zwei Weltkriege haben die Karte neu gezeichnet.
+
+1914 war das Deutsche Kaiserreich rund 540.000 Quadratkilometer groß. Dazu gehörten Elsass-Lothringen im Westen und große Gebiete im Osten, etwa Posen und Westpreußen.
+
+Nach dem Ersten Weltkrieg legte der Vertrag von Versailles 1919 neue Grenzen fest. Elsass-Lothringen ging an Frankreich, Posen und Teile Westpreußens an Polen. Das Reich verlor rund 13 Prozent seiner Fläche.
+
+Nach dem Zweiten Weltkrieg kam es noch härter. 1945 gerieten die Gebiete östlich von Oder und Neiße unter polnische und sowjetische Verwaltung, darunter Schlesien, Pommern und Ostpreußen. Rund ein Viertel der Fläche von 1937 ging verloren, und etwa zwölf Millionen Deutsche flohen oder wurden vertrieben.
+
+Erst 1990 erkannte das vereinte Deutschland die Oder-Neiße-Grenze im Vertrag mit Polen endgültig an. Heute ist es rund 358.000 Quadratkilometer groß, ein Drittel weniger als 1914.
+
+Grenzen sind also kein Naturgesetz, sondern das Ergebnis von Kriegen und Verträgen.
+
+Wusstest du das schon? Gib dem Video ein Like, folg uns für mehr, und schick es jemandem, den das auch interessiert.</script><canvas id="c" width="1080" height="1920"></canvas>
+<script src="/geofy-studio/vendor/d3.min.js"></script><script src="kv-engine.js"></script><script src="dekrieg.js"></script>
+<script>
+window.ready=(async()=>{const w=await (await fetch('/geofy-studio/data/world.json')).json(); KV.setWorld(w); window.WW=w; window.G10=await (await fetch('dekrieg_10m.json')).json();  
+ const style=new URLSearchParams(location.search).get('style')||'studio'; if(style!=='studio'){const im=new Image(); im.src='tex/'+style+'.jpg'; await im.decode(); KV.setStyle(style,im);}
+ await Promise.all(['800 40px "Bricolage Grotesque"','700 30px "Hanken Grotesk"','700 30px "JetBrains Mono"','500 30px "Hanken Grotesk"'].map(f=>document.fonts.load(f)));
+ const st=makeStory(); const tf=new URLSearchParams(location.search).get('timing'); const timing=tf?await (await fetch(tf)).json():null; const S=KV.build(st,window.WPM||158,timing); S.tag=st.tag;
+ S.scenes.forEach(sc=>{ // pops on visible moments
+  ['1914','Versailles','13 Prozent','1945','Viertel','1990','Drittel'].forEach(f=>{if(sc.say.includes(f)) S.events.push({t:sc.start+st.wt(sc,f),kind:'pop'});});});
+ window.S=S; return {total:S.total,scenes:S.scenes.map(s=>({head:s.head,start:+s.start.toFixed(2),dur:+s.dur.toFixed(2),say:s.say})),events:S.events};})();
+const ctx=document.getElementById('c').getContext('2d');
+window.frame=(t,q)=>{KV.draw(ctx,t); return document.getElementById('c').toDataURL('image/jpeg',q||0.93);};
+</script></body></html>
