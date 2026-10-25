@@ -1,0 +1,29 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:"Bricolage Grotesque";src:url(/geofy-studio/fonts/BricolageGrotesque.ttf);font-weight:200 800}
+@font-face{font-family:"Hanken Grotesk";src:url(/geofy-studio/fonts/HankenGrotesk.ttf);font-weight:100 900}
+@font-face{font-family:"JetBrains Mono";src:url(/geofy-studio/fonts/JetBrainsMono.ttf);font-weight:100 800}
+body{margin:0;background:#000}</style></head><body><script type="text/plain" id="script">Was wäre, wenn Europas Heizung ausfällt? Gemeint ist die große Atlantikströmung AMOC, die oft mit dem Golfstrom verwechselt wird. Sie bringt warmes Wasser aus den Tropen nach Norden.
+
+Genau genommen wird der Golfstrom vom Wind angetrieben und würde weiterfließen. Die AMOC ist das größere System: ein Förderband, das warmes Wasser nach Norden und kaltes Tiefenwasser nach Süden trägt.
+
+Sie ist so schwach wie seit mindestens 1.600 Jahren nicht. Seit 1950 hat sie um etwa 15 Prozent nachgelassen.
+
+Eine Studie von 2023 hielt einen Kollaps zwischen 2025 und 2095 für möglich, am wahrscheinlichsten um 2057. Andere Forscher sehen ihn eher im nächsten Jahrhundert.
+
+Was dann? Europa würde kälter, während sich die Tropen weiter aufheizen. Eine plötzliche Eiszeit wie im Film wäre es nicht. Wie stark, ist unsicher, Schätzungen reichen bis zu fünf bis zehn Grad.
+
+Sicher ist nur: Die Messreihen sind noch kurz, und der Zeitpunkt ist offen. Forscher sagen, weniger Emissionen senken das Risiko.
+
+Wusstest du das schon? Gib dem Video ein Like, folg uns für mehr, und schick es jemandem, den das auch interessiert.</script><canvas id="c" width="1080" height="1920"></canvas>
+<script src="/geofy-studio/vendor/d3.min.js"></script><script src="kv-engine.js"></script><script src="golfstrom.js"></script>
+<script>
+window.ready=(async()=>{const w=await (await fetch('/geofy-studio/data/world.json')).json(); KV.setWorld(w); window.WW=w; window.G10={};  
+ const style=new URLSearchParams(location.search).get('style')||'studio'; if(style!=='studio'){const im=new Image(); im.src='tex/'+style+'.jpg'; await im.decode(); KV.setStyle(style,im);}
+ await Promise.all(['800 40px "Bricolage Grotesque"','700 30px "Hanken Grotesk"','700 30px "JetBrains Mono"','500 30px "Hanken Grotesk"'].map(f=>document.fonts.load(f)));
+ const st=makeStory(); const tf=new URLSearchParams(location.search).get('timing'); const timing=tf?await (await fetch(tf)).json():null; const S=KV.build(st,window.WPM||158,timing); S.tag=st.tag;
+ S.scenes.forEach(sc=>{ // pops on visible moments
+  ['AMOC','Förderband','1.600','15 Prozent','2057','kälter','Messreihen'].forEach(f=>{if(sc.say.includes(f)) S.events.push({t:sc.start+st.wt(sc,f),kind:'pop'});});});
+ window.S=S; return {total:S.total,scenes:S.scenes.map(s=>({head:s.head,start:+s.start.toFixed(2),dur:+s.dur.toFixed(2),say:s.say})),events:S.events};})();
+const ctx=document.getElementById('c').getContext('2d');
+window.frame=(t,q)=>{KV.draw(ctx,t); return document.getElementById('c').toDataURL('image/jpeg',q||0.93);};
+</script></body></html>
