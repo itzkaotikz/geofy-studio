@@ -1,0 +1,29 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:"Bricolage Grotesque";src:url(/geofy-studio/fonts/BricolageGrotesque.ttf);font-weight:200 800}
+@font-face{font-family:"Hanken Grotesk";src:url(/geofy-studio/fonts/HankenGrotesk.ttf);font-weight:100 900}
+@font-face{font-family:"JetBrains Mono";src:url(/geofy-studio/fonts/JetBrainsMono.ttf);font-weight:100 800}
+body{margin:0;background:#000}</style></head><body><script type="text/plain" id="script">Naypyidaw ist seit 2005 die Hauptstadt von Myanmar. Aber wer durch die Stadt fährt, sieht oft leere Straßen. Wie kommt das?
+
+Bis 2005 war Rangun die Hauptstadt, eine Millionenstadt an der Küste. Dann verkündete die damalige Regierung den Umzug. Gebaut wurde schon ab etwa 2002, zunächst weitgehend geheim, rund 320 Kilometer weiter nördlich im Landesinneren.
+
+Die Gründe blieben vage. Genannt werden Platzmangel in Rangun, die zentrale Lage und Sicherheit. Auch Astrologie wird manchmal erwähnt, belegt ist das aber nicht.
+
+Die Stadt wurde für sehr viele Menschen geplant: Ministerien, ein riesiges Parlament und Straßen mit bis zu zwanzig Spuren. Doch Besucher berichten immer wieder von auffallend wenig Verkehr.
+
+Heute leben in der Verwaltungszone rund eine Million Menschen. Wirtschaft und Alltag konzentrieren sich weiter in Rangun.
+
+Naypyidaw zeigt also: Eine Hauptstadt lässt sich per Beschluss gründen, ein lebendiges Zentrum entsteht dadurch aber nicht automatisch.
+
+Wusstest du das schon? Gib dem Video ein Like, folg uns für mehr, und schick es jemandem, den das auch interessiert.</script><canvas id="c" width="1080" height="1920"></canvas>
+<script src="/geofy-studio/vendor/d3.min.js"></script><script src="kv-engine.js"></script><script src="naypyidaw.js"></script>
+<script>
+window.ready=(async()=>{const w=await (await fetch('/geofy-studio/data/world.json')).json(); KV.setWorld(w); window.WW=w; window.G10={};  
+ const style=new URLSearchParams(location.search).get('style')||'studio'; if(style!=='studio'){const im=new Image(); im.src='tex/'+style+'.jpg'; await im.decode(); KV.setStyle(style,im);}
+ await Promise.all(['800 40px "Bricolage Grotesque"','700 30px "Hanken Grotesk"','700 30px "JetBrains Mono"','500 30px "Hanken Grotesk"'].map(f=>document.fonts.load(f)));
+ const st=makeStory(); const tf=new URLSearchParams(location.search).get('timing'); const timing=tf?await (await fetch(tf)).json():null; const S=KV.build(st,window.WPM||158,timing); S.tag=st.tag;
+ S.scenes.forEach(sc=>{ // pops on visible moments
+  ['Naypyidaw','2005','Gründe','zwanzig','Millionen','Beschluss'].forEach(f=>{if(sc.say.includes(f)) S.events.push({t:sc.start+st.wt(sc,f),kind:'pop'});});});
+ window.S=S; return {total:S.total,scenes:S.scenes.map(s=>({head:s.head,start:+s.start.toFixed(2),dur:+s.dur.toFixed(2),say:s.say})),events:S.events};})();
+const ctx=document.getElementById('c').getContext('2d');
+window.frame=(t,q)=>{KV.draw(ctx,t); return document.getElementById('c').toDataURL('image/jpeg',q||0.93);};
+</script></body></html>
