@@ -1,0 +1,31 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:"Bricolage Grotesque";src:url(/geofy-studio/fonts/BricolageGrotesque.ttf);font-weight:200 800}
+@font-face{font-family:"Hanken Grotesk";src:url(/geofy-studio/fonts/HankenGrotesk.ttf);font-weight:100 900}
+@font-face{font-family:"JetBrains Mono";src:url(/geofy-studio/fonts/JetBrainsMono.ttf);font-weight:100 800}
+body{margin:0;background:#000}</style></head><body><script type="text/plain" id="script">Istanbul ist die größte Stadt der Türkei, die Hauptstadt des Osmanischen Reichs war sie jahrhundertelang. Trotzdem ist die Hauptstadt heute Ankara. Warum?
+
+Nach dem Ersten Weltkrieg war Istanbul von alliierten Truppen besetzt. Mustafa Kemal und die türkische Nationalbewegung bauten ihre Führung deshalb im Landesinneren auf, in Ankara. 1920 trat dort das erste Parlament zusammen.
+
+Ankara hatte Vorteile: Es liegt zentral in Anatolien, weit weg von der Küste und den Kriegsschiffen, und hatte schon einen Bahnanschluss.
+
+Am 13. Oktober 1923 wurde Ankara offiziell zur Hauptstadt erklärt. Wenige Wochen später rief Mustafa Kemal die Republik aus.
+
+Der Wechsel war auch ein Zeichen. Er setzte einen Bruch mit dem Sultanat und mit der alten Hauptstadt am Bosporus.
+
+Ankara war damals eine kleine Stadt mit nur einigen zehntausend Einwohnern. Heute leben dort rund sechs Millionen Menschen.
+
+Istanbul blieb trotzdem das wirtschaftliche und kulturelle Zentrum des Landes.
+
+Wusstest du das schon? Gib dem Video ein Like, folg uns für mehr, und schick es jemandem, den das auch interessiert.</script><canvas id="c" width="1080" height="1920"></canvas>
+<script src="/geofy-studio/vendor/d3.min.js"></script><script src="kv-engine.js"></script><script src="ankara.js"></script>
+<script>
+window.ready=(async()=>{const w=await (await fetch('/geofy-studio/data/world.json')).json(); KV.setWorld(w); window.WW=w; window.G10={};  
+ const style=new URLSearchParams(location.search).get('style')||'studio'; if(style!=='studio'){const im=new Image(); im.src='tex/'+style+'.jpg'; await im.decode(); KV.setStyle(style,im);}
+ await Promise.all(['800 40px "Bricolage Grotesque"','700 30px "Hanken Grotesk"','700 30px "JetBrains Mono"','500 30px "Hanken Grotesk"'].map(f=>document.fonts.load(f)));
+ const st=makeStory(); const tf=new URLSearchParams(location.search).get('timing'); const timing=tf?await (await fetch(tf)).json():null; const S=KV.build(st,window.WPM||158,timing); S.tag=st.tag;
+ S.scenes.forEach(sc=>{ // pops on visible moments
+  ['Ankara','1920','13.','Bruch','Millionen'].forEach(f=>{if(sc.say.includes(f)) S.events.push({t:sc.start+st.wt(sc,f),kind:'pop'});});});
+ window.S=S; return {total:S.total,scenes:S.scenes.map(s=>({head:s.head,start:+s.start.toFixed(2),dur:+s.dur.toFixed(2),say:s.say})),events:S.events};})();
+const ctx=document.getElementById('c').getContext('2d');
+window.frame=(t,q)=>{KV.draw(ctx,t); return document.getElementById('c').toDataURL('image/jpeg',q||0.93);};
+</script></body></html>
