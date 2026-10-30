@@ -1,0 +1,31 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:"Bricolage Grotesque";src:url(/geofy-studio/fonts/BricolageGrotesque.ttf);font-weight:200 800}
+@font-face{font-family:"Hanken Grotesk";src:url(/geofy-studio/fonts/HankenGrotesk.ttf);font-weight:100 900}
+@font-face{font-family:"JetBrains Mono";src:url(/geofy-studio/fonts/JetBrainsMono.ttf);font-weight:100 800}
+body{margin:0;background:#000}</style></head><body><script type="text/plain" id="script">Diese kleine Insel in der Nordsee wurde einmal gegen ein ganzes Stück Afrika getauscht. Sie heißt Helgoland.
+
+Helgoland ist nur rund einen Quadratkilometer groß und liegt etwa 50 Kilometer vor der deutschen Küste. Trotzdem gehörte sie lange nicht zu Deutschland. Seit 1807 war sie britisch.
+
+Im 19. Jahrhundert wurde sie für das Deutsche Reich wichtig. Die Marine wollte die Mündungen von Elbe und Weser schützen, und der Kaiser-Wilhelm-Kanal in Kiel entstand.
+
+1890 handelten das Deutsche Reich und Großbritannien den Helgoland-Sansibar-Vertrag aus. Deutschland verzichtete auf Ansprüche auf Sansibar vor der Küste Ostafrikas und auf andere Gebiete. Dafür bekam es Helgoland.
+
+Außerdem erhielt Deutschland den Caprivi-Zipfel im heutigen Namibia, einen schmalen Landstreifen. Er ist bis heute auf der Karte zu sehen.
+
+Später wurde die Insel im Krieg zur Festung. 1947 sprengten die Briten dort Munition, eine der größten Explosionen ohne Atomwaffen. 1952 kam Helgoland wieder an Deutschland zurück.
+
+Heute leben dort rund 1.300 Menschen. Und Sansibar gehört zu Tansania.
+
+Wusstest du das schon? Gib dem Video ein Like, folg uns für mehr, und schick es jemandem, den das auch interessiert.</script><canvas id="c" width="1080" height="1920"></canvas>
+<script src="/geofy-studio/vendor/d3.min.js"></script><script src="kv-engine.js"></script><script src="helgoland.js"></script>
+<script>
+window.ready=(async()=>{const w=await (await fetch('/geofy-studio/data/world.json')).json(); KV.setWorld(w); window.WW=w; window.G10=await (await fetch('hg_10m.json')).json();  
+ const style=new URLSearchParams(location.search).get('style')||'studio'; if(style!=='studio'){const im=new Image(); im.src='tex/'+style+'.jpg'; await im.decode(); KV.setStyle(style,im);}
+ await Promise.all(['800 40px "Bricolage Grotesque"','700 30px "Hanken Grotesk"','700 30px "JetBrains Mono"','500 30px "Hanken Grotesk"'].map(f=>document.fonts.load(f)));
+ const st=makeStory(); const tf=new URLSearchParams(location.search).get('timing'); const timing=tf?await (await fetch(tf)).json():null; const S=KV.build(st,window.WPM||158,timing); S.tag=st.tag;
+ S.scenes.forEach(sc=>{ // pops on visible moments
+  ['Helgoland','1807','1890','Caprivi','1947','1952'].forEach(f=>{if(sc.say.includes(f)) S.events.push({t:sc.start+st.wt(sc,f),kind:'pop'});});});
+ window.S=S; return {total:S.total,scenes:S.scenes.map(s=>({head:s.head,start:+s.start.toFixed(2),dur:+s.dur.toFixed(2),say:s.say})),events:S.events};})();
+const ctx=document.getElementById('c').getContext('2d');
+window.frame=(t,q)=>{KV.draw(ctx,t); return document.getElementById('c').toDataURL('image/jpeg',q||0.93);};
+</script></body></html>
