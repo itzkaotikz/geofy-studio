@@ -1,0 +1,60 @@
+name: Video produzieren
+# Läuft, sobald eine Stimme (jobs/<slug>/voice.mp3) hochgeladen wird, oder per Hand mit einem Job-Namen.
+on:
+  push:
+    branches: [main]
+    paths: ['jobs/*/voice.mp3']
+  workflow_dispatch:
+    inputs:
+      slug:
+        description: 'Job-Name (Ordner unter jobs/)'
+        required: true
+permissions:
+  contents: write
+concurrency:
+  group: produce
+  cancel-in-progress: false
+jobs:
+  produce:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Jobs bestimmen
+        id: jobs
+        run: |
+          if [ -n "${{ github.event.inputs.slug }}" ]; then S="${{ github.event.inputs.slug }}";
+          else S=$(git diff --name-only HEAD~1 HEAD -- 'jobs/*/voice.mp3' | cut -d/ -f2 | sort -u | tr '\n' ' '); fi
+          echo "slugs=$S" >> "$GITHUB_OUTPUT"; echo "Jobs: $S"
+      - name: Werkzeuge installieren
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          pip install --quiet numpy
+          npm install --no-save --silent playwright@1.48.2
+          npx playwright install --with-deps chromium
+      - name: Produzieren
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git config user.name "geofy-bot"; git config user.email "geofy-bot@users.noreply.github.com"
+          for S in ${{ steps.jobs.outputs.slugs }}; do
+            python3 - "$S" in-produktion <<'PY'
+          import json,sys; p=f"jobs/{sys.argv[1]}/job.json"; j=json.load(open(p)); j['status']=sys.argv[2]; j.pop('error',None); json.dump(j,open(p,'w'),ensure_ascii=False,indent=1)
+          PY
+            python3 pipeline/index.py; git add jobs; git commit -qm "Job $S: in Produktion [skip ci]" || true; git pull -q --rebase && git push -q
+            if pipeline/run_job.sh "$S"; then
+              O="out/$S"; TAG="video-$S"
+              gh release delete "$TAG" -y --cleanup-tag 2>/dev/null || true
+              gh release create "$TAG" "$O/$S.mp4" "$O/cover_$S.png" "$O/captions.txt" $O/preview_t*.jpg --title "Video: $S" --notes-file "$O/captions.txt"
+              python3 - "$S" "$(cat $O/duration.txt)" "https://github.com/${{ github.repository }}/releases/tag/$TAG" <<'PY'
+          import json,sys; p=f"jobs/{sys.argv[1]}/job.json"; j=json.load(open(p)); j.update(status='fertig',duration=float(sys.argv[2]),release=sys.argv[3]); json.dump(j,open(p,'w'),ensure_ascii=False,indent=1)
+          PY
+            else
+              python3 - "$S" <<'PY'
+          import json,sys; p=f"jobs/{sys.argv[1]}/job.json"; j=json.load(open(p)); j.update(status='wartet-auf-stimme',error='Produktion fehlgeschlagen, siehe GitHub Actions'); json.dump(j,open(p,'w'),ensure_ascii=False,indent=1)
+          PY
+            fi
+            python3 pipeline/index.py; git add jobs; git commit -qm "Job $S: Ergebnis [skip ci]" || true; git pull -q --rebase && git push -q
+          done

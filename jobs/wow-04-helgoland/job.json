@@ -1,0 +1,57 @@
+{
+ "title": "Helgoland gegen Sansibar",
+ "series": "Wow",
+ "nr": 4,
+ "status": "fertig",
+ "created": "2026-10-30",
+ "outro": "neu",
+ "caption": "Deutschland hat 1890 eine Insel gegen ein Stück Afrika getauscht 🏝️ Helgoland. Wusstest du das schon?",
+ "hashtags": [
+  "#helgoland",
+  "#sansibar",
+  "#geografie",
+  "#deutschland",
+  "#lernenmittiktok"
+ ],
+ "youtube_title": "Deutschland tauschte diese Insel gegen ein Stück Afrika",
+ "story": {
+  "question": "Hättest du Helgoland gegen Sansibar getauscht?",
+  "options": [
+   "Ja, klar",
+   "Niemals"
+  ]
+ },
+ "highlight": "Wow",
+ "cover": {
+  "time": 4.5,
+  "kicker": "WOW",
+  "lines": "Eine Insel|gegen ein Stück|Afrika getauscht"
+ },
+ "popwords": [
+  "Helgoland",
+  "1807",
+  "1890",
+  "Caprivi",
+  "1947",
+  "1952"
+ ],
+ "spoken": {
+  "Helgoland": "helgoland",
+  "Sansibar": "sansibar",
+  "Helgoland-Sansibar-Vertrag": "helgoland sansibar vertrag",
+  "Caprivi-Zipfel": "kaprivi zipfel",
+  "Kaiser-Wilhelm-Kanal": "kaiser wilhelm kanal",
+  "Elbe": "elbe",
+  "Weser": "weser",
+  "Namibia": "namibia",
+  "Tansania": "tansania"
+ },
+ "check": [
+  "Einwohnerzahl ~1.300",
+  "Entfernung ~50 km",
+  "Sprengung 1947",
+  "Caprivi-Bezug"
+ ],
+ "release": null,
+ "duration": 74.5
+}

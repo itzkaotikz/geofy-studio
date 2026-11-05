@@ -1,0 +1,35 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Geofy Job</title><style>
+@font-face{font-family:"Bricolage Grotesque";src:url(../fonts/BricolageGrotesque.ttf);font-weight:200 800}
+@font-face{font-family:"Hanken Grotesk";src:url(../fonts/HankenGrotesk.ttf);font-weight:100 900}
+@font-face{font-family:"JetBrains Mono";src:url(../fonts/JetBrainsMono.ttf);font-weight:100 800}
+html,body{margin:0;background:#000}
+canvas{display:block;max-width:100%;height:auto;margin:0 auto}
+body.embed canvas{max-height:100vh;width:auto}
+</style></head><body><script type="text/plain" id="script"></script><canvas id="c" width="1080" height="1920"></canvas>
+<script src="../vendor/d3.min.js"></script><script src="../js/kv-engine.js"></script>
+<script>
+// Generic page for one pipeline job: ?job=<slug>&style=satellite&timing=1&play=1
+const Q=new URLSearchParams(location.search), JOB=Q.get('job'), DIR='../jobs/'+JOB+'/';
+const loadScript=src=>new Promise((ok,no)=>{const s=document.createElement('script'); s.src=src; s.onload=ok; s.onerror=()=>no(new Error('missing '+src)); document.head.appendChild(s);});
+window.ready=(async()=>{
+ const bust='?v='+Date.now();
+ const job=await (await fetch(DIR+'job.json'+bust)).json(); window.JOB=job;
+ document.getElementById('script').textContent=(await (await fetch(DIR+'script.txt'+bust)).text()).trim();
+ const w=await (await fetch('../data/world.json')).json(); KV.setWorld(w); window.WW=w;
+ try{window.G10=await (await fetch(DIR+'geo.json'+bust)).json();}catch(e){window.G10={};}
+ await loadScript(DIR+'story.js'+bust);
+ const style=Q.get('style')||'satellite'; if(style!=='studio'){const im=new Image(); im.src='tex/'+style+'.jpg'; await im.decode(); KV.setStyle(style,im);}
+ await Promise.all(['800 40px "Bricolage Grotesque"','700 30px "Hanken Grotesk"','700 30px "JetBrains Mono"','500 30px "Hanken Grotesk"'].map(f=>document.fonts.load(f)));
+ const st=makeStory(); let timing=null;
+ if(Q.get('timing')){try{const r=await fetch(DIR+'timing.json'+bust); if(r.ok) timing=await r.json();}catch(e){}}
+ const S=KV.build(st,window.WPM||158,timing); S.tag=st.tag;
+ const pops=job.popwords||[];
+ S.scenes.forEach(sc=>pops.forEach(f=>{if(sc.say.includes(f)) S.events.push({t:sc.start+st.wt(sc,f),kind:'pop'});}));
+ window.S=S;
+ return {total:S.total,scenes:S.scenes.map(s=>({head:s.head,start:+s.start.toFixed(2),dur:+s.dur.toFixed(2),say:s.say})),events:S.events};
+})();
+const ctx=document.getElementById('c').getContext('2d');
+window.frame=(t,q)=>{KV.draw(ctx,t); return document.getElementById('c').toDataURL('image/jpeg',q||0.93);};
+// Live-Vorschau im Browser (Board): ?play=1 spielt die Animation ohne Ton ab
+if(Q.get('play')){document.body.classList.add('embed'); window.ready.then(info=>{const t0=performance.now(); const tick=()=>{const t=((performance.now()-t0)/1000)%info.total; KV.draw(ctx,t); requestAnimationFrame(tick);}; tick();}).catch(e=>{document.body.innerHTML='<p style="color:#fff;font:16px sans-serif;padding:20px">Vorschau nicht verfügbar: '+e.message+'</p>';});}
+</script></body></html>

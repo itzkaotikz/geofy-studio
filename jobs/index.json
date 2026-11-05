@@ -1,0 +1,33 @@
+{
+ "updated": "2026-11-05T07:15:59Z",
+ "jobs": [
+  {
+   "title": "Helgoland gegen Sansibar",
+   "series": "Wow",
+   "nr": 4,
+   "status": "fertig",
+   "created": "2026-10-30",
+   "caption": "Deutschland hat 1890 eine Insel gegen ein Stück Afrika getauscht 🏝️ Helgoland. Wusstest du das schon?",
+   "hashtags": [
+    "#helgoland",
+    "#sansibar",
+    "#geografie",
+    "#deutschland",
+    "#lernenmittiktok"
+   ],
+   "release": null,
+   "duration": 74.5,
+   "error": null,
+   "check": [
+    "Einwohnerzahl ~1.300",
+    "Entfernung ~50 km",
+    "Sprengung 1947",
+    "Caprivi-Bezug"
+   ],
+   "priority": null,
+   "slug": "wow-04-helgoland",
+   "words": 178,
+   "has_voice": true
+  }
+ ]
+}
