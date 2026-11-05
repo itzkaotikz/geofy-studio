@@ -2,7 +2,7 @@
 
 So entsteht ein Wissensvideo:
 
-1. **Job anlegen** (Mensch oder Skript-Nachschub): Ordner `jobs/<slug>/` mit `job.json`, `script.txt`, `story.js`, `geo.json`. Status `wartet-auf-stimme`.
+1. **Job anlegen** (auf Zuruf: „neue Skripte“ an Claude, kein automatischer Nachschub): Ordner `jobs/<slug>/` mit `job.json`, `script.txt`, `story.js`, `geo.json`. Status `wartet-auf-stimme`.
 2. **Stimme**: Skript in ElevenLabs einsprechen (Stimme *Lennart – Energetic*, Modell eleven v4). Die MP3 im Studio unter **Pipeline** hochladen. Sie landet als `jobs/<slug>/voice.mp3` im Repo.
 3. **Produktion** (GitHub Action `produce.yml`, startet automatisch): Timing → Video (Satellitenstil, 30 fps) → Soundeffekte → Mix (−14 LUFS) → Cover → Captions. Das Ergebnis kommt als Release `video-<slug>`, und `job.json` springt auf `fertig`.
 4. **Posten**: Im Board Video und Cover laden, Captions kopieren und danach „Als veröffentlicht markieren“ antippen.
