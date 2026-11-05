@@ -1,10 +1,10 @@
 {
- "updated": "2026-11-05T07:21:38Z",
+ "updated": "2026-11-05T07:23:01Z",
  "jobs": [
   {
    "title": "Was wäre wenn der Bosporus gesperrt wird",
    "series": "Was wäre wenn",
-   "nr": 1,
+   "nr": 5,
    "status": "wartet-auf-stimme",
    "created": "2026-10-30",
    "caption": "Was passiert, wenn der Bosporus gesperrt wird? 🚢 Eine Meerenge, 700 Meter breit. Wusstest du das schon?",
@@ -26,7 +26,7 @@
     "Kanal Istanbul: aktueller Stand"
    ],
    "priority": 1,
-   "slug": "was-waere-wenn-01-bosporus",
+   "slug": "was-waere-wenn-05-bosporus",
    "words": 160,
    "has_voice": false
   },

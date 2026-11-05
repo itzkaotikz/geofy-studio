@@ -1,4 +1,4 @@
-// Story: Was wäre wenn #1 – Bosporus gesperrt
+// Story: Was wäre wenn #5 – Bosporus gesperrt
 function makeStory(){
 const {C,FD,FB,L,clamp,ease,eout,lerp,viewBox,label,rr,fit,hl}=KV;
 const S_say=document.getElementById('script').textContent.trim().split(/\n\s*\n/).map(s=>s.replace(/\s+/g,' ').trim());
@@ -64,5 +64,5 @@ const scenes=[
     ctx.restore(); ctx.save(); ctx.globalAlpha=a*ai; ctx.font=`800 42px ${FD}`; ctx.fillStyle=C.ink; ctx.fillText(txt,x+60,y,620); ctx.restore();});
    ctx.restore();}]}
 ];
-return {tag:'GEOFY · WAS WÄRE WENN #1', scenes, wt};
+return {tag:'GEOFY · WAS WÄRE WENN #5', scenes, wt};
 }

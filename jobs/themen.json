@@ -1,0 +1,134 @@
+{
+ "hinweis": "Themen-Warteschlange für den automatischen Skript-Nachschub. Oben = als Nächstes. Erledigte Themen wandern nach 'erledigt'.",
+ "regeln": {
+  "pro_woche": "Deutschland und Türkei je mindestens 1×/Woche (auch Krieg/Konflikt/Grenzen)",
+  "bevorzugt": "Was wäre wenn, besondere Länder, abgefahrene Geografie, Wow; trockene Rankings/Wirtschaft nur mit starkem Hook",
+  "vorrat_ziel": 5
+ },
+ "warteschlange": [
+  {
+   "titel": "Länder, die es nicht mehr gibt",
+   "serie": "Wow",
+   "notiz": "DDR, Jugoslawien, UdSSR, Tschechoslowakei … neutral, Karte vorher/nachher"
+  },
+  {
+   "titel": "Tuvalu – das erste digitale Land",
+   "serie": "Wow",
+   "notiz": "Meeresspiegel, digitale Kopie; Fakten prüfen"
+  },
+  {
+   "titel": "Was wäre wenn alle Menschen in einem Land leben",
+   "serie": "Was wäre wenn",
+   "notiz": "Dichte-Vergleich (Texas? Deutschland?) seriös rechnen"
+  },
+  {
+   "titel": "Warum spricht Brasilien Portugiesisch",
+   "serie": "Warum ist",
+   "notiz": "Vertrag von Tordesillas 1494"
+  },
+  {
+   "titel": "Kappadokien oder Gallipoli",
+   "serie": "Türkei",
+   "notiz": "Türkei-Quote; Gallipoli neutral erzählen"
+  },
+  {
+   "titel": "Aralsee – der See, der verschwand",
+   "serie": "Wow",
+   "notiz": "Satellit vorher/nachher"
+  },
+  {
+   "titel": "Sealand – Staat auf einer Seefestung",
+   "serie": "Wow",
+   "notiz": ""
+  },
+  {
+   "titel": "Warum ist Norwegen so zerfranst",
+   "serie": "Warum ist",
+   "notiz": "Fjorde, Gletscher"
+  },
+  {
+   "titel": "Wo leben alle Kanadier",
+   "serie": "Wo leben alle",
+   "notiz": "Bevölkerung nahe US-Grenze"
+  },
+  {
+   "titel": "Surtsey – Insel aus dem Meer",
+   "serie": "Wow",
+   "notiz": "1963"
+  },
+  {
+   "titel": "Die Nordsee steigt um 1 m",
+   "serie": "Was wäre wenn",
+   "notiz": "Deutschland-Quote: Küste, Hamburg"
+  },
+  {
+   "titel": "Istanbul-Erdbeben – Nordanatolische Verwerfung",
+   "serie": "Was wäre wenn",
+   "notiz": "Türkei-Quote; sachlich, nicht reißerisch"
+  }
+ ],
+ "erledigt": [
+  "kaliningrad",
+  "fasaneninsel",
+  "baarle",
+  "bodensee",
+  "jungholz",
+  "buesingen",
+  "llivia",
+  "elsass",
+  "brasilia",
+  "canberra",
+  "naypyidaw",
+  "ankara",
+  "afrika (karten lügen)",
+  "deutschland (karten lügen)",
+  "kanada_usa",
+  "indonesien",
+  "antarktis",
+  "russland (karten lügen)",
+  "kongo",
+  "suwalki",
+  "krieg russland",
+  "krieg deutschland",
+  "suezkanal",
+  "panamakanal",
+  "hormus",
+  "zeitzonen",
+  "saudi_arabien",
+  "samoa",
+  "afrikas_grenzen",
+  "gambia",
+  "alaska",
+  "wakhan",
+  "bolivien",
+  "niederlande",
+  "tuerkei zwei kontinente",
+  "eis_schmilzt",
+  "mittelmeer",
+  "sahara",
+  "golfstrom",
+  "chile",
+  "wo leben alle kreis",
+  "australien",
+  "aegypten",
+  "birtawil",
+  "transnistrien",
+  "pointnemo",
+  "helgoland",
+  "bosporus"
+ ],
+ "serien_naechste_nr": {
+  "Wow": 5,
+  "Was wäre wenn": 6,
+  "Warum ist": 9,
+  "Grenz-Kuriositäten": 8,
+  "Hauptstädte": 5,
+  "Karten lügen": 8,
+  "Nadelöhre": 4,
+  "Rekorde": 4,
+  "Wo leben alle": 4,
+  "Konflikt erklärt": 2,
+  "Grenzen die Kriege machten": 2,
+  "Krieg auf der Karte": 3
+ }
+}

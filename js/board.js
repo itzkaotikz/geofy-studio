@@ -87,7 +87,7 @@
       const buf = new Uint8Array(await f.arrayBuffer()); let s = ''; for (let i = 0; i < buf.length; i += 0x8000) s += String.fromCharCode.apply(null, buf.subarray(i, i + 0x8000));
       const slug = d.dataset.slug, p = `jobs/${slug}/voice.mp3`;
       await putFile(p, btoa(s), `Stimme: ${slug}`, await sha(p));
-      info.textContent = 'Hochgeladen. Die Produktion läuft jetzt, in etwa 15–25 Minuten ist das Video hier.';
+      info.textContent = 'Hochgeladen. Die Produktion läuft jetzt, in etwa 5–10 Minuten ist das Video hier.';
       setTimeout(load, 4000);
     } catch (e) { info.textContent = e.message; }
   }
