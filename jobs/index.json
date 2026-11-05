@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-05T07:23:01Z",
+ "updated": "2026-11-05T07:40:13Z",
  "jobs": [
   {
    "title": "Was wäre wenn der Bosporus gesperrt wird",
@@ -28,6 +28,35 @@
    "priority": 1,
    "slug": "was-waere-wenn-05-bosporus",
    "words": 160,
+   "has_voice": false
+  },
+  {
+   "title": "Länder, die es nicht mehr gibt",
+   "series": "Wow",
+   "nr": 5,
+   "status": "wartet-auf-stimme",
+   "created": "2026-11-05",
+   "caption": "Diese Länder standen vor Kurzem noch auf jeder Weltkarte 🗺️ Heute gibt es sie nicht mehr. Wusstest du das schon?",
+   "hashtags": [
+    "#geschichte",
+    "#wow",
+    "#geografie",
+    "#weltkarte",
+    "#lernenmittiktok"
+   ],
+   "release": null,
+   "duration": null,
+   "error": null,
+   "check": [
+    "DDR-Beitritt 3.10.1990",
+    "Sowjetunion Ende 1991, 15 Nachfolgestaaten",
+    "Jugoslawien: Zerfall ab 1991 (Nachfolgestaaten bewusst ohne Zahl, Kosovo-Status umstritten)",
+    "Tschechoslowakei 1.1.1993",
+    "Tansania 1964, Name aus Tanganjika + Sansibar"
+   ],
+   "priority": 2,
+   "slug": "wow-05-laender-die-es-nicht-mehr-gibt",
+   "words": 169,
    "has_voice": false
   },
   {

@@ -1,0 +1,59 @@
+{
+ "title": "Länder, die es nicht mehr gibt",
+ "series": "Wow",
+ "nr": 5,
+ "status": "wartet-auf-stimme",
+ "created": "2026-11-05",
+ "outro": "neu",
+ "priority": 2,
+ "caption": "Diese Länder standen vor Kurzem noch auf jeder Weltkarte 🗺️ Heute gibt es sie nicht mehr. Wusstest du das schon?",
+ "hashtags": [
+  "#geschichte",
+  "#wow",
+  "#geografie",
+  "#weltkarte",
+  "#lernenmittiktok"
+ ],
+ "youtube_title": "Diese Länder gibt es nicht mehr",
+ "story": {
+  "question": "Welches Land hättest du gewusst?",
+  "options": [
+   "DDR",
+   "Tschechoslowakei"
+  ]
+ },
+ "highlight": "Wow",
+ "cover": {
+  "time": 3.5,
+  "kicker": "WOW",
+  "lines": "Diese Länder|gibt es|nicht mehr"
+ },
+ "popwords": [
+  "DDR",
+  "1990",
+  "15",
+  "1991",
+  "1993",
+  "1964",
+  "Tansania"
+ ],
+ "spoken": {
+  "DDR": "de de er",
+  "Tanganjika": "tanganjika",
+  "Sansibar": "sansibar",
+  "Tansania": "tansania",
+  "Kasachstan": "kasachstan",
+  "Tschechoslowakei": "tschechoslowakai",
+  "Slowakei": "slowakai",
+  "3.": "dritten"
+ },
+ "check": [
+  "DDR-Beitritt 3.10.1990",
+  "Sowjetunion Ende 1991, 15 Nachfolgestaaten",
+  "Jugoslawien: Zerfall ab 1991 (Nachfolgestaaten bewusst ohne Zahl, Kosovo-Status umstritten)",
+  "Tschechoslowakei 1.1.1993",
+  "Tansania 1964, Name aus Tanganjika + Sansibar"
+ ],
+ "release": null,
+ "duration": null
+}

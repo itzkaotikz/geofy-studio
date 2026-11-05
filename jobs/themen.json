@@ -7,11 +7,6 @@
  },
  "warteschlange": [
   {
-   "titel": "Länder, die es nicht mehr gibt",
-   "serie": "Wow",
-   "notiz": "DDR, Jugoslawien, UdSSR, Tschechoslowakei … neutral, Karte vorher/nachher"
-  },
-  {
    "titel": "Tuvalu – das erste digitale Land",
    "serie": "Wow",
    "notiz": "Meeresspiegel, digitale Kopie; Fakten prüfen"
@@ -115,10 +110,11 @@
   "transnistrien",
   "pointnemo",
   "helgoland",
-  "bosporus"
+  "bosporus",
+  "länder die es nicht mehr gibt"
  ],
  "serien_naechste_nr": {
-  "Wow": 5,
+  "Wow": 6,
   "Was wäre wenn": 6,
   "Warum ist": 9,
   "Grenz-Kuriositäten": 8,
