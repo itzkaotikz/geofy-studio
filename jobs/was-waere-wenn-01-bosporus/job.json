@@ -1,0 +1,54 @@
+{
+ "title": "Was wäre wenn der Bosporus gesperrt wird",
+ "series": "Was wäre wenn",
+ "nr": 1,
+ "status": "wartet-auf-stimme",
+ "created": "2026-10-30",
+ "outro": "neu",
+ "priority": 1,
+ "caption": "Was passiert, wenn der Bosporus gesperrt wird? 🚢 Eine Meerenge, 700 Meter breit. Wusstest du das schon?",
+ "hashtags": [
+  "#bosporus",
+  "#tuerkei",
+  "#geografie",
+  "#schwarzesmeer",
+  "#lernenmittiktok"
+ ],
+ "youtube_title": "Was wäre, wenn der Bosporus gesperrt wird?",
+ "story": {
+  "question": "Wusstest du, dass nur ein Weg aus dem Schwarzen Meer führt?",
+  "options": [
+   "Ja",
+   "Nein"
+  ]
+ },
+ "highlight": "Was wäre wenn",
+ "cover": {
+  "time": 3.5,
+  "kicker": "WAS WÄRE WENN",
+  "lines": "Der Bosporus|wird|gesperrt?"
+ },
+ "popwords": [
+  "Bosporus",
+  "700",
+  "40.000",
+  "1936",
+  "2022",
+  "Kanal"
+ ],
+ "spoken": {
+  "Bosporus": "bosporus",
+  "Montreux": "mongtrö",
+  "Istanbul": "istanbul",
+  "Kriegs": "kriegs"
+ },
+ "check": [
+  "~30 km Länge, ~700 m engste Stelle",
+  "~40.000 Schiffe/Jahr (Quellen schwanken)",
+  "Montreux 1936: Regeln Handels-/Kriegsschiffe",
+  "Einschränkung Kriegsschiffe 2022",
+  "Kanal Istanbul: aktueller Stand"
+ ],
+ "release": null,
+ "duration": null
+}

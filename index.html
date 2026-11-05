@@ -130,6 +130,30 @@ textarea{font:15px/1.5 var(--f-body);color:var(--ink);background:var(--ozean);bo
 .coverbox img{width:100%;aspect-ratio:9/16;border-radius:12px;border:1px solid var(--linie);display:block;background:var(--ozean)}
 .update{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 16px);background:var(--ink);color:var(--tiefsee);border:0;border-radius:999px;padding:12px 20px;font:700 14px var(--f-body);box-shadow:0 8px 30px rgba(0,0,0,.4);z-index:20;cursor:pointer}
 select#channel{width:auto;padding:6px 10px;font-size:13px}
+
+.bhint{color:var(--mute);margin:0;font-size:14px}
+.bstats{display:flex;gap:10px;flex-wrap:wrap}
+.bstat{background:var(--ozean);border:1px solid var(--linie);border-radius:12px;padding:10px 14px;min-width:96px}
+.bstat b{display:block;font-family:var(--f-display);font-size:24px;line-height:1.1}
+.bstat span{font-size:12.5px;color:var(--mute)}
+.bstat.warn b{color:var(--signal)}
+.blist{display:flex;flex-direction:column;gap:12px}
+.bjob{background:var(--ozean);border:1px solid var(--linie);border-radius:16px;padding:14px 16px}
+.bjob>summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.bjob>summary::-webkit-details-marker{display:none}
+.bjob h3{margin:0;font-family:var(--f-display);font-size:18px;line-height:1.25}
+.bjob .meta{font-size:12.5px;color:var(--mute)}
+.bbadge{font:700 11.5px var(--f-mono);letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:4px 10px;white-space:nowrap;background:var(--linie);color:var(--ink)}
+.bbadge.s-wartet-auf-stimme{background:var(--signal);color:#fff}
+.bbadge.s-in-produktion{background:#FFE066;color:#0B1C2A}
+.bbadge.s-fertig{background:var(--lagune);color:#0B1C2A}
+.bbody{display:flex;flex-direction:column;gap:12px;margin-top:14px}
+.bbody pre{white-space:pre-wrap;font:14.5px/1.55 var(--f-body);margin:0;background:var(--tiefsee);border:1px solid var(--linie);border-radius:12px;padding:12px}
+.bbody .acts{display:flex;gap:8px;flex-wrap:wrap}
+.bcap{display:flex;flex-direction:column;gap:6px}
+.bcap h4{margin:0;font-size:13px;color:var(--mute);font-weight:700}
+.bprev{width:100%;max-width:300px;aspect-ratio:9/16;border:0;border-radius:12px;background:#000}
+.berr{color:var(--signal)}
 </style>
 </head>
 <body>
@@ -145,7 +169,30 @@ select#channel{width:auto;padding:6px 10px;font-size:13px}
   <nav class="tabs" role="tablist" aria-label="Modus">
     <button type="button" role="tab" id="tab-quiz" aria-selected="true" aria-controls="mode-quiz">Quiz</button>
     <button type="button" role="tab" id="tab-wissen" aria-selected="false" aria-controls="mode-wissen">Wissen</button>
+    <button type="button" role="tab" id="tab-board" aria-selected="false" aria-controls="mode-board">Pipeline</button>
   </nav>
+
+  <div id="mode-board" class="mode" role="tabpanel" aria-labelledby="tab-board" hidden>
+    <section class="sec" aria-labelledby="h-board">
+      <div class="sec-head"><h2 id="h-board">Content-Pipeline</h2><span class="tag" id="bUpdated"></span></div>
+      <p class="bhint">Skript in ElevenLabs einsprechen, MP3 hier hochladen. Video, Cover und Captions entstehen danach automatisch, das dauert etwa 15–25 Minuten.</p>
+      <div class="bstats" id="bStats"></div>
+      <div class="seg" id="bFilter" role="group" aria-label="Filter">
+        <button type="button" data-f="offen" aria-pressed="true">Offen</button>
+        <button type="button" data-f="fertig" aria-pressed="false">Fertig</button>
+        <button type="button" data-f="alle" aria-pressed="false">Alle</button>
+      </div>
+      <p id="bStatus" class="bhint" role="status"></p>
+      <div id="bList" class="blist"></div>
+    </section>
+    <section class="sec" aria-labelledby="h-btoken">
+      <details class="help" id="bTokenBox"><summary id="h-btoken">Verbindung zu GitHub</summary>
+        <p>Zum Hochladen braucht die App einmalig einen GitHub-Schlüssel (Fine-grained Token): nur für das Repository <code>geofy-studio</code>, Berechtigung <code>Contents: Read and write</code>, Ablauf z. B. 90 Tage. Er wird nur auf diesem Gerät gespeichert, nicht im Repository.</p>
+        <div class="row"><input id="bToken" type="password" autocomplete="off" placeholder="github_pat_…" aria-label="GitHub-Token"><button type="button" class="btn" id="bTokenSave">Speichern</button></div>
+        <p class="bhint" id="bTokenInfo"></p>
+      </details>
+    </section>
+  </div>
 
   <div id="mode-wissen" class="mode" role="tabpanel" aria-labelledby="tab-wissen" hidden>
     <section class="sec" aria-labelledby="h-wnew">
@@ -315,5 +362,6 @@ select#channel{width:auto;padding:6px 10px;font-size:13px}
 <script src="js/align.js"></script>
 <script src="js/wissen.js"></script>
 <script src="js/app.js"></script>
+<script src="js/board.js"></script>
 </body>
 </html>

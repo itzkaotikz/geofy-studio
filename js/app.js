@@ -1,5 +1,5 @@
 (async function(){
-const APP_VERSION='2.0.0';
+const APP_VERSION='2.1.0';
 const W=1080,H=1920;
 const C={bg:'#0B1C2A',ocean:'#10283B',grat:'rgba(246,241,231,0.07)',land:'#E9DFC7',landDim:'#B9B09B',target:'#FF3B7F',ok:'#33D1B0',ink:'#F6F1E7',mute:'#8CA3B6',line:'#1F4360'};
 const FD='"Bricolage Grotesque", "Hanken Grotesk", sans-serif', FB='"Hanken Grotesk", sans-serif', FM='"JetBrains Mono", monospace';
@@ -444,11 +444,11 @@ $('copyCap').addEventListener('click',async()=>{const ta=$('caption'); try{await
 
 // =================== Wissen 2.0 (js/wissen.js) ===================
 window.GEO={world,features,byId,NAMES,pickCodecs,renderClean,save,status,dataURLtoBlob};
-function setMode(m){const w=m==='wissen'; $('mode-wissen').hidden=!w; $('mode-quiz').hidden=w; $('tab-wissen').setAttribute('aria-selected',w); $('tab-quiz').setAttribute('aria-selected',!w);
- try{localStorage.setItem('geofy-mode',m);}catch(e){} if(w&&window.WISSEN) window.WISSEN.show();}
-$('tab-quiz').addEventListener('click',()=>setMode('quiz')); $('tab-wissen').addEventListener('click',()=>setMode('wissen'));
+function setMode(m){if(!['quiz','wissen','board'].includes(m)) m='quiz'; ['quiz','wissen','board'].forEach(k=>{$('mode-'+k).hidden=k!==m; $('tab-'+k).setAttribute('aria-selected',k===m);});
+ try{localStorage.setItem('geofy-mode',m);}catch(e){} if(m==='wissen'&&window.WISSEN) window.WISSEN.show(); if(m==='board'&&window.BOARD) window.BOARD.show();}
+$('tab-quiz').addEventListener('click',()=>setMode('quiz')); $('tab-wissen').addEventListener('click',()=>setMode('wissen')); $('tab-board').addEventListener('click',()=>setMode('board'));
 let startMode='quiz'; try{startMode=localStorage.getItem('geofy-mode')||'quiz';}catch(e){}
-if(location.hash==='#wissen') startMode='wissen';
+if(location.hash==='#wissen') startMode='wissen'; if(location.hash==='#pipeline') startMode='board';
 
 if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').then(reg=>{
  const show=()=>{$('updateBtn').hidden=false;};

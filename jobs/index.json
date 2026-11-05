@@ -1,6 +1,35 @@
 {
- "updated": "2026-11-05T07:20:19Z",
+ "updated": "2026-11-05T07:21:38Z",
  "jobs": [
+  {
+   "title": "Was wäre wenn der Bosporus gesperrt wird",
+   "series": "Was wäre wenn",
+   "nr": 1,
+   "status": "wartet-auf-stimme",
+   "created": "2026-10-30",
+   "caption": "Was passiert, wenn der Bosporus gesperrt wird? 🚢 Eine Meerenge, 700 Meter breit. Wusstest du das schon?",
+   "hashtags": [
+    "#bosporus",
+    "#tuerkei",
+    "#geografie",
+    "#schwarzesmeer",
+    "#lernenmittiktok"
+   ],
+   "release": null,
+   "duration": null,
+   "error": null,
+   "check": [
+    "~30 km Länge, ~700 m engste Stelle",
+    "~40.000 Schiffe/Jahr (Quellen schwanken)",
+    "Montreux 1936: Regeln Handels-/Kriegsschiffe",
+    "Einschränkung Kriegsschiffe 2022",
+    "Kanal Istanbul: aktueller Stand"
+   ],
+   "priority": 1,
+   "slug": "was-waere-wenn-01-bosporus",
+   "words": 160,
+   "has_voice": false
+  },
   {
    "title": "Helgoland gegen Sansibar",
    "series": "Wow",
