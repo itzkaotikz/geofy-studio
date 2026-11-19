@@ -32,12 +32,25 @@ Status: `idee` → `skript` → `wartet-auf-stimme` → `in-produktion` → `fer
 
 ## Regeln für Skripte
 - Länge 62–75 s gesprochen: **höchstens 185 Wörter**, besser 150–175. Ein Absatz entspricht einer Szene, 7 Szenen plus Outro.
-- Szene 1 ist ein starker Hook in einem Satz und nennt das Thema sofort.
+- **Hook-Regel (seit 2026-11-19, Priorität):** Die ersten 5 bis 15 Sekunden (etwa 15 bis 40 Wörter) wecken sofort Neugier und halten die Leute im Video: konkretes Szenario oder überraschende Behauptung, offene Frage („Was passiert dann?“), Eskalation („Und das ist erst Tag eins.“). Keine Begrüßung, kein „Heute geht es um …“, kein Definitionssatz am Anfang. Die Erklärung kommt danach.
+- **Titel-Regel:** Titel, Cover-Text und erste Caption-Zeile sind Klick-Hooks in Frageform oder Szenario („Der Bosporus wird gesperrt: Was passiert dann?“, „Was, wenn …? Dann …“), nicht Themenbezeichnungen. Immer faktentreu, keine falschen Versprechen.
+- Offene Schleifen: Mitten im Skript mindestens 1–2 Spannungspunkte („Doch hier kommt der Haken“, „Und dann wird es seltsam“), die den nächsten Absatz ankündigen.
+- Zeitleiste/Eskalation bevorzugt (Tag 1 → Woche 1 → Monat 1), bei Was-wäre-wenn und Warum-Videos.
 - Outro wörtlich: „Wusstest du das schon? Gib dem Video ein Like, folg uns für mehr, und schick es jemandem, den das auch interessiert.“
 - Politisch neutral, keine Wertung. Bei Konflikten werden nur Fakten erzählt. International anerkannte Grenzen gelten (z. B. die Krim als Teil der Ukraine einfärben).
 - Zahlen gerundet („rund“, „etwa“). Alles Unsichere kommt in `check`.
 - Caption: 1–2 Sätze mit Hook, endet mit „Wusstest du das schon?“. Genau 5 Hashtags: Thema, Serie, #geografie, Nische, #lernenmittiktok.
 - Themenwahl: `jobs/themen.json` (Warteschlange, Quoten Deutschland/Türkei, nächste Folgennummern).
+
+## Tempo und Bildsprache (seit 2026-11-19, Priorität)
+Kurzvideo-Publikum braucht ständig Bewegung, der Wissenscharakter bleibt.
+- **Alle 2 bis 3 Sekunden ändert sich etwas** (neue Einblendung, Kamerafahrt, Schnitt auf neue Karte, Zähler). Keine Einstellung länger als etwa 3 s ohne neues Element.
+- Pro Video etwa **15 bis 22 Bildmomente** statt 7 bis 8. Absätze dürfen in mehrere Bildmomente zerlegt werden.
+- Mehr Grafiken: animierte Zähler, Icons (Schiffe, Menschen), Pfeile und Routen, Vorher/Nachher, Vergleichsbalken, Zeitleisten-Chips (Tag 1, Woche 1).
+- Harte Wechsel zwischen Weltkarte und Detailkarte (schneller Zoom), kurze Punch-Zooms auf Schlüsselzahlen, Wörter in Popwords hervorheben, Whoosh-SFX bei Wechseln.
+- Die ersten 3 Sekunden sind bereits visuell stark (große Zahl oder Frage im Bild, Bewegung ab Frame 1).
+- Untertitel immer Wort für Wort, gut lesbar, im Sicherheitsbereich.
+- Nach dem Rendern prüfen: Zählt man im Preview mehr als 6 Wechsel in 15 s?
 
 ## story.js
 - Am einfachsten ein bestehendes `jobs/*/story.js` kopieren: Kopf mit den Helfern (`wt`, `chip`, `tag`, `big`, `pulse`, `line`, `arrow`, `fill`) und die Outro-Szene am Ende übernehmen, nur die Szenen dazwischen neu schreiben.
