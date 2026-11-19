@@ -60,7 +60,7 @@ function build(story,wpm,timing){let t=0; let scenes;
   if(sc.wordsT){let k=0; sc.subs=ch.map(c=>{const ws=sc.wordsT.slice(k,k+c.length); k+=c.length; return {words:c,from:ws[0].t0,to:ws[ws.length-1].t1,times:ws.map(w=>w.t0)};});}
   else {const total=ch.reduce((a,c)=>a+c.join(' ').length,0); let acc=0; sc.subs=ch.map(c=>{const len=c.join(' ').length; const o={words:c,from:0.25+acc/total*sc.speak,to:0.25+(acc+len)/total*sc.speak}; acc+=len; return o;});}
   sc.subs.forEach((x,i)=>{x.until=i<sc.subs.length-1?sc.subs[i+1].from:x.to+0.6;});});
- S={scenes,total:t,events:[]}; scenes.forEach(sc=>{S.events.push({t:sc.start,kind:'whoosh'}); (sc.pops||[]).forEach(p=>S.events.push({t:sc.start+p,kind:'pop'}));}); S.events.push({t:S.total-0.2,kind:'end'});
+ S={scenes,total:t,events:[]}; scenes.forEach(sc=>{S.events.push({t:sc.start,kind:'whoosh'}); (sc.pops||[]).forEach(p=>S.events.push({t:sc.start+(typeof p==='function'?p(sc):p),kind:'pop'})); (sc.swish||[]).forEach(p=>S.events.push({t:sc.start+(typeof p==='function'?p(sc):p),kind:'swish'}));}); S.events.push({t:S.total-0.2,kind:'end'});
  return S;}
 function camAt(sc,u){let v=sc.prevView, from=0; for(const c of sc.cams){const fly=c.fly??1.2; if(u<c.at) break; const k=ease(clamp((u-c.at)/fly)); v=lerpView(v,c.view,k); from=c.at;}
  // gentle continuous camera breathing so the map never stands still

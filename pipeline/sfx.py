@@ -30,6 +30,7 @@ for k, sc in enumerate(meta['scenes']):
     if k > 0: add(W, sc['start'] - 0.25)
 for ev in meta['events']:
     if ev.get('kind') == 'pop': add(Pp, ev['t'])
+    if ev.get('kind') == 'swish': add(W * 0.7, ev['t'] - 0.2)
 buf = np.clip(buf, -1, 1)
 with wave.open(sys.argv[2], 'wb') as w:
     w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR)

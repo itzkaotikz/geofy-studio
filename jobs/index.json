@@ -1,35 +1,6 @@
 {
- "updated": "2026-11-05T07:40:13Z",
+ "updated": "2026-11-19T22:21:25Z",
  "jobs": [
-  {
-   "title": "Was wäre wenn der Bosporus gesperrt wird",
-   "series": "Was wäre wenn",
-   "nr": 5,
-   "status": "wartet-auf-stimme",
-   "created": "2026-10-30",
-   "caption": "Was passiert, wenn der Bosporus gesperrt wird? 🚢 Eine Meerenge, 700 Meter breit. Wusstest du das schon?",
-   "hashtags": [
-    "#bosporus",
-    "#tuerkei",
-    "#geografie",
-    "#schwarzesmeer",
-    "#lernenmittiktok"
-   ],
-   "release": null,
-   "duration": null,
-   "error": null,
-   "check": [
-    "~30 km Länge, ~700 m engste Stelle",
-    "~40.000 Schiffe/Jahr (Quellen schwanken)",
-    "Montreux 1936: Regeln Handels-/Kriegsschiffe",
-    "Einschränkung Kriegsschiffe 2022",
-    "Kanal Istanbul: aktueller Stand"
-   ],
-   "priority": 1,
-   "slug": "was-waere-wenn-05-bosporus",
-   "words": 160,
-   "has_voice": false
-  },
   {
    "title": "Länder, die es nicht mehr gibt",
    "series": "Wow",
@@ -58,6 +29,37 @@
    "slug": "wow-05-laender-die-es-nicht-mehr-gibt",
    "words": 169,
    "has_voice": false
+  },
+  {
+   "title": "Der Bosporus wird gesperrt: Was passiert dann?",
+   "series": "Was wäre wenn",
+   "nr": 5,
+   "status": "fertig",
+   "created": "2026-10-30",
+   "caption": "Der Bosporus wird gesperrt: Was passiert dann? 🚢 Tag 1, Woche 1 … Wusstest du das schon?",
+   "hashtags": [
+    "#bosporus",
+    "#tuerkei",
+    "#geografie",
+    "#schwarzesmeer",
+    "#lernenmittiktok"
+   ],
+   "release": null,
+   "duration": 62.73,
+   "error": null,
+   "check": [
+    "~30 km Länge, ~700 m engste Stelle",
+    "~40.000 Schiffe/Jahr, daraus ≈ 110 pro Tag (Quellen schwanken)",
+    "Montreux 1936: Regeln Handels-/Kriegsschiffe",
+    "Einschränkung Kriegsschiffe 2022",
+    "Kanal Istanbul: aktueller Stand",
+    "„Seehandel von sechs Ländern“: Küstenstaaten TR, BG, RO, UA, RU, GE",
+    "Preisfolgen sind ein Szenario, kein Fakt"
+   ],
+   "priority": 1,
+   "slug": "was-waere-wenn-05-bosporus",
+   "words": 155,
+   "has_voice": true
   },
   {
    "title": "Helgoland gegen Sansibar",

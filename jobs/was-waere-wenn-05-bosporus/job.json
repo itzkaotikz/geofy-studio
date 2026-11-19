@@ -2,7 +2,7 @@
  "title": "Der Bosporus wird gesperrt: Was passiert dann?",
  "series": "Was wäre wenn",
  "nr": 5,
- "status": "wartet-auf-stimme",
+ "status": "fertig",
  "created": "2026-10-30",
  "outro": "neu",
  "priority": 1,
@@ -54,6 +54,6 @@
   "Preisfolgen sind ein Szenario, kein Fakt"
  ],
  "release": null,
- "duration": null,
+ "duration": 62.73,
  "hook_check": "Hook in den ersten ~12 s: Szenario + offene Frage + Eskalation (Tag eins)"
 }
