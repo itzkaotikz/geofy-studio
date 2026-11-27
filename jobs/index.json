@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-27T20:22:36Z",
+ "updated": "2026-11-27T20:35:08Z",
  "jobs": [
   {
    "title": "Der Bosporus wird gesperrt: Was passiert dann?",
@@ -61,6 +61,37 @@
    "priority": 1,
    "slug": "wow-05-laender-die-es-nicht-mehr-gibt",
    "words": 168,
+   "has_voice": true
+  },
+  {
+   "title": "Warum spricht Brasilien kein Spanisch?",
+   "series": "Warum ist",
+   "nr": 9,
+   "status": "fertig",
+   "created": "2026-11-27",
+   "caption": "Fast ganz Südamerika spricht Spanisch. Warum Brasilien nicht? 🇧🇷 Schuld ist eine Linie von 1494. Wusstest du das schon?",
+   "hashtags": [
+    "#brasilien",
+    "#warumist",
+    "#geografie",
+    "#geschichte",
+    "#lernenmittiktok"
+   ],
+   "release": null,
+   "duration": 73.86,
+   "error": null,
+   "check": [
+    "„Fast ganz Südamerika spricht Spanisch“: 9 von 12 Staaten (dazu Guyana Englisch, Suriname Niederländisch)",
+    "Kolumbus 1492",
+    "Vertrag von Tordesillas 1494, Linie 370 Leguas westlich der Kapverden",
+    "Cabral landet April 1500",
+    "Vertrag von Madrid 1750: Spanien erkennt Ausdehnung nach Westen an",
+    "Brasilien ≈ 8,5 Mio. km², EU ≈ 4,2 Mio. km² (≈ 2×)",
+    "Brasilien > 200 Mio. Einw. (Zensus 2022: 203 Mio.), Portugal ≈ 10,6 Mio. (≈ 20×)"
+   ],
+   "priority": 1,
+   "slug": "warum-ist-09-brasilien-portugiesisch",
+   "words": 172,
    "has_voice": true
   },
   {

@@ -2,7 +2,7 @@
  "title": "Warum spricht Brasilien kein Spanisch?",
  "series": "Warum ist",
  "nr": 9,
- "status": "wartet-auf-stimme",
+ "status": "fertig",
  "created": "2026-11-27",
  "outro": "neu",
  "priority": 1,
@@ -53,5 +53,6 @@
   "Brasilien ≈ 8,5 Mio. km², EU ≈ 4,2 Mio. km² (≈ 2×)",
   "Brasilien > 200 Mio. Einw. (Zensus 2022: 203 Mio.), Portugal ≈ 10,6 Mio. (≈ 20×)"
  ],
- "hook_check": "Hook ~10 s: Kontrast (alle Spanisch, das Größte nicht) + Schuld-Versprechen (eine Linie vor 500 Jahren)"
+ "hook_check": "Hook ~10 s: Kontrast (alle Spanisch, das Größte nicht) + Schuld-Versprechen (eine Linie vor 500 Jahren)",
+ "duration": 73.86
 }
