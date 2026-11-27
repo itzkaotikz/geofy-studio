@@ -60,6 +60,27 @@ In `job.json` `"look": "v3"` setzen (oder `?look=v3` an der Seite). Gewählt: En
 - `label()` (Chips, Tags) als Glas-Pille; rote/pinke Chips werden zu kräftigen pinken Pillen, farbige Chips bekommen einen Farbpunkt.
 - `KV.bigText()` für große Zahlen/Wörter: ohne Kontur, weicher Schatten; Gelb/Cyan werden weiß, Rot wird Pink. Im story.js `big()` darauf umleiten: `if(KV.LOOK==='v3') return KV.bigText(ctx,txt,a,y,col,size);`
 
+
+## FX-Baukasten (seit 2026-11-27)
+`js/fx.js` enthält die wiederkehrenden Look-v3-Animationen. In story.js nach den Helfern: `const fx = FX.make({big, chip, fill, P});`
+| Funktion | Wofür |
+|---|---|
+| `fx.A(u,t0,d)` / `fx.win(u,t0,t1,d)` | Einblenden / Zeitfenster |
+| `fx.VW(lon,lat,breiteGrad)` | Kamera-Ansicht, auch über die Datumsgrenze |
+| `fx.pop(ctx,txt,a,u,t0,y,col,size)` | großes Wort/Zahl mit Pop-in |
+| `fx.counter(ctx,von,bis,a,u,t0,y,size,suffix,dauer,nachkomma)` | Zähler |
+| `fx.flash(ctx,u,t0,'rgba(r,g,b,',stärke)` | Farbblitz bei Wendepunkt |
+| `fx.badge(ctx,txt,a,farbe)` | Pille oben rechts (TAG 1, 1/4, PLAN B) |
+| `fx.shatter(e,ids,k,farben,a,abstand)` | Länder springen auseinander |
+| `fx.fillS(e,id,farbe,a,dx,dy)` | Land verschoben füllen (Trennen, Abdriften) |
+| `fx.qmark(e,[lon,lat],a)` | Fragezeichen auf der Karte |
+| `fx.pixels` / `fx.ripple` | digitale Pixelwolke / Wellenringe |
+| `fx.panel` / `fx.bars` / `fx.gauge` | Glas-Panel / Balkenvergleich / Pegel |
+| `fx.stamp` / `fx.xmark` | Stempel / rotes X |
+| `fx.ship` / `fx.flow` | Schiff-Icon / Schiffe entlang Route |
+| `fx.swarm(e,von,nach,a,k)` | Punkte strömen von A nach B |
+Vorlage für neue Videos: `pipeline/story_template_v3.js` (Szenenaufbau mit Hook, Zeitleiste, Outro).
+
 ## story.js
 - Am einfachsten ein bestehendes `jobs/*/story.js` kopieren: Kopf mit den Helfern (`wt`, `chip`, `tag`, `big`, `pulse`, `line`, `arrow`, `fill`) und die Outro-Szene am Ende übernehmen, nur die Szenen dazwischen neu schreiben.
 - `S_say[i]` ist Absatz i aus `script.txt`. Mit `wt(sc,'Wort')` bekommt man den Zeitpunkt, an dem das Wort gesprochen wird. Damit Einblendungen starten: `clamp((u-wt(sc,'Wort'))/0.4)`.

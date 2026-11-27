@@ -1,0 +1,1091 @@
+[
+ {
+  "nr": 1,
+  "titel": "Warum liegt Istanbul auf zwei Kontinenten – und Ankara ist trotzdem Hauptstadt?",
+  "serie": "Hauptstadt-Geheimnisse",
+  "region": "Türkei",
+  "quote": "TR",
+  "potenzial": 3,
+  "kernfakt_zu_pruefen": "(bereits Ankara-Video – nur als Fortsetzung mit anderem Winkel)"
+ },
+ {
+  "nr": 2,
+  "titel": "Was wäre, wenn Istanbul morgen ein großes Erdbeben trifft?",
+  "serie": "Was wäre wenn",
+  "region": "Türkei",
+  "quote": "TR",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "Nordanatolische Verwerfung, Wahrscheinlichkeiten laut Studien vorsichtig formulieren"
+ },
+ {
+  "nr": 3,
+  "titel": "Warum hat die Türkei so viele Erdbeben?",
+  "serie": "Warum ist …?",
+  "region": "Türkei",
+  "quote": "TR",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "3 Platten: Anatolische, Eurasische, Arabische; Beben Feb. 2023"
+ },
+ {
+  "nr": 4,
+  "titel": "Der Van-See: Ein Sodasee, in dem fast kein Fisch leben kann – außer einem",
+  "serie": "Wow",
+  "region": "Türkei",
+  "quote": "TR",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Van-See alkalisch, Perlmulle (Inci kefali) wandert"
+ },
+ {
+  "nr": 5,
+  "titel": "Göbekli Tepe: 6.000 Jahre älter als Stonehenge",
+  "serie": "Wow",
+  "region": "Türkei",
+  "quote": "TR",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "ca. 9500 v. Chr.; Stonehenge ca. 3000 v. Chr."
+ },
+ {
+  "nr": 6,
+  "titel": "Warum gibt es in der Türkei ein Meer, das Marmara heißt – und warum ist es so wichtig?",
+  "serie": "Nadelöhre",
+  "region": "Türkei",
+  "quote": "TR",
+  "potenzial": 3,
+  "kernfakt_zu_pruefen": "Marmara = Marmor (Insel Marmara)"
+ },
+ {
+  "nr": 7,
+  "titel": "Pamukkale: Warum hier weiße Terrassen wie Schnee liegen",
+  "serie": "Wow",
+  "region": "Türkei",
+  "quote": "TR",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Kalksinter (Travertin), Thermalquellen"
+ },
+ {
+  "nr": 8,
+  "titel": "Der Ararat: Warum der höchste Berg der Türkei auf Armeniens Wappen ist",
+  "serie": "Grenz-Kuriositäten",
+  "region": "Türkei",
+  "quote": "TR",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "Ararat im armenischen Wappen; neutral erzählen"
+ },
+ {
+  "nr": 9,
+  "titel": "Das Schwarze Meer ist unten tot – 90 % ohne Sauerstoff",
+  "serie": "Wow",
+  "region": "Schwarzes Meer",
+  "quote": "TR",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "anoxisch unterhalb ~150–200 m"
+ },
+ {
+  "nr": 10,
+  "titel": "Warum Rize grün ist und Konya Wüste – in einem Land",
+  "serie": "Warum ist …?",
+  "region": "Türkei",
+  "quote": "TR",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Niederschlag Rize > 2.000 mm vs. Konya ~ 300 mm"
+ },
+ {
+  "nr": 11,
+  "titel": "Atatürk-Staudamm: Der Damm, der zwei Flüsse kontrolliert",
+  "serie": "Konflikt erklärt",
+  "region": "Türkei/Syrien/Irak",
+  "quote": "TR",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Euphrat/Tigris, GAP-Projekt; neutral"
+ },
+ {
+  "nr": 12,
+  "titel": "Die Türkei hat eine Grenze von nur 17 km zu einem Land – welches?",
+  "serie": "Grenz-Kuriositäten",
+  "region": "Türkei",
+  "quote": "TR",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Grenze zu Nachitschewan (Aserbaidschan) ≈ 17 km"
+ },
+ {
+  "nr": 13,
+  "titel": "Hatay: Die Provinz, die erst 1939 zur Türkei kam",
+  "serie": "Grenzen die Kriege machten",
+  "region": "Türkei",
+  "quote": "TR",
+  "potenzial": 3,
+  "kernfakt_zu_pruefen": "Hatay-Staat 1938, Anschluss 1939; neutral"
+ },
+ {
+  "nr": 14,
+  "titel": "Warum Zypern geteilt ist – und eine UN-Zone mitten durch Nikosia läuft",
+  "serie": "Konflikt erklärt",
+  "region": "Zypern",
+  "quote": "TR",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Pufferzone seit 1974; sehr neutral formulieren"
+ },
+ {
+  "nr": 15,
+  "titel": "Kemer, Bodrum, Antalya: Warum die Türkische Riviera so warm ist",
+  "serie": "Warum ist …?",
+  "region": "Türkei",
+  "quote": "TR",
+  "potenzial": 3,
+  "kernfakt_zu_pruefen": "Taurus als Windschutz, Mittelmeerklima"
+ },
+ {
+  "nr": 16,
+  "titel": "Warum hat Deutschland 16 Bundesländer – und Bremen besteht aus zwei Teilen?",
+  "serie": "Warum ist …?",
+  "region": "Deutschland",
+  "quote": "DE",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Bremen + Bremerhaven, getrennt durch Niedersachsen"
+ },
+ {
+  "nr": 17,
+  "titel": "Was wäre, wenn die Nordsee um 1 Meter steigt?",
+  "serie": "Was wäre wenn",
+  "region": "Deutschland",
+  "quote": "DE",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "Küstenmodelle vorsichtig; Hamburg, Bremen, Ostfriesland"
+ },
+ {
+  "nr": 18,
+  "titel": "Warum fließen in Deutschland fast alle Flüsse nach Norden?",
+  "serie": "Warum ist …?",
+  "region": "Deutschland",
+  "quote": "DE",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Gefälle Alpen → Nordsee; Donau als Ausnahme"
+ },
+ {
+  "nr": 19,
+  "titel": "Die Donau: Ein Fluss, zehn Länder, vier Hauptstädte",
+  "serie": "Rekorde",
+  "region": "Europa",
+  "quote": "DE",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "10 Anrainerstaaten, Wien/Bratislava/Budapest/Belgrad"
+ },
+ {
+  "nr": 20,
+  "titel": "Die Donauversickerung: Hier verschwindet die Donau im Boden",
+  "serie": "Wow",
+  "region": "Deutschland",
+  "quote": "DE",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "Immendingen, Wasser taucht im Aachtopf wieder auf"
+ },
+ {
+  "nr": 21,
+  "titel": "Warum ist Berlin so weit im Osten?",
+  "serie": "Warum ist …?",
+  "region": "Deutschland",
+  "quote": "DE",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Preußen, Grenzen 1945"
+ },
+ {
+  "nr": 22,
+  "titel": "Die Zugspitze ist nicht Deutschlands höchster Punkt … oder doch?",
+  "serie": "Rekorde",
+  "region": "Deutschland",
+  "quote": "DE",
+  "potenzial": 3,
+  "kernfakt_zu_pruefen": "Zugspitze 2.962 m (Grenze zu Österreich)"
+ },
+ {
+  "nr": 23,
+  "titel": "Ein Dorf, das in zwei Ländern liegt: Herzogenrath und Kerkrade",
+  "serie": "Grenz-Kuriositäten",
+  "region": "Deutschland/NL",
+  "quote": "DE",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Neustraße/Nieuwstraat als Grenze"
+ },
+ {
+  "nr": 24,
+  "titel": "Warum Sylt verschwindet – jedes Jahr ein Stück",
+  "serie": "Wow",
+  "region": "Deutschland",
+  "quote": "DE",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Sandaufspülungen, Abtrag Westküste"
+ },
+ {
+  "nr": 25,
+  "titel": "Das Ruhrgebiet: Warum hier 5 Mio. Menschen auf so kleiner Fläche leben",
+  "serie": "Wo leben alle",
+  "region": "Deutschland",
+  "quote": "DE",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Kohle, Industrialisierung; Fläche ≈ 4.400 km²"
+ },
+ {
+  "nr": 26,
+  "titel": "Der Nord-Ostsee-Kanal: meistbefahrene künstliche Wasserstraße der Welt",
+  "serie": "Nadelöhre",
+  "region": "Deutschland",
+  "quote": "DE",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Schiffsanzahl pro Jahr prüfen"
+ },
+ {
+  "nr": 27,
+  "titel": "Warum hat Deutschland keinen richtigen Mittelpunkt?",
+  "serie": "Kurios",
+  "region": "Deutschland",
+  "quote": "DE",
+  "potenzial": 3,
+  "kernfakt_zu_pruefen": "mehrere Mittelpunkt-Orte je nach Methode"
+ },
+ {
+  "nr": 28,
+  "titel": "Was wäre, wenn Deutschland wieder geteilt wäre – wo verliefe die Grenze heute?",
+  "serie": "Was wäre wenn",
+  "region": "Deutschland",
+  "quote": "DE",
+  "potenzial": 3,
+  "kernfakt_zu_pruefen": "innerdeutsche Grenze 1.393 km"
+ },
+ {
+  "nr": 29,
+  "titel": "Ein Stück Österreich, das man nur über Deutschland erreicht: Kleinwalsertal",
+  "serie": "Grenz-Kuriositäten",
+  "region": "Österreich/DE",
+  "quote": "DE",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Straßenzugang nur über Oberstdorf"
+ },
+ {
+  "nr": 30,
+  "titel": "Warum ist Bayern so groß?",
+  "serie": "Warum ist …?",
+  "region": "Deutschland",
+  "quote": "DE",
+  "potenzial": 3,
+  "kernfakt_zu_pruefen": "Bayern ≈ 70.550 km², Wiener Kongress 1815"
+ },
+ {
+  "nr": 31,
+  "titel": "Was wäre, wenn die Alpen nicht existierten?",
+  "serie": "Was wäre wenn",
+  "region": "Europa",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "Klima, Flüsse, Grenzen; Gedankenexperiment"
+ },
+ {
+  "nr": 32,
+  "titel": "Was wäre, wenn der Panamakanal geschlossen würde?",
+  "serie": "Was wäre wenn",
+  "region": "Mittelamerika",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "≈ 5 % des Welthandels, Dürre 2023"
+ },
+ {
+  "nr": 33,
+  "titel": "Was wäre, wenn die Straße von Hormus gesperrt würde?",
+  "serie": "Was wäre wenn",
+  "region": "Naher Osten",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "≈ 20 % des Ölhandels; neutral"
+ },
+ {
+  "nr": 34,
+  "titel": "Was wäre, wenn sich die Erde nicht mehr drehen würde?",
+  "serie": "Was wäre wenn",
+  "region": "Welt",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "Physik vereinfacht, Quellen NASA"
+ },
+ {
+  "nr": 35,
+  "titel": "Was wäre, wenn alle Menschen Vegetarier wären – wie viel Land würde frei?",
+  "serie": "Was wäre wenn",
+  "region": "Welt",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Our World in Data: Landnutzung"
+ },
+ {
+  "nr": 36,
+  "titel": "Was wäre, wenn Grönland komplett schmilzt?",
+  "serie": "Was wäre wenn",
+  "region": "Arktis",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "≈ 7 m Meeresspiegel"
+ },
+ {
+  "nr": 37,
+  "titel": "Was wäre, wenn der Amazonas verschwindet?",
+  "serie": "Was wäre wenn",
+  "region": "Südamerika",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "fliegende Flüsse, Regen"
+ },
+ {
+  "nr": 38,
+  "titel": "Was wäre, wenn es einen Tunnel durch die Erde gäbe?",
+  "serie": "Was wäre wenn",
+  "region": "Welt",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "≈ 42 min Fallzeit (Gravity Tunnel)"
+ },
+ {
+  "nr": 39,
+  "titel": "Was wäre, wenn Europa ein einziges Land wäre?",
+  "serie": "Was wäre wenn",
+  "region": "Europa",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Fläche, Einwohner, Rang weltweit"
+ },
+ {
+  "nr": 40,
+  "titel": "Was wäre, wenn der Yellowstone ausbricht?",
+  "serie": "Was wäre wenn",
+  "region": "USA",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "USGS, sehr vorsichtig"
+ },
+ {
+  "nr": 41,
+  "titel": "Warum hat Chile so eine verrückte Form?",
+  "serie": "Warum ist …?",
+  "region": "Chile",
+  "quote": "",
+  "potenzial": 2,
+  "kernfakt_zu_pruefen": "(bereits als Video – nicht wiederholen)"
+ },
+ {
+  "nr": 42,
+  "titel": "Warum ist Russland so groß – und so leer?",
+  "serie": "Warum ist …?",
+  "region": "Russland",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Sibirien, Einwohnerdichte"
+ },
+ {
+  "nr": 43,
+  "titel": "Warum sprechen in Afrika so viele Länder Französisch?",
+  "serie": "Warum ist …?",
+  "region": "Afrika",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Kolonialgeschichte, Frankophonie"
+ },
+ {
+  "nr": 44,
+  "titel": "Warum hat Indonesien 17.000 Inseln, aber eine Sprache?",
+  "serie": "Warum ist …?",
+  "region": "Indonesien",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Bahasa Indonesia als Verkehrssprache"
+ },
+ {
+  "nr": 45,
+  "titel": "Warum liegt Lesotho komplett in Südafrika?",
+  "serie": "Grenz-Kuriositäten",
+  "region": "Afrika",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "Enklave, höchster tiefster Punkt eines Landes (1.400 m)"
+ },
+ {
+  "nr": 46,
+  "titel": "Warum Island grün ist und Grönland weiß",
+  "serie": "Warum ist …?",
+  "region": "Arktis",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "Namen-Mythos, Golfstrom, Eisschild"
+ },
+ {
+  "nr": 47,
+  "titel": "Warum gibt es in Australien so viele giftige Tiere?",
+  "serie": "Warum ist …?",
+  "region": "Australien",
+  "quote": "",
+  "potenzial": 3,
+  "kernfakt_zu_pruefen": "Evolution, Isolation (Tiere = Rand der Geo-Nische)"
+ },
+ {
+  "nr": 48,
+  "titel": "Warum ist das Tote Meer so salzig?",
+  "serie": "Warum ist …?",
+  "region": "Naher Osten",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "≈ 34 % Salz, tiefster Landpunkt −430 m"
+ },
+ {
+  "nr": 49,
+  "titel": "Warum ist die Sahara so groß?",
+  "serie": "Warum ist …?",
+  "region": "Afrika",
+  "quote": "",
+  "potenzial": 3,
+  "kernfakt_zu_pruefen": "Hadley-Zelle (Sahara-Video existiert – anderer Winkel)"
+ },
+ {
+  "nr": 50,
+  "titel": "Warum hat Norwegen so eine lange Küste?",
+  "serie": "Warum ist …?",
+  "region": "Norwegen",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Fjorde, Küstenlänge mit Inseln > 100.000 km"
+ },
+ {
+  "nr": 51,
+  "titel": "Warum hat Japan so viele Vulkane?",
+  "serie": "Warum ist …?",
+  "region": "Japan",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Pazifischer Feuerring, ≈ 111 aktive Vulkane"
+ },
+ {
+  "nr": 52,
+  "titel": "Warum ist Venedig auf Holz gebaut?",
+  "serie": "Warum ist …?",
+  "region": "Italien",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "Holzpfähle, Lagune"
+ },
+ {
+  "nr": 53,
+  "titel": "Warum liegt Mexiko-Stadt auf einem See?",
+  "serie": "Warum ist …?",
+  "region": "Mexiko",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "Tenochtitlan, Absinken bis 50 cm/Jahr"
+ },
+ {
+  "nr": 54,
+  "titel": "Warum ist Jakarta dabei zu versinken – und wird ersetzt?",
+  "serie": "Hauptstadt-Geheimnisse",
+  "region": "Indonesien",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "neue Hauptstadt Nusantara"
+ },
+ {
+  "nr": 55,
+  "titel": "Kasachstan hat seine Hauptstadt einfach verlegt – und umbenannt, mehrfach",
+  "serie": "Hauptstadt-Geheimnisse",
+  "region": "Kasachstan",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Almaty → Akmola/Astana → Nur-Sultan → Astana"
+ },
+ {
+  "nr": 56,
+  "titel": "Canberra: Die Hauptstadt, die es nur wegen eines Streits gibt",
+  "serie": "Hauptstadt-Geheimnisse",
+  "region": "Australien",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "Sydney vs. Melbourne"
+ },
+ {
+  "nr": 57,
+  "titel": "Washington D.C. gehört zu keinem Bundesstaat",
+  "serie": "Hauptstadt-Geheimnisse",
+  "region": "USA",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "District of Columbia"
+ },
+ {
+  "nr": 58,
+  "titel": "Bolivien hat zwei Hauptstädte",
+  "serie": "Hauptstadt-Geheimnisse",
+  "region": "Bolivien",
+  "quote": "",
+  "potenzial": 3,
+  "kernfakt_zu_pruefen": "Sucre/La Paz (Bolivien-Video existiert – anderer Winkel)"
+ },
+ {
+  "nr": 59,
+  "titel": "Südafrika hat drei Hauptstädte",
+  "serie": "Hauptstadt-Geheimnisse",
+  "region": "Afrika",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Pretoria, Kapstadt, Bloemfontein"
+ },
+ {
+  "nr": 60,
+  "titel": "Die höchste Hauptstadt der Welt: La Paz",
+  "serie": "Rekorde",
+  "region": "Bolivien",
+  "quote": "",
+  "potenzial": 3,
+  "kernfakt_zu_pruefen": "≈ 3.600 m (Regierungssitz)"
+ },
+ {
+  "nr": 61,
+  "titel": "Das Land mit den meisten Zeitzonen ist nicht Russland",
+  "serie": "Rekorde",
+  "region": "Frankreich",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "Frankreich 12 Zeitzonen inkl. Überseegebiete"
+ },
+ {
+  "nr": 62,
+  "titel": "Das Land mit den meisten Seen der Welt",
+  "serie": "Rekorde",
+  "region": "Kanada",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Kanada > 60 % der Seen weltweit (Angaben prüfen)"
+ },
+ {
+  "nr": 63,
+  "titel": "Das kälteste bewohnte Dorf der Welt: Oimjakon",
+  "serie": "Rekorde",
+  "region": "Russland",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "−67,7 °C (1933)"
+ },
+ {
+  "nr": 64,
+  "titel": "Der trockenste Ort der Erde: Atacama",
+  "serie": "Rekorde",
+  "region": "Chile",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Messstationen ohne Regen über Jahrzehnte"
+ },
+ {
+  "nr": 65,
+  "titel": "Der regenreichste Ort der Erde: Mawsynram",
+  "serie": "Rekorde",
+  "region": "Indien",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "≈ 11.800 mm/Jahr"
+ },
+ {
+  "nr": 66,
+  "titel": "Das flachste Land der Welt: Malediven",
+  "serie": "Rekorde",
+  "region": "Malediven",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "höchster Punkt ≈ 2,4 m"
+ },
+ {
+  "nr": 67,
+  "titel": "Das einzige Land ohne Flughafen-Landebahn und Fluss: Vatikan?",
+  "serie": "Rekorde",
+  "region": "Europa",
+  "quote": "",
+  "potenzial": 2,
+  "kernfakt_zu_pruefen": "Fakten unklar – nur nach Prüfung"
+ },
+ {
+  "nr": 68,
+  "titel": "Das Land, das komplett über 1.000 m liegt: Lesotho",
+  "serie": "Rekorde",
+  "region": "Afrika",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "niedrigster Punkt ≈ 1.400 m"
+ },
+ {
+  "nr": 69,
+  "titel": "Die längste Grenze der Welt: Kanada–USA",
+  "serie": "Rekorde",
+  "region": "Nordamerika",
+  "quote": "",
+  "potenzial": 3,
+  "kernfakt_zu_pruefen": "≈ 8.890 km"
+ },
+ {
+  "nr": 70,
+  "titel": "Die kürzeste Grenze der Welt: Spanien–Marokko (Peñón de Vélez)",
+  "serie": "Grenz-Kuriositäten",
+  "region": "Spanien/Marokko",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "≈ 85 m"
+ },
+ {
+  "nr": 71,
+  "titel": "Ein Land, zwei Teile: Warum Oman eine Exklave hat (Musandam)",
+  "serie": "Grenz-Kuriositäten",
+  "region": "Arabien",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Musandam durch VAE getrennt"
+ },
+ {
+  "nr": 72,
+  "titel": "Madha und Nahwa: Eine Enklave in einer Enklave in einer Enklave",
+  "serie": "Grenz-Kuriositäten",
+  "region": "Oman/VAE",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "Nahwa (VAE) in Madha (Oman) in VAE"
+ },
+ {
+  "nr": 73,
+  "titel": "Point Roberts: Ein Stück USA, das man nur über Kanada erreicht",
+  "serie": "Grenz-Kuriositäten",
+  "region": "USA/Kanada",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "Halbinsel südlich des 49. Breitengrads"
+ },
+ {
+  "nr": 74,
+  "titel": "Northwest Angle: Der Zipfel der USA in Kanada",
+  "serie": "Grenz-Kuriositäten",
+  "region": "USA/Kanada",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Lake of the Woods, Kartenfehler"
+ },
+ {
+  "nr": 75,
+  "titel": "Die Grenze, die mitten durch eine Bibliothek läuft",
+  "serie": "Grenz-Kuriositäten",
+  "region": "USA/Kanada",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "Haskell Free Library, Derby Line/Stanstead"
+ },
+ {
+  "nr": 76,
+  "titel": "Kaliningrad ist nicht die einzige Exklave Russlands … oder doch?",
+  "serie": "Grenz-Kuriositäten",
+  "region": "Russland",
+  "quote": "",
+  "potenzial": 2,
+  "kernfakt_zu_pruefen": "(Kaliningrad-Video existiert)"
+ },
+ {
+  "nr": 77,
+  "titel": "Gibraltar: Ein Felsen, um den zwei Länder streiten",
+  "serie": "Konflikt erklärt",
+  "region": "Spanien/UK",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Vertrag von Utrecht 1713; neutral"
+ },
+ {
+  "nr": 78,
+  "titel": "Die Falklandinseln: Warum sie zwei Namen haben",
+  "serie": "Konflikt erklärt",
+  "region": "Südatlantik",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Malwinen; Krieg 1982; neutral"
+ },
+ {
+  "nr": 79,
+  "titel": "Kaschmir: Warum drei Länder eine Region beanspruchen",
+  "serie": "Konflikt erklärt",
+  "region": "Südasien",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Indien, Pakistan, China; sehr neutral"
+ },
+ {
+  "nr": 80,
+  "titel": "Westsahara: Das größte Gebiet ohne geklärten Status",
+  "serie": "Konflikt erklärt",
+  "region": "Afrika",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "UN-Liste Hoheitsgebiete ohne Selbstregierung; neutral"
+ },
+ {
+  "nr": 81,
+  "titel": "Bergkarabach: Was dort passiert ist, auf einer Karte",
+  "serie": "Konflikt erklärt",
+  "region": "Kaukasus",
+  "quote": "",
+  "potenzial": 3,
+  "kernfakt_zu_pruefen": "2023; sehr neutral, Opfer nicht werten"
+ },
+ {
+  "nr": 82,
+  "titel": "Kosovo: Warum nicht alle Länder es anerkennen",
+  "serie": "Konflikt erklärt",
+  "region": "Balkan",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "≈ 100+ Anerkennungen; Zahl prüfen"
+ },
+ {
+  "nr": 83,
+  "titel": "Taiwan: Warum nur 12 Länder es offiziell anerkennen",
+  "serie": "Konflikt erklärt",
+  "region": "Ostasien",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Zahl Anerkennungen 2026 prüfen; neutral"
+ },
+ {
+  "nr": 84,
+  "titel": "Warum Afrika auf Karten so klein aussieht",
+  "serie": "Karten lügen",
+  "region": "Afrika",
+  "quote": "",
+  "potenzial": 2,
+  "kernfakt_zu_pruefen": "(existiert – nur als Rückblick)"
+ },
+ {
+  "nr": 85,
+  "titel": "So groß ist Grönland wirklich",
+  "serie": "Karten lügen",
+  "region": "Arktis",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "2,17 Mio. km² vs. Afrika 30 Mio. km²"
+ },
+ {
+  "nr": 86,
+  "titel": "So groß ist die Türkei wirklich",
+  "serie": "Karten lügen",
+  "region": "Türkei",
+  "quote": "TR",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "≈ 784.000 km² – über Europa gelegt"
+ },
+ {
+  "nr": 87,
+  "titel": "So groß ist Australien wirklich",
+  "serie": "Karten lügen",
+  "region": "Australien",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "≈ 7,7 Mio. km², fast so groß wie die USA ohne Alaska"
+ },
+ {
+  "nr": 88,
+  "titel": "So groß ist Japan wirklich",
+  "serie": "Karten lügen",
+  "region": "Japan",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Länge ≈ 3.000 km über Europa gelegt"
+ },
+ {
+  "nr": 89,
+  "titel": "So groß ist der Kaspische See wirklich",
+  "serie": "Karten lügen",
+  "region": "Zentralasien",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "≈ 371.000 km², größer als Deutschland"
+ },
+ {
+  "nr": 90,
+  "titel": "Ist der Kaspische See ein Meer oder ein See?",
+  "serie": "Konflikt erklärt",
+  "region": "Zentralasien",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Konvention 2018"
+ },
+ {
+  "nr": 91,
+  "titel": "Wo leben alle Ägypter? Am Nil",
+  "serie": "Wo leben alle",
+  "region": "Ägypten",
+  "quote": "",
+  "potenzial": 2,
+  "kernfakt_zu_pruefen": "(existiert)"
+ },
+ {
+  "nr": 92,
+  "titel": "Wo leben alle Russen?",
+  "serie": "Wo leben alle",
+  "region": "Russland",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "≈ 75 % im europäischen Teil"
+ },
+ {
+  "nr": 93,
+  "titel": "Wo leben alle Chinesen? Die Hu-Linie",
+  "serie": "Wo leben alle",
+  "region": "China",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "≈ 94 % östlich der Hu-Linie"
+ },
+ {
+  "nr": 94,
+  "titel": "Wo leben alle Brasilianer?",
+  "serie": "Wo leben alle",
+  "region": "Brasilien",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Küstennähe, Amazonas leer"
+ },
+ {
+  "nr": 95,
+  "titel": "Wo leben alle Isländer?",
+  "serie": "Wo leben alle",
+  "region": "Island",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "≈ 2/3 im Großraum Reykjavík"
+ },
+ {
+  "nr": 96,
+  "titel": "Wo leben alle Türken?",
+  "serie": "Wo leben alle",
+  "region": "Türkei",
+  "quote": "TR",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "Marmara, Westen; Bevölkerungskarte"
+ },
+ {
+  "nr": 97,
+  "titel": "Wo leben alle Deutschen?",
+  "serie": "Wo leben alle",
+  "region": "Deutschland",
+  "quote": "DE",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Ballungsräume, Dichtekarte"
+ },
+ {
+  "nr": 98,
+  "titel": "Die Insel, die erst 1963 aus dem Meer kam: Surtsey",
+  "serie": "Wow",
+  "region": "Island",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "Vulkanausbruch 1963–1967, Betretungsverbot"
+ },
+ {
+  "nr": 99,
+  "titel": "Nauru: Das Land, das sich selbst abgebaut hat",
+  "serie": "Wow",
+  "region": "Pazifik",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "Phosphat, ≈ 80 % unbewohnbar"
+ },
+ {
+  "nr": 100,
+  "titel": "Die Färöer: Ein Land, in dem es mehr Schafe als Menschen gibt",
+  "serie": "Wow",
+  "region": "Nordatlantik",
+  "quote": "",
+  "potenzial": 3,
+  "kernfakt_zu_pruefen": "Schafe ≈ 70.000 vs. Einwohner ≈ 55.000"
+ },
+ {
+  "nr": 101,
+  "titel": "Monaco: Das Land, das größer wird, weil es ins Meer baut",
+  "serie": "Wow",
+  "region": "Europa",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "Landgewinnung Mareterra"
+ },
+ {
+  "nr": 102,
+  "titel": "Singapur ist seit 1965 um ein Viertel gewachsen",
+  "serie": "Wow",
+  "region": "Asien",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "Landgewinnung ≈ 25 %"
+ },
+ {
+  "nr": 103,
+  "titel": "Die Malediven bauen eine schwimmende Stadt",
+  "serie": "Wow",
+  "region": "Indischer Ozean",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Projektstand prüfen"
+ },
+ {
+  "nr": 104,
+  "titel": "Eine Stadt, in der niemand sterben darf: Longyearbyen",
+  "serie": "Wow",
+  "region": "Spitzbergen",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "Permafrost, Beerdigungen ausgelagert (Mythos/Realität prüfen)"
+ },
+ {
+  "nr": 105,
+  "titel": "Die Stadt, die nur mit einem Aufzug zu erreichen ist?",
+  "serie": "Wow",
+  "region": "Welt",
+  "quote": "",
+  "potenzial": 2,
+  "kernfakt_zu_pruefen": "Recherche nötig"
+ },
+ {
+  "nr": 106,
+  "titel": "Vatikan: Der kleinste Staat mit dem höchsten Weinkonsum pro Kopf",
+  "serie": "Rekorde",
+  "region": "Europa",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Statistik prüfen"
+ },
+ {
+  "nr": 107,
+  "titel": "Diese Insel gehört zu drei Ländern: Neuguinea? Nein: Borneo",
+  "serie": "Grenz-Kuriositäten",
+  "region": "Asien",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Indonesien, Malaysia, Brunei"
+ },
+ {
+  "nr": 108,
+  "titel": "Saint-Martin: Eine kleine Insel, zwei Länder, keine Grenze",
+  "serie": "Grenz-Kuriositäten",
+  "region": "Karibik",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Frankreich/Niederlande seit 1648"
+ },
+ {
+  "nr": 109,
+  "titel": "Die Diomedes-Inseln: 4 km voneinander, 21 Stunden Zeitunterschied",
+  "serie": "Grenz-Kuriositäten",
+  "region": "Beringstraße",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "Datumsgrenze, USA/Russland"
+ },
+ {
+  "nr": 110,
+  "titel": "Russland und Japan: Warum es nie einen Friedensvertrag gab",
+  "serie": "Konflikt erklärt",
+  "region": "Ostasien",
+  "quote": "",
+  "potenzial": 3,
+  "kernfakt_zu_pruefen": "Kurilen; neutral"
+ },
+ {
+  "nr": 111,
+  "titel": "Warum Spanien zwei Städte in Afrika hat: Ceuta und Melilla",
+  "serie": "Grenz-Kuriositäten",
+  "region": "Spanien/Marokko",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "EU-Außengrenze in Afrika"
+ },
+ {
+  "nr": 112,
+  "titel": "Warum Frankreich eine Grenze zu Brasilien hat",
+  "serie": "Grenz-Kuriositäten",
+  "region": "Südamerika",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "Französisch-Guayana, ≈ 730 km"
+ },
+ {
+  "nr": 113,
+  "titel": "Die längste Grenze Frankreichs ist nicht in Europa",
+  "serie": "Grenz-Kuriositäten",
+  "region": "Südamerika",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "Brasilien ≈ 730 km > Spanien ≈ 620 km (prüfen)"
+ },
+ {
+  "nr": 114,
+  "titel": "Warum Dänemark größer ist als gedacht: Grönland",
+  "serie": "Karten lügen",
+  "region": "Arktis",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Königreich Dänemark inkl. Grönland"
+ },
+ {
+  "nr": 115,
+  "titel": "Zeitzonen: Warum China nur eine Zeitzone hat",
+  "serie": "Warum ist …?",
+  "region": "China",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "UTC+8 für 5 geografische Zonen"
+ },
+ {
+  "nr": 116,
+  "titel": "Warum Spanien in der falschen Zeitzone liegt",
+  "serie": "Warum ist …?",
+  "region": "Spanien",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "seit 1940 MEZ"
+ },
+ {
+  "nr": 117,
+  "titel": "Warum Nepal eine Zeitzone mit 45 Minuten hat",
+  "serie": "Kurios",
+  "region": "Nepal",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "UTC+5:45"
+ },
+ {
+  "nr": 118,
+  "titel": "Warum es in Island keine Mücken gibt",
+  "serie": "Kurios",
+  "region": "Island",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "Klimazyklen; Fund 2025 prüfen!"
+ },
+ {
+  "nr": 119,
+  "titel": "Warum Neuseeland auf manchen Weltkarten fehlt",
+  "serie": "Kurios",
+  "region": "Ozeanien",
+  "quote": "",
+  "potenzial": 5,
+  "kernfakt_zu_pruefen": "Map-Meme, Beispiele"
+ },
+ {
+  "nr": 120,
+  "titel": "Das Bermudadreieck auf der Karte: Was wirklich dran ist",
+  "serie": "Mythos-Check",
+  "region": "Atlantik",
+  "quote": "",
+  "potenzial": 4,
+  "kernfakt_zu_pruefen": "keine erhöhte Unfallrate (NOAA)"
+ },
+ {
+  "nr": 121,
+  "titel": "Atlantis auf der Karte: Wo Platon es verortete",
+  "serie": "Mythos-Check",
+  "region": "Atlantik",
+  "quote": "",
+  "potenzial": 3,
+  "kernfakt_zu_pruefen": "Platon, Säulen des Herakles"
+ }
+]
