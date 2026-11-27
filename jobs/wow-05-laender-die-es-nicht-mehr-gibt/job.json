@@ -1,12 +1,12 @@
 {
- "title": "Länder, die es nicht mehr gibt",
+ "title": "Diese Länder sind von der Weltkarte verschwunden",
  "series": "Wow",
  "nr": 5,
  "status": "wartet-auf-stimme",
  "created": "2026-11-05",
  "outro": "neu",
- "priority": 2,
- "caption": "Diese Länder standen vor Kurzem noch auf jeder Weltkarte 🗺️ Heute gibt es sie nicht mehr. Wusstest du das schon?",
+ "priority": 1,
+ "caption": "Auf einer Weltkarte von 1985 stehen Länder, die es heute nicht mehr gibt 🗺️ Eins war das größte der Erde. Wusstest du das schon?",
  "hashtags": [
   "#geschichte",
   "#wow",
@@ -14,7 +14,7 @@
   "#weltkarte",
   "#lernenmittiktok"
  ],
- "youtube_title": "Diese Länder gibt es nicht mehr",
+ "youtube_title": "Diese Länder sind von der Weltkarte verschwunden",
  "story": {
   "question": "Welches Land hättest du gewusst?",
   "options": [
@@ -24,18 +24,22 @@
  },
  "highlight": "Wow",
  "cover": {
-  "time": 3.5,
+  "time": 3.0,
   "kicker": "WOW",
-  "lines": "Diese Länder|gibt es|nicht mehr"
+  "lines": "1985 gab es sie noch.|Heute sind sie|verschwunden."
  },
  "popwords": [
+  "1985",
+  "vier",
+  "größte",
+  "15",
   "DDR",
   "1990",
-  "15",
   "1991",
   "1993",
   "1964",
-  "Tansania"
+  "Tansania",
+  "2011"
  ],
  "spoken": {
   "DDR": "de de er",
@@ -48,12 +52,16 @@
   "3.": "dritten"
  },
  "check": [
+  "Weltkarte 1985: SU, DDR, Jugoslawien, Tschechoslowakei (dazu Nord-/Südjemen) – „mindestens vier“",
+  "SU-Auflösung Dez. 1991, 15 Nachfolgestaaten",
   "DDR-Beitritt 3.10.1990",
-  "Sowjetunion Ende 1991, 15 Nachfolgestaaten",
-  "Jugoslawien: Zerfall ab 1991 (Nachfolgestaaten bewusst ohne Zahl, Kosovo-Status umstritten)",
+  "Jugoslawien Zerfall ab 1991",
   "Tschechoslowakei 1.1.1993",
-  "Tansania 1964, Name aus Tanganjika + Sansibar"
+  "Tansania 1964 (Tan + Zan)",
+  "Südsudan 9.7.2011, jüngster UN-Mitgliedsstaat"
  ],
  "release": null,
- "duration": null
+ "duration": null,
+ "look": "v3",
+ "hook_check": "Hook ~12 s: Karte 1985, „mindestens vier“, zwei offene Schleifen (größtes Land, mitten in Deutschland)"
 }
