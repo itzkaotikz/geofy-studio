@@ -1,35 +1,6 @@
 {
- "updated": "2026-11-19T22:21:25Z",
+ "updated": "2026-11-27T19:48:45Z",
  "jobs": [
-  {
-   "title": "Länder, die es nicht mehr gibt",
-   "series": "Wow",
-   "nr": 5,
-   "status": "wartet-auf-stimme",
-   "created": "2026-11-05",
-   "caption": "Diese Länder standen vor Kurzem noch auf jeder Weltkarte 🗺️ Heute gibt es sie nicht mehr. Wusstest du das schon?",
-   "hashtags": [
-    "#geschichte",
-    "#wow",
-    "#geografie",
-    "#weltkarte",
-    "#lernenmittiktok"
-   ],
-   "release": null,
-   "duration": null,
-   "error": null,
-   "check": [
-    "DDR-Beitritt 3.10.1990",
-    "Sowjetunion Ende 1991, 15 Nachfolgestaaten",
-    "Jugoslawien: Zerfall ab 1991 (Nachfolgestaaten bewusst ohne Zahl, Kosovo-Status umstritten)",
-    "Tschechoslowakei 1.1.1993",
-    "Tansania 1964, Name aus Tanganjika + Sansibar"
-   ],
-   "priority": 2,
-   "slug": "wow-05-laender-die-es-nicht-mehr-gibt",
-   "words": 169,
-   "has_voice": false
-  },
   {
    "title": "Der Bosporus wird gesperrt: Was passiert dann?",
    "series": "Was wäre wenn",
@@ -59,6 +30,37 @@
    "priority": 1,
    "slug": "was-waere-wenn-05-bosporus",
    "words": 155,
+   "has_voice": true
+  },
+  {
+   "title": "Diese Länder sind von der Weltkarte verschwunden",
+   "series": "Wow",
+   "nr": 5,
+   "status": "fertig",
+   "created": "2026-11-05",
+   "caption": "Auf einer Weltkarte von 1985 stehen Länder, die es heute nicht mehr gibt 🗺️ Eins war das größte der Erde. Wusstest du das schon?",
+   "hashtags": [
+    "#geschichte",
+    "#wow",
+    "#geografie",
+    "#weltkarte",
+    "#lernenmittiktok"
+   ],
+   "release": null,
+   "duration": 73.55,
+   "error": null,
+   "check": [
+    "Weltkarte 1985: SU, DDR, Jugoslawien, Tschechoslowakei (dazu Nord-/Südjemen) – „mindestens vier“",
+    "SU-Auflösung Dez. 1991, 15 Nachfolgestaaten",
+    "DDR-Beitritt 3.10.1990",
+    "Jugoslawien Zerfall ab 1991",
+    "Tschechoslowakei 1.1.1993",
+    "Tansania 1964 (Tan + Zan)",
+    "Südsudan 9.7.2011, jüngster UN-Mitgliedsstaat"
+   ],
+   "priority": 1,
+   "slug": "wow-05-laender-die-es-nicht-mehr-gibt",
+   "words": 168,
    "has_voice": true
   },
   {

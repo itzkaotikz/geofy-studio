@@ -2,7 +2,7 @@
  "title": "Diese Länder sind von der Weltkarte verschwunden",
  "series": "Wow",
  "nr": 5,
- "status": "wartet-auf-stimme",
+ "status": "fertig",
  "created": "2026-11-05",
  "outro": "neu",
  "priority": 1,
@@ -61,7 +61,7 @@
   "Südsudan 9.7.2011, jüngster UN-Mitgliedsstaat"
  ],
  "release": null,
- "duration": null,
+ "duration": 73.55,
  "look": "v3",
  "hook_check": "Hook ~12 s: Karte 1985, „mindestens vier“, zwei offene Schleifen (größtes Land, mitten in Deutschland)"
 }
