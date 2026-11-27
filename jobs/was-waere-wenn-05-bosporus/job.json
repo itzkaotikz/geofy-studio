@@ -55,5 +55,6 @@
  ],
  "release": null,
  "duration": 62.73,
- "hook_check": "Hook in den ersten ~12 s: Szenario + offene Frage + Eskalation (Tag eins)"
+ "hook_check": "Hook in den ersten ~12 s: Szenario + offene Frage + Eskalation (Tag eins)",
+ "look": "v3"
 }

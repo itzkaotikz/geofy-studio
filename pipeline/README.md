@@ -52,6 +52,13 @@ Kurzvideo-Publikum braucht ständig Bewegung, der Wissenscharakter bleibt.
 - Untertitel immer Wort für Wort, gut lesbar, im Sicherheitsbereich.
 - Nach dem Rendern prüfen: Zählt man im Preview mehr als 6 Wechsel in 15 s?
 
+## Look v3 (seit 2026-11-27, Standard für neue Videos)
+In `job.json` `"look": "v3"` setzen (oder `?look=v3` an der Seite). Gewählt: Entwurf H „Satellit Nachtblau“ (`design/v3c.html?s=H`).
+- Satellit abgedunkelt und nachtblau eingefärbt, scharfe hellblaue Küstenlinien darüber.
+- Untertitel: Hanken Grotesk 800, weiß ohne Kontur mit weichem Schatten, max. 4 Wörter, Umbruch an Satzzeichen; aktives Wort dunkelblau auf weißer Box. Kein pinker Text mehr.
+- `label()` (Chips, Tags) als Glas-Pille; rote/pinke Chips werden zu kräftigen pinken Pillen, farbige Chips bekommen einen Farbpunkt.
+- `KV.bigText()` für große Zahlen/Wörter: ohne Kontur, weicher Schatten; Gelb/Cyan werden weiß, Rot wird Pink. Im story.js `big()` darauf umleiten: `if(KV.LOOK==='v3') return KV.bigText(ctx,txt,a,y,col,size);`
+
 ## story.js
 - Am einfachsten ein bestehendes `jobs/*/story.js` kopieren: Kopf mit den Helfern (`wt`, `chip`, `tag`, `big`, `pulse`, `line`, `arrow`, `fill`) und die Outro-Szene am Ende übernehmen, nur die Szenen dazwischen neu schreiben.
 - `S_say[i]` ist Absatz i aus `script.txt`. Mit `wt(sc,'Wort')` bekommt man den Zeitpunkt, an dem das Wort gesprochen wird. Damit Einblendungen starten: `clamp((u-wt(sc,'Wort'))/0.4)`.
