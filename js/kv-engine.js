@@ -1,10 +1,13 @@
 // Geofy knowledge-video engine: a story is a list of scenes; draw(t) paints one frame at time t (seconds).
 // Text stays inside the TikTok safe area x 100–880, y 300–1440.
 (function(){
-const W=1080,H=1920, L=100, MW=780;
+let W=1080,H=1920, L=100, MW=780;
+let LY={wm:292,head:368,tg:500,bg0:1360,bg1:1700,sub:1560,subW:860};
 const C={bg:'#0B1C2A',ocean:'#10283B',land:'#E9DFC7',landDim:'#B9B09B',target:'#FF3B7F',ok:'#33D1B0',ink:'#F6F1E7',mute:'#8CA3B6',sand:'#F2B66D',ice:'#9FD8F5',green:'#7FCB8F'};
 const FD='"Bricolage Grotesque", sans-serif', FB='"Hanken Grotesk", sans-serif', FM='"JetBrains Mono", monospace';
-const KB=[80,430,920,940]; // where the subject sits
+let KB=[80,430,920,940]; // where the subject sits
+let FORMAT='9:16';
+function setFormat(f){FORMAT=f||'9:16'; if(FORMAT==='16:9'){W=1920;H=1080;L=110;MW=1150;KB=[110,150,1700,800];LY={wm:70,head:132,tg:260,bg0:800,bg1:1080,sub:990,subW:1500};}}
 const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v)), lerp=(a,b,t)=>a+(b-a)*t;
 const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2, eout=t=>1-Math.pow(1-t,3);
 let features=[], byId=new Map();
@@ -39,7 +42,7 @@ function label(ctx,text,x,y,{color=C.ink,bg='rgba(11,28,42,0.88)',font=`700 32px
  if(alpha<=0) return; ctx.save(); ctx.globalAlpha=alpha; ctx.font=font; const w=ctx.measureText(text).width; let bx=align==='right'?x-w-28:align==='center'?x-w/2-14:x;
  bx=clamp(bx,L,880-w-28); ctx.fillStyle=bg; rr(ctx,bx,y-30,w+28,48,14); ctx.fill(); ctx.fillStyle=color; ctx.fillText(text,bx+14,y+6); ctx.restore();}
 function bigText(ctx,txt,a,y,col,size){if(a<=0) return; ctx.save(); ctx.globalAlpha=a; ctx.font=`800 ${size}px ${FD}`; ctx.textAlign='center'; const c=/FFE066|7FD0FF|33D1B0|C78BFF/i.test(col)?'#FFFFFF':/E5484D|FF3D81|FF3B7F/i.test(col)?C.target:col;
- ctx.shadowColor='rgba(2,8,18,0.75)'; ctx.shadowBlur=34; ctx.shadowOffsetY=6; ctx.fillStyle=c; ctx.fillText(txt,540,y); ctx.restore();}
+ ctx.shadowColor='rgba(2,8,18,0.75)'; ctx.shadowBlur=34; ctx.shadowOffsetY=6; ctx.fillStyle=c; ctx.fillText(txt,W/2,y); ctx.restore();}
 // ---- icons ----
 function icon(ctx,kind,x,y,s=1,a=1){if(a<=0) return; ctx.save(); ctx.globalAlpha=a; ctx.translate(x,y); ctx.scale(s,s); ctx.lineJoin='round'; ctx.lineCap='round';
  if(kind==='mountain'){ctx.beginPath(); ctx.moveTo(-26,16); ctx.lineTo(0,-24); ctx.lineTo(26,16); ctx.closePath(); ctx.fillStyle='#6B7C8F'; ctx.fill(); ctx.strokeStyle=C.bg; ctx.lineWidth=3; ctx.stroke();
@@ -112,20 +115,20 @@ function draw(ctx,t){
  }
  (sc.over||[]).forEach(fn=>fn(env));
  // soft gradients behind headline and subtitles only
- const gt=ctx.createLinearGradient(0,0,0,500); gt.addColorStop(0,'rgba(6,16,26,0.75)'); gt.addColorStop(0.45,'rgba(6,16,26,0.55)'); gt.addColorStop(1,'rgba(6,16,26,0)'); ctx.fillStyle=gt; ctx.fillRect(0,0,W,500);
- const gb=ctx.createLinearGradient(0,1360,0,1700); gb.addColorStop(0,'rgba(6,16,26,0)'); gb.addColorStop(1,'rgba(6,16,26,0.75)'); ctx.fillStyle=gb; ctx.fillRect(0,1360,W,560);
+ const gt=ctx.createLinearGradient(0,0,0,LY.tg); gt.addColorStop(0,'rgba(6,16,26,0.75)'); gt.addColorStop(0.45,'rgba(6,16,26,0.55)'); gt.addColorStop(1,'rgba(6,16,26,0)'); ctx.fillStyle=gt; ctx.fillRect(0,0,W,LY.tg);
+ const gb=ctx.createLinearGradient(0,LY.bg0,0,LY.bg1); gb.addColorStop(0,'rgba(6,16,26,0)'); gb.addColorStop(1,'rgba(6,16,26,0.75)'); ctx.fillStyle=gb; ctx.fillRect(0,LY.bg0,W,H-LY.bg0);
  ctx.textAlign='left'; ctx.textBaseline='alphabetic';
  // subtle watermark
- ctx.save(); ctx.globalAlpha=0.55; ctx.font=`800 30px ${FD}`; ctx.fillStyle=C.ink; ctx.fillText('geofy',L,292); const bw=ctx.measureText('geofy').width; ctx.fillStyle=C.target; ctx.fillText('.',L+2+bw,292); ctx.restore();
+ ctx.save(); ctx.globalAlpha=0.55; ctx.font=`800 30px ${FD}`; ctx.fillStyle=C.ink; ctx.fillText('geofy',L,LY.wm); const bw=ctx.measureText('geofy').width; ctx.fillStyle=C.target; ctx.fillText('.',L+2+bw,LY.wm); ctx.restore();
  if(sc.head){const prev=S.scenes[S.scenes.indexOf(sc)-1]; const ha=(prev&&prev.head===sc.head)||sc.headInstant?1:eout(clamp(u/0.45)); ctx.save(); ctx.globalAlpha=ha; ctx.translate(0,(1-ha)*16);
-  ctx.shadowColor='rgba(0,0,0,0.55)'; ctx.shadowBlur=18; const z=fit(ctx,sc.head,800,66,46,MW,FD); ctx.fillStyle=C.ink; wrapLines(ctx,sc.head,MW).forEach((l,i)=>ctx.fillText(l,L,368+i*(z+6))); ctx.restore();}
+  ctx.shadowColor='rgba(0,0,0,0.55)'; ctx.shadowBlur=18; const z=fit(ctx,sc.head,800,66,46,MW,FD); ctx.fillStyle=C.ink; wrapLines(ctx,sc.head,MW).forEach((l,i)=>ctx.fillText(l,L,LY.head+i*(z+6))); ctx.restore();}
  (sc.top||[]).forEach(fn=>fn(env));
  // subtitles: low, centred, no box; active word pink
  const sub=sc.subs.find(s=>u>=s.from-0.05&&u<Math.min(s.until,s.to+0.6));
- if(sub&&!sc.noSubs&&LOOK==='v3'){ctx.font=`800 64px ${FB}`; const ls=wrapLines(ctx,sub.words.join(' '),860); const lh=88, base=1560-(ls.length-1)*lh;
+ if(sub&&!sc.noSubs&&LOOK==='v3'){ctx.font=`800 64px ${FB}`; const ls=wrapLines(ctx,sub.words.join(' '),LY.subW); const lh=88, base=LY.sub-(ls.length-1)*lh;
   let nAct=0; if(sub.times){sub.times.forEach((tt,i)=>{if(u>=tt-0.03) nAct=i;});} else {const prog=clamp((u-sub.from)/(sub.to-sub.from)); nAct=Math.floor(prog*sub.words.length+0.0001);} let wi=0; const sp=ctx.measureText(' ').width;
   const ap=clamp((u-sub.from+0.05)/0.18); ctx.save(); ctx.globalAlpha=ap; ctx.translate(0,(1-eout(ap))*14);
-  ls.forEach((l,li)=>{const lw=ctx.measureText(l).width; let x=540-lw/2; const y=base+li*lh; for(const w of l.split(' ')){const ww=ctx.measureText(w).width;
+  ls.forEach((l,li)=>{const lw=ctx.measureText(l).width; let x=W/2-lw/2; const y=base+li*lh; for(const w of l.split(' ')){const ww=ctx.measureText(w).width;
    if(wi===nAct){ctx.fillStyle='#FFFFFF'; rr(ctx,x-14,y-58,ww+28,78,18); ctx.fill(); ctx.fillStyle=C.bg;}
    else {ctx.shadowColor='rgba(2,8,18,0.85)'; ctx.shadowBlur=20; ctx.shadowOffsetY=3; ctx.fillStyle=wi<nAct?'#FFFFFF':'rgba(255,255,255,0.62)';}
    ctx.fillText(w,x,y); ctx.shadowBlur=0; ctx.shadowOffsetY=0; x+=ww+sp; wi++;}}); ctx.restore();}
@@ -134,5 +137,5 @@ function draw(ctx,t){
   ctx.lineJoin='round'; ctx.lineWidth=12; ctx.strokeStyle='rgba(6,16,26,0.92)';
   ls.forEach((l,li)=>{const lw=ctx.measureText(l).width; let x=cx-lw/2; const y=base+li*70; for(const w of l.split(' ')){ctx.strokeText(w,x,y); ctx.fillStyle=wi===nAct?C.target:wi<nAct?C.ink:'rgba(246,241,231,0.62)'; ctx.fillText(w,x,y); x+=ctx.measureText(w+' ').width; wi++;}});}
 }
-window.KV={setLook,bigText,get LOOK(){return LOOK;},W,H,C,FD,FB,FM,L,MW,KB,clamp,lerp,ease,eout,setWorld,setStyle,hl,tintK,mainPart,viewBox,viewObj,projAt,rr,fit,wrapLines,label,icon,build,draw,get S(){return S;},byId:()=>byId};
+window.KV={setFormat,get W(){return W;},get H(){return H;},get L(){return L;},get KB(){return KB;},get LY(){return LY;},get FORMAT(){return FORMAT;},setLook,bigText,get LOOK(){return LOOK;},C,FD,FB,FM,MW,clamp,lerp,ease,eout,setWorld,setStyle,hl,tintK,mainPart,viewBox,viewObj,projAt,rr,fit,wrapLines,label,icon,build,draw,get S(){return S;},byId:()=>byId};
 })();

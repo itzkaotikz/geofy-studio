@@ -20,7 +20,7 @@ window.ready=(async()=>{
  await loadScript(DIR+'story.js'+bust);
  const style=Q.get('style')||'satellite'; if(style!=='studio'){const im=new Image(); im.src='tex/'+style+'.jpg'; await im.decode(); KV.setStyle(style,im);}
  await Promise.all(['800 40px "Bricolage Grotesque"','700 30px "Hanken Grotesk"','700 30px "JetBrains Mono"','500 30px "Hanken Grotesk"'].map(f=>document.fonts.load(f)));
- KV.setLook(Q.get('look')||job.look||'v2'); const st=makeStory(); let timing=null;
+ KV.setFormat(job.format||'9:16'); if(job.format==='16:9'){const cv=document.getElementById('c'); cv.width=1920; cv.height=1080;} KV.setLook(Q.get('look')||job.look||'v2'); const st=makeStory(); let timing=null;
  if(Q.get('timing')){try{const r=await fetch(DIR+'timing.json'+bust); if(r.ok) timing=await r.json();}catch(e){}}
  const S=KV.build(st,window.WPM||158,timing); S.tag=st.tag;
  const pops=job.popwords||[];

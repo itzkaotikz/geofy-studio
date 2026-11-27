@@ -4,22 +4,46 @@
  "nr": 1,
  "format": "16:9",
  "platform": "YouTube",
- "status": "wartet-auf-stimme",
+ "status": "fertig",
  "created": "2026-11-27",
  "look": "v3",
  "chapters": [
-  "Kapitel 1 – Ein Damm, zwei Welten",
-  "Kapitel 2 – Oben und unten",
-  "Kapitel 3 – Der Nil",
-  "Kapitel 4 – Der Damm",
-  "Kapitel 5 – Euphrat und Tigris",
-  "Kapitel 6 – Der Indus",
-  "Kapitel 7 – Das Muster",
-  "Kapitel 8 – Wem gehört das Wasser?"
+  {
+   "title": "Kapitel 1 – Ein Damm, zwei Welten",
+   "start": 0
+  },
+  {
+   "title": "Kapitel 2 – Oben und unten",
+   "start": 3
+  },
+  {
+   "title": "Kapitel 3 – Der Nil",
+   "start": 6
+  },
+  {
+   "title": "Kapitel 4 – Der Damm",
+   "start": 9
+  },
+  {
+   "title": "Kapitel 5 – Euphrat und Tigris",
+   "start": 12
+  },
+  {
+   "title": "Kapitel 6 – Der Indus",
+   "start": 15
+  },
+  {
+   "title": "Kapitel 7 – Das Muster",
+   "start": 18
+  },
+  {
+   "title": "Kapitel 8 – Wem gehört das Wasser?",
+   "start": 20
+  }
  ],
  "words": 867,
  "youtube_title": "Kampf ums Wasser: Wem gehört ein Fluss? | Nil, Euphrat, Indus",
- "voice": "pro Kapitel eine MP3 (Kapitel 1–8), Dateiname mit Kapitelnummer",
+ "voice": "eine MP3 für das ganze Skript (351 s)",
  "check": [
   "GERD Einweihung 9.9.2025, Ägypten/Sudan fern (AFP)",
   "Ägypten 97 % Wasser aus dem Nil (AFP)",
@@ -35,5 +59,13 @@
   "Indus-Wasservertrag 1960; Aussetzung April 2025 nach Anschlag mit 26 Toten",
   "Schiedsgericht Den Haag Aug. 2026; Indien erkennt nicht an",
   "IKSR Rhein seit 1950; Mekong-Kommission"
- ]
+ ],
+ "paragraphs": 22,
+ "cover": {
+  "time": 28.5,
+  "kicker": "GEOFY DOKU #1",
+  "lines": "Kampf|ums|Wasser."
+ },
+ "outro": "doku (Kommentar-Frage + Abonnieren)",
+ "duration": 352.9
 }

@@ -29,7 +29,14 @@ const url = `http://localhost:${PORT}/pipeline/page.html?job=${encodeURIComponen
     const d = await p.evaluate(([t, kicker, lines]) => {
       const c = document.getElementById('c'), ctx = c.getContext('2d');
       S.scenes.forEach(s => { s.noSubs = true; s.head = ''; }); window.NO_COUNTER = 1; window.NO_CHIPS = 1; KV.draw(ctx, +t);
-      const { C, FD, FM, L } = KV; const g = ctx.createLinearGradient(0, 0, 0, 860);
+      const { C, FD, FM, L } = KV;
+      if (KV.FORMAT === '16:9') { // YouTube-Thumbnail: Text links, Karte rechts
+        const g2 = ctx.createLinearGradient(0, 0, 1250, 0); g2.addColorStop(0, 'rgba(11,28,42,0.97)'); g2.addColorStop(0.6, 'rgba(11,28,42,0.85)'); g2.addColorStop(1, 'rgba(11,28,42,0)'); ctx.fillStyle = g2; ctx.fillRect(0, 0, 1250, 1080);
+        ctx.textAlign = 'left'; ctx.font = `700 40px ${FM}`; ctx.fillStyle = C.ok; ctx.fillText(kicker, L, 300);
+        const ls = lines.split('|'); ls.forEach((l, i) => { ctx.font = `800 190px ${FD}`; ctx.fillStyle = i === ls.length - 1 ? C.target : C.ink; ctx.fillText(l, L - 6, 480 + i * 190, 1100); });
+        ctx.font = `800 56px ${FD}`; ctx.fillStyle = C.ink; ctx.fillText('geofy', L, 1000); const bw2 = ctx.measureText('geofy').width; ctx.fillStyle = C.target; ctx.fillText('.', L + bw2 + 2, 1000);
+        return c.toDataURL('image/png'); }
+      const g = ctx.createLinearGradient(0, 0, 0, 860);
       g.addColorStop(0, 'rgba(11,28,42,1)'); g.addColorStop(0.55, 'rgba(11,28,42,0.95)'); g.addColorStop(1, 'rgba(11,28,42,0)'); ctx.fillStyle = g; ctx.fillRect(0, 0, 1080, 860);
       ctx.textAlign = 'left'; ctx.font = `700 30px ${FM}`; ctx.fillStyle = C.ok; ctx.fillText(kicker, L, 400);
       const ls = lines.split('|'); ls.forEach((l, i) => { ctx.font = `800 120px ${FD}`; ctx.fillStyle = i === ls.length - 1 ? C.target : C.ink; ctx.fillText(l, L, 525 + i * 126, 860); });

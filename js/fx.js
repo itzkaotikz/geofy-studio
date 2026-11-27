@@ -2,7 +2,7 @@
 // Einbinden: in story.js  const fx = FX.make({big, chip, fill, P});  danach fx.pop(...), fx.counter(...), ...
 // Alle Zeitangaben in Sekunden relativ zur Szene (u). Alle Funktionen zeichnen nichts, wenn a <= 0.
 (function(){
-const {C,FD,FB,L,clamp,eout,rr}=KV;
+const {C,FD,FB,clamp,eout,rr}=KV;
 const PK='#FF3B7F', GO='#FFE066', CY='#7FD0FF', TE='#33D1B0', RD='#E5484D';
 // Einblenden ab t0 über d Sekunden / Fenster zwischen t0 und t1
 const A=(u,t0,d=0.35)=>clamp((u-t0)/d);
@@ -12,11 +12,11 @@ const VW=(lon,lat,wdeg)=>({lon,lat,scale:920/(wdeg*Math.PI/180)});
 
 function make({big,chip,fill,P}){
  // Großes Wort/Zahl mit Pop-in
- function pop(ctx,txt,a,u,t0,y=600,col='#fff',size=130){if(a<=0||window.NO_CHIPS) return; const k=1+0.3*Math.max(0,1-(u-t0)/0.25); ctx.save(); ctx.translate(540,y); ctx.scale(k,k); ctx.translate(-540,-y); big(ctx,txt,a,y,col,size); ctx.restore();}
+ function pop(ctx,txt,a,u,t0,y=600,col='#fff',size=130){if(a<=0||window.NO_CHIPS) return; const k=1+0.3*Math.max(0,1-(u-t0)/0.25); const cx=KV.W/2; ctx.save(); ctx.translate(cx,y); ctx.scale(k,k); ctx.translate(-cx,-y); big(ctx,txt,a,y,col,size); ctx.restore();}
  // Farbblitz über das ganze Bild (col als 'rgba(r,g,b,' ohne Alpha)
- function flash(ctx,u,t0,col='rgba(255,224,102,',m=0.28){const a=1-clamp((u-t0)/0.45); if(u<t0||a<=0) return; ctx.save(); ctx.fillStyle=col+(a*m)+')'; ctx.fillRect(0,0,1080,1920); ctx.restore();}
+ function flash(ctx,u,t0,col='rgba(255,224,102,',m=0.28){const a=1-clamp((u-t0)/0.45); if(u<t0||a<=0) return; ctx.save(); ctx.fillStyle=col+(a*m)+')'; ctx.fillRect(0,0,KV.W,KV.H); ctx.restore();}
  // Pille oben rechts (Zeitleiste, Zähler 1/4, PLAN B …)
- function badge(ctx,txt,a,col=PK){if(a<=0||window.NO_CHIPS) return; ctx.save(); ctx.globalAlpha=a; ctx.font=`800 38px ${FB}`; const w=ctx.measureText(txt).width+44; const x=1080-L-w, y=250; ctx.fillStyle=col; rr(ctx,x,y,w,60,30); ctx.fill(); ctx.fillStyle='#fff'; ctx.fillText(txt,x+22,y+43); ctx.restore();}
+ function badge(ctx,txt,a,col=PK){if(a<=0||window.NO_CHIPS) return; ctx.save(); ctx.globalAlpha=a; ctx.font=`800 38px ${FB}`; const w=ctx.measureText(txt).width+44; const x=KV.W-KV.L-w, y=KV.FORMAT==='16:9'?60:250; ctx.fillStyle=col; rr(ctx,x,y,w,60,30); ctx.fill(); ctx.fillStyle='#fff'; ctx.fillText(txt,x+22,y+43); ctx.restore();}
  // Hochzählende Zahl (deutsches Format), optional Nachkommastellen
  function counter(ctx,from,to,a,u,t0,y=600,size=150,suf='',dur=1.0,dec=0){if(a<=0) return; const k=eout(clamp((u-t0)/dur)); const v=from+(to-from)*k; big(ctx,v.toLocaleString('de-DE',{minimumFractionDigits:dec,maximumFractionDigits:dec})+suf,a,y,'#fff',size);}
  // Land um (dx,dy) Pixel verschoben füllen
@@ -39,7 +39,7 @@ function make({big,chip,fill,P}){
  // Pegel/Messlatte (fill 0..1)
  function gauge(ctx,x,y0,hpx,a,fill01,label){if(a<=0) return; ctx.save(); ctx.globalAlpha=a; ctx.fillStyle='rgba(6,20,40,0.72)'; rr(ctx,x-60,y0-hpx-40,120,hpx+80,24); ctx.fill(); ctx.strokeStyle='rgba(255,255,255,0.2)'; ctx.lineWidth=2; ctx.stroke(); const h=hpx*eout(fill01); ctx.fillStyle='#3FA9FF'; rr(ctx,x-30,y0-h,60,h,10); ctx.fill(); ctx.fillStyle='#fff'; ctx.font=`700 26px ${FB}`; ctx.textAlign='center'; ctx.fillText(label,x,y0+30); ctx.restore();}
  // Stempel (schräg, knallt rein)
- function stamp(ctx,txt,a,u,t0,y=1080,col=PK){if(a<=0) return; const k=1+1.2*Math.max(0,1-(u-t0)/0.25); ctx.save(); ctx.globalAlpha=a; ctx.translate(540,y); ctx.rotate(-0.12); ctx.scale(k,k); ctx.strokeStyle=col; ctx.lineWidth=8; ctx.font=`800 60px ${FD}`; const w=ctx.measureText(txt).width+60; rr(ctx,-w/2,-50,w,100,14); ctx.stroke(); ctx.fillStyle=col; ctx.textAlign='center'; ctx.fillText(txt,0,20); ctx.restore();}
+ function stamp(ctx,txt,a,u,t0,y=1080,col=PK){if(a<=0) return; const k=1+1.2*Math.max(0,1-(u-t0)/0.25); ctx.save(); ctx.globalAlpha=a; ctx.translate(KV.W/2,y); ctx.rotate(-0.12); ctx.scale(k,k); ctx.strokeStyle=col; ctx.lineWidth=8; ctx.font=`800 60px ${FD}`; const w=ctx.measureText(txt).width+60; rr(ctx,-w/2,-50,w,100,14); ctx.stroke(); ctx.fillStyle=col; ctx.textAlign='center'; ctx.fillText(txt,0,20); ctx.restore();}
  // Rotes X (gesperrt, verboten)
  function xmark(ctx,x,y,a,s=1){if(a<=0) return; ctx.save(); ctx.globalAlpha=a; ctx.translate(x,y); ctx.scale(s*(1+0.4*(1-a)),s*(1+0.4*(1-a))); ctx.lineCap='round'; ctx.strokeStyle='rgba(5,14,24,0.85)'; ctx.lineWidth=20; ctx.beginPath(); ctx.moveTo(-22,-22); ctx.lineTo(22,22); ctx.moveTo(22,-22); ctx.lineTo(-22,22); ctx.stroke(); ctx.strokeStyle=RD; ctx.lineWidth=11; ctx.stroke(); ctx.restore();}
  // Schiff-Icon und Schiffe entlang einer Route
