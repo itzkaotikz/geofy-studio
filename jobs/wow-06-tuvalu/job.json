@@ -1,0 +1,59 @@
+{
+ "title": "Dieses Land will im Internet weiterleben",
+ "series": "Wow",
+ "nr": 6,
+ "status": "wartet-auf-stimme",
+ "created": "2026-11-27",
+ "outro": "neu",
+ "priority": 1,
+ "look": "v3",
+ "caption": "Dieses Land verschwindet im Meer und will im Internet weiterleben 🌊 Tuvalu. Wusstest du das schon?",
+ "hashtags": [
+  "#tuvalu",
+  "#wow",
+  "#geografie",
+  "#pazifik",
+  "#lernenmittiktok"
+ ],
+ "youtube_title": "Dieses Land will im Internet weiterleben",
+ "story": {
+  "question": "Kann ein Land ohne Land ein Staat sein?",
+  "options": [
+   "Ja",
+   "Nein"
+  ]
+ },
+ "highlight": "Wow",
+ "cover": {
+  "time": 3.0,
+  "kicker": "WOW",
+  "lines": "Dieses Land|will im Internet|weiterleben."
+ },
+ "popwords": [
+  "Internet",
+  "11.000",
+  "26",
+  "4,6",
+  "20",
+  "2050",
+  "280",
+  "Drittel",
+  "3D",
+  "2023"
+ ],
+ "spoken": {
+  "4,6": "vier Komma sechs",
+  "3D": "3D"
+ },
+ "check": [
+  "~11.000 Einwohner, 9 Inseln, ~26 km²",
+  "höchster Punkt ~4,6 m",
+  "Funafuti stellenweise ~20 m breit (SBS)",
+  "Meeresspiegel steigt ~1,5× schneller als global (NASA 2023)",
+  "NASA: bis 2050 halbe Funafuti-Atoll bei Flut unter Wasser",
+  "Falepili Union: 280 Visa/Jahr, erste Vergabe 2025, >1/3 der Bevölkerung im ersten Ballot",
+  "Digital Nation seit COP27 2022, 3D-Scan",
+  "Verfassungsänderung 2023: Staatlichkeit bleibt trotz Landverlust"
+ ],
+ "hook_check": "Hook ~10 s: überraschende Behauptung (Staat im Internet) + Grund + offene Frage"
+}

@@ -7,11 +7,6 @@
  },
  "warteschlange": [
   {
-   "titel": "Tuvalu – das erste digitale Land",
-   "serie": "Wow",
-   "notiz": "Meeresspiegel, digitale Kopie; Fakten prüfen"
-  },
-  {
    "titel": "Was wäre wenn alle Menschen in einem Land leben",
    "serie": "Was wäre wenn",
    "notiz": "Dichte-Vergleich (Texas? Deutschland?) seriös rechnen"
@@ -114,7 +109,7 @@
   "länder die es nicht mehr gibt"
  ],
  "serien_naechste_nr": {
-  "Wow": 6,
+  "Wow": 7,
   "Was wäre wenn": 6,
   "Warum ist": 9,
   "Grenz-Kuriositäten": 8,
