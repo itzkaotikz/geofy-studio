@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-27T20:11:13Z",
+ "updated": "2026-11-27T20:22:36Z",
  "jobs": [
   {
    "title": "Der Bosporus wird gesperrt: Was passiert dann?",
@@ -61,6 +61,35 @@
    "priority": 1,
    "slug": "wow-05-laender-die-es-nicht-mehr-gibt",
    "words": 168,
+   "has_voice": true
+  },
+  {
+   "title": "Alle Menschen in einem Land: Wie groß müsste es sein?",
+   "series": "Was wäre wenn",
+   "nr": 6,
+   "status": "fertig",
+   "created": "2026-11-27",
+   "caption": "Was wäre, wenn alle 8 Milliarden Menschen in ein einziges Land ziehen? 🌍 Die Antwort ist kleiner, als du denkst. Wusstest du das schon?",
+   "hashtags": [
+    "#weltbevölkerung",
+    "#waswärewenn",
+    "#geografie",
+    "#gedankenexperiment",
+    "#lernenmittiktok"
+   ],
+   "release": null,
+   "duration": 55.55,
+   "error": null,
+   "check": [
+    "Weltbevölkerung ≈ 8,2 Mrd. (UN 2025)",
+    "Paris ≈ 2,1 Mio. / 105 km² ≈ 20.000/km² → 8,2 Mrd. ≈ 412.000 km² ≈ 1,15× Deutschland",
+    "Manhattan ≈ 1,69 Mio. / 59 km² ≈ 28.800/km² → ≈ 285.000 km², Italien ≈ 302.000 km²",
+    "2 Personen/m² → 4.100 km², Mallorca ≈ 3.640 km²",
+    "FAO: Agrarfläche ≈ 4,8 Mrd. ha ≈ 1/3 der Landfläche"
+   ],
+   "priority": 1,
+   "slug": "was-waere-wenn-06-alle-in-einem-land",
+   "words": 150,
    "has_voice": true
   },
   {

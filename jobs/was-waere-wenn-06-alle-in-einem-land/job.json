@@ -2,7 +2,7 @@
  "title": "Alle Menschen in einem Land: Wie groß müsste es sein?",
  "series": "Was wäre wenn",
  "nr": 6,
- "status": "wartet-auf-stimme",
+ "status": "fertig",
  "created": "2026-11-27",
  "outro": "neu",
  "priority": 1,
@@ -48,5 +48,6 @@
   "2 Personen/m² → 4.100 km², Mallorca ≈ 3.640 km²",
   "FAO: Agrarfläche ≈ 4,8 Mrd. ha ≈ 1/3 der Landfläche"
  ],
- "hook_check": "Hook ~10 s: Szenario + Frage + Versprechen „kleiner, als du denkst“; Eskalation Paris → Manhattan → Stehen; Haken Essen"
+ "hook_check": "Hook ~10 s: Szenario + Frage + Versprechen „kleiner, als du denkst“; Eskalation Paris → Manhattan → Stehen; Haken Essen",
+ "duration": 55.55
 }
