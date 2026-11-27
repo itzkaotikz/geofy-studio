@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-27T20:52:29Z",
+ "updated": "2026-11-27T21:12:09Z",
  "jobs": [
   {
    "title": "Diese Halbinsel prägt drei Länder bis heute",
@@ -60,36 +60,6 @@
    "priority": 3,
    "slug": "wo-leben-alle-04-kanada",
    "words": 158,
-   "has_voice": false
-  },
-  {
-   "title": "Hier lag mal ein Meer",
-   "series": "Wow",
-   "nr": 8,
-   "status": "wartet-auf-stimme",
-   "created": "2026-11-27",
-   "caption": "Diese Schiffe liegen mitten in der Wüste 🏜️ Hier war vor 60 Jahren noch der viertgrößte See der Erde. Wusstest du das schon?",
-   "hashtags": [
-    "#aralsee",
-    "#wow",
-    "#geografie",
-    "#umwelt",
-    "#lernenmittiktok"
-   ],
-   "release": null,
-   "duration": null,
-   "error": null,
-   "check": [
-    "viertgrößter See 1960, ≈ 68.000 km² (Britannica)",
-    "Bayern ≈ 70.550 km²",
-    "Umleitung Amudarja/Syrdarja für Bewässerung (Britannica, NASA)",
-    "2007 ≈ 10 % der Fläche (Wikipedia)",
-    "Aralkum-Wüste, Salz- und Staubstürme",
-    "Kokaral-Damm (2005), Nordaralsee erholt sich"
-   ],
-   "priority": 3,
-   "slug": "wow-08-aralsee",
-   "words": 163,
    "has_voice": false
   },
   {
@@ -308,6 +278,36 @@
    "priority": 1,
    "slug": "wow-07-derinkuyu",
    "words": 162,
+   "has_voice": true
+  },
+  {
+   "title": "Hier lag mal ein Meer",
+   "series": "Wow",
+   "nr": 8,
+   "status": "fertig",
+   "created": "2026-11-27",
+   "caption": "Diese Schiffe liegen mitten in der Wüste 🏜️ Hier war vor 60 Jahren noch der viertgrößte See der Erde. Wusstest du das schon?",
+   "hashtags": [
+    "#aralsee",
+    "#wow",
+    "#geografie",
+    "#umwelt",
+    "#lernenmittiktok"
+   ],
+   "release": null,
+   "duration": 62.42,
+   "error": null,
+   "check": [
+    "viertgrößter See 1960, ≈ 68.000 km² (Britannica)",
+    "Bayern ≈ 70.550 km²",
+    "Umleitung Amudarja/Syrdarja für Bewässerung (Britannica, NASA)",
+    "2007 ≈ 10 % der Fläche (Wikipedia)",
+    "Aralkum-Wüste, Salz- und Staubstürme",
+    "Kokaral-Damm (2005), Nordaralsee erholt sich"
+   ],
+   "priority": 3,
+   "slug": "wow-08-aralsee",
+   "words": 163,
    "has_voice": true
   },
   {

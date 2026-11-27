@@ -2,7 +2,7 @@
  "title": "Hier lag mal ein Meer",
  "series": "Wow",
  "nr": 8,
- "status": "wartet-auf-stimme",
+ "status": "fertig",
  "created": "2026-11-27",
  "outro": "neu",
  "priority": 3,
@@ -33,5 +33,6 @@
   "Kokaral-Damm (2005), Nordaralsee erholt sich"
  ],
  "words": 163,
- "story_todo": "story.js nach Eingang der Stimme bauen"
+ "story_todo": "story.js nach Eingang der Stimme bauen",
+ "duration": 62.42
 }
