@@ -7,11 +7,6 @@
  },
  "warteschlange": [
   {
-   "titel": "Was wäre wenn alle Menschen in einem Land leben",
-   "serie": "Was wäre wenn",
-   "notiz": "Dichte-Vergleich (Texas? Deutschland?) seriös rechnen"
-  },
-  {
    "titel": "Warum spricht Brasilien Portugiesisch",
    "serie": "Warum ist",
    "notiz": "Vertrag von Tordesillas 1494"
@@ -110,7 +105,7 @@
  ],
  "serien_naechste_nr": {
   "Wow": 7,
-  "Was wäre wenn": 6,
+  "Was wäre wenn": 7,
   "Warum ist": 9,
   "Grenz-Kuriositäten": 8,
   "Hauptstädte": 5,

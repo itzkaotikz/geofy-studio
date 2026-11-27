@@ -1,0 +1,52 @@
+{
+ "title": "Alle Menschen in einem Land: Wie groß müsste es sein?",
+ "series": "Was wäre wenn",
+ "nr": 6,
+ "status": "wartet-auf-stimme",
+ "created": "2026-11-27",
+ "outro": "neu",
+ "priority": 1,
+ "look": "v3",
+ "caption": "Was wäre, wenn alle 8 Milliarden Menschen in ein einziges Land ziehen? 🌍 Die Antwort ist kleiner, als du denkst. Wusstest du das schon?",
+ "hashtags": [
+  "#weltbevölkerung",
+  "#waswärewenn",
+  "#geografie",
+  "#gedankenexperiment",
+  "#lernenmittiktok"
+ ],
+ "youtube_title": "Alle 8 Milliarden Menschen in einem Land – wie groß müsste es sein?",
+ "story": {
+  "question": "Welches Land wäre groß genug?",
+  "options": [
+   "Italien",
+   "Russland"
+  ]
+ },
+ "highlight": "Was wäre wenn",
+ "cover": {
+  "time": 3.0,
+  "kicker": "WAS WÄRE WENN",
+  "lines": "8 Milliarden|Menschen in|einem Land?"
+ },
+ "popwords": [
+  "acht Milliarden",
+  "kleiner",
+  "20.000",
+  "Deutschland",
+  "29.000",
+  "Italien",
+  "Mallorca",
+  "Haken",
+  "Drittel"
+ ],
+ "spoken": {},
+ "check": [
+  "Weltbevölkerung ≈ 8,2 Mrd. (UN 2025)",
+  "Paris ≈ 2,1 Mio. / 105 km² ≈ 20.000/km² → 8,2 Mrd. ≈ 412.000 km² ≈ 1,15× Deutschland",
+  "Manhattan ≈ 1,69 Mio. / 59 km² ≈ 28.800/km² → ≈ 285.000 km², Italien ≈ 302.000 km²",
+  "2 Personen/m² → 4.100 km², Mallorca ≈ 3.640 km²",
+  "FAO: Agrarfläche ≈ 4,8 Mrd. ha ≈ 1/3 der Landfläche"
+ ],
+ "hook_check": "Hook ~10 s: Szenario + Frage + Versprechen „kleiner, als du denkst“; Eskalation Paris → Manhattan → Stehen; Haken Essen"
+}
