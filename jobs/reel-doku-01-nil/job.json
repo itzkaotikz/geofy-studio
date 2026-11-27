@@ -1,0 +1,32 @@
+{
+ "title": "Wenn dein Nachbar dir das Wasser abdrehen könnte",
+ "series": "Doku-Teaser",
+ "nr": 1,
+ "status": "wartet-auf-stimme",
+ "created": "2026-11-27",
+ "look": "v3",
+ "format": "9:16",
+ "outro": "Doku-Verweis (Link im Profil + Kommentarfrage)",
+ "links_to": "doku-01-kampf-ums-wasser",
+ "caption": "Was passiert, wenn ein Nachbarland dir das Wasser abdrehen könnte? 🌊 Die ganze Geschichte von Nil, Euphrat und Indus gibt's in unserer neuen Doku auf YouTube – Link im Profil.",
+ "hashtags": [
+  "#nil",
+  "#doku",
+  "#geografie",
+  "#geopolitik",
+  "#lernenmittiktok"
+ ],
+ "cover": {
+  "time": 3.0,
+  "kicker": "KAMPF UMS WASSER",
+  "lines": "Wem gehört|der Nil?"
+ },
+ "check": [
+  "Ägypten ≈ 97 % Wasser aus dem Nil (AFP)",
+  "Blauer Nil bis 85 % (Al-Monitor)",
+  "GERD eröffnet 9.9.2025 (AFP/Dawn)",
+  "Stausee 74 Mrd. m³ (Ahram), Bodensee ≈ 48 Mrd. m³",
+  "≈ Hälfte ohne Strom, Verdopplung Stromproduktion (AFP)",
+  "über 10 Jahre Verhandlungen ohne Einigung"
+ ]
+}
