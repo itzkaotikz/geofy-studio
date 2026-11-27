@@ -1,0 +1,56 @@
+{
+ "title": "Hinter dieser Wand lag eine ganze Stadt",
+ "series": "Wow",
+ "nr": 7,
+ "status": "wartet-auf-stimme",
+ "created": "2026-11-27",
+ "outro": "neu",
+ "priority": 1,
+ "look": "v3",
+ "caption": "1963 reißt ein Mann eine Wand im Keller ein und findet eine Stadt für 20.000 Menschen 🇹🇷 Derinkuyu. Wusstest du das schon?",
+ "hashtags": [
+  "#derinkuyu",
+  "#kappadokien",
+  "#türkei",
+  "#geografie",
+  "#lernenmittiktok"
+ ],
+ "youtube_title": "Hinter dieser Kellerwand lag eine ganze Stadt – Derinkuyu",
+ "story": {
+  "question": "Würdest du in eine unterirdische Stadt gehen?",
+  "options": [
+   "Ja",
+   "Niemals"
+  ]
+ },
+ "highlight": "Wow",
+ "cover": {
+  "time": 3.0,
+  "kicker": "WOW",
+  "lines": "Hinter dieser|Wand lag eine|ganze Stadt."
+ },
+ "popwords": [
+  "1963",
+  "Tunnel",
+  "20.000",
+  "85",
+  "18",
+  "Schutz",
+  "Tuff",
+  "200",
+  "Wand"
+ ],
+ "spoken": {},
+ "check": [
+  "1963 Kellerwand bei Renovierung (History, Atlas Obscura, IFLScience)",
+  "bis zu 20.000 Menschen",
+  "≈ 76–85 m tief, mind. 18 Ebenen (Angaben schwanken), nur 8 für Besucher offen",
+  "Ställe, Brunnen, Weinkeller, Kirchen",
+  "> 15.000 Luftschächte (Atlas Obscura) → „Tausende“",
+  "rollende Steintüren",
+  "Tuff aus Vulkanen (Erciyes, Hasan Dağı)",
+  "> 200 unterirdische Städte in Kappadokien",
+  "genutzt bis in die 1920er-Jahre (Bevölkerungsaustausch 1923)"
+ ],
+ "hook_check": "Hook ~10 s: Wand → Tunnel → Stadt → 20.000 Menschen (Eskalation in 4 Schritten)"
+}
