@@ -2,7 +2,7 @@
  "title": "Dieses Land will im Internet weiterleben",
  "series": "Wow",
  "nr": 6,
- "status": "wartet-auf-stimme",
+ "status": "fertig",
  "created": "2026-11-27",
  "outro": "neu",
  "priority": 1,
@@ -55,5 +55,6 @@
   "Digital Nation seit COP27 2022, 3D-Scan",
   "Verfassungsänderung 2023: Staatlichkeit bleibt trotz Landverlust"
  ],
- "hook_check": "Hook ~10 s: überraschende Behauptung (Staat im Internet) + Grund + offene Frage"
+ "hook_check": "Hook ~10 s: überraschende Behauptung (Staat im Internet) + Grund + offene Frage",
+ "duration": 67.38
 }
