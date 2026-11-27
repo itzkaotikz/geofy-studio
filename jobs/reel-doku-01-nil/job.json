@@ -2,7 +2,7 @@
  "title": "Wenn dein Nachbar dir das Wasser abdrehen könnte",
  "series": "Doku-Teaser",
  "nr": 1,
- "status": "wartet-auf-stimme",
+ "status": "fertig",
  "created": "2026-11-27",
  "look": "v3",
  "format": "9:16",
@@ -17,7 +17,7 @@
   "#lernenmittiktok"
  ],
  "cover": {
-  "time": 3.0,
+  "time": 10.4,
   "kicker": "KAMPF UMS WASSER",
   "lines": "Wem gehört|der Nil?"
  },
@@ -28,5 +28,6 @@
   "Stausee 74 Mrd. m³ (Ahram), Bodensee ≈ 48 Mrd. m³",
   "≈ Hälfte ohne Strom, Verdopplung Stromproduktion (AFP)",
   "über 10 Jahre Verhandlungen ohne Einigung"
- ]
+ ],
+ "duration": 67.38
 }
