@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-27T20:35:08Z",
+ "updated": "2026-11-27T20:47:20Z",
  "jobs": [
   {
    "title": "Der Bosporus wird gesperrt: Was passiert dann?",
@@ -153,6 +153,39 @@
    "priority": 1,
    "slug": "wow-06-tuvalu",
    "words": 167,
+   "has_voice": true
+  },
+  {
+   "title": "Hinter dieser Wand lag eine ganze Stadt",
+   "series": "Wow",
+   "nr": 7,
+   "status": "fertig",
+   "created": "2026-11-27",
+   "caption": "1963 reißt ein Mann eine Wand im Keller ein und findet eine Stadt für 20.000 Menschen 🇹🇷 Derinkuyu. Wusstest du das schon?",
+   "hashtags": [
+    "#derinkuyu",
+    "#kappadokien",
+    "#türkei",
+    "#geografie",
+    "#lernenmittiktok"
+   ],
+   "release": null,
+   "duration": 65.37,
+   "error": null,
+   "check": [
+    "1963 Kellerwand bei Renovierung (History, Atlas Obscura, IFLScience)",
+    "bis zu 20.000 Menschen",
+    "≈ 76–85 m tief, mind. 18 Ebenen (Angaben schwanken), nur 8 für Besucher offen",
+    "Ställe, Brunnen, Weinkeller, Kirchen",
+    "> 15.000 Luftschächte (Atlas Obscura) → „Tausende“",
+    "rollende Steintüren",
+    "Tuff aus Vulkanen (Erciyes, Hasan Dağı)",
+    "> 200 unterirdische Städte in Kappadokien",
+    "genutzt bis in die 1920er-Jahre (Bevölkerungsaustausch 1923)"
+   ],
+   "priority": 1,
+   "slug": "wow-07-derinkuyu",
+   "words": 162,
    "has_voice": true
   },
   {

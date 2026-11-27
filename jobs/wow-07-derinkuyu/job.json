@@ -2,7 +2,7 @@
  "title": "Hinter dieser Wand lag eine ganze Stadt",
  "series": "Wow",
  "nr": 7,
- "status": "wartet-auf-stimme",
+ "status": "fertig",
  "created": "2026-11-27",
  "outro": "neu",
  "priority": 1,
@@ -52,5 +52,6 @@
   "> 200 unterirdische Städte in Kappadokien",
   "genutzt bis in die 1920er-Jahre (Bevölkerungsaustausch 1923)"
  ],
- "hook_check": "Hook ~10 s: Wand → Tunnel → Stadt → 20.000 Menschen (Eskalation in 4 Schritten)"
+ "hook_check": "Hook ~10 s: Wand → Tunnel → Stadt → 20.000 Menschen (Eskalation in 4 Schritten)",
+ "duration": 65.37
 }
