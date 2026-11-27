@@ -1,0 +1,57 @@
+{
+ "title": "Warum spricht Brasilien kein Spanisch?",
+ "series": "Warum ist",
+ "nr": 9,
+ "status": "wartet-auf-stimme",
+ "created": "2026-11-27",
+ "outro": "neu",
+ "priority": 1,
+ "look": "v3",
+ "caption": "Fast ganz Südamerika spricht Spanisch. Warum Brasilien nicht? 🇧🇷 Schuld ist eine Linie von 1494. Wusstest du das schon?",
+ "hashtags": [
+  "#brasilien",
+  "#warumist",
+  "#geografie",
+  "#geschichte",
+  "#lernenmittiktok"
+ ],
+ "youtube_title": "Warum spricht Brasilien kein Spanisch?",
+ "story": {
+  "question": "Wusstest du, warum Brasilien Portugiesisch spricht?",
+  "options": [
+   "Ja",
+   "Nein"
+  ]
+ },
+ "highlight": "Warum ist",
+ "cover": {
+  "time": 3.0,
+  "kicker": "WARUM IST …?",
+  "lines": "Warum spricht|Brasilien kein|Spanisch?"
+ },
+ "popwords": [
+  "Spanisch",
+  "Portugiesisch",
+  "500",
+  "1492",
+  "1494",
+  "Tordesillas",
+  "1500",
+  "Clou",
+  "1750",
+  "doppelt",
+  "200",
+  "zwanzigmal"
+ ],
+ "spoken": {},
+ "check": [
+  "„Fast ganz Südamerika spricht Spanisch“: 9 von 12 Staaten (dazu Guyana Englisch, Suriname Niederländisch)",
+  "Kolumbus 1492",
+  "Vertrag von Tordesillas 1494, Linie 370 Leguas westlich der Kapverden",
+  "Cabral landet April 1500",
+  "Vertrag von Madrid 1750: Spanien erkennt Ausdehnung nach Westen an",
+  "Brasilien ≈ 8,5 Mio. km², EU ≈ 4,2 Mio. km² (≈ 2×)",
+  "Brasilien > 200 Mio. Einw. (Zensus 2022: 203 Mio.), Portugal ≈ 10,6 Mio. (≈ 20×)"
+ ],
+ "hook_check": "Hook ~10 s: Kontrast (alle Spanisch, das Größte nicht) + Schuld-Versprechen (eine Linie vor 500 Jahren)"
+}

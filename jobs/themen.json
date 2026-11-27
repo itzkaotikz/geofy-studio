@@ -7,11 +7,6 @@
  },
  "warteschlange": [
   {
-   "titel": "Warum spricht Brasilien Portugiesisch",
-   "serie": "Warum ist",
-   "notiz": "Vertrag von Tordesillas 1494"
-  },
-  {
    "titel": "Kappadokien oder Gallipoli",
    "serie": "Türkei",
    "notiz": "Türkei-Quote; Gallipoli neutral erzählen"
@@ -106,7 +101,7 @@
  "serien_naechste_nr": {
   "Wow": 7,
   "Was wäre wenn": 7,
-  "Warum ist": 9,
+  "Warum ist": 10,
   "Grenz-Kuriositäten": 8,
   "Hauptstädte": 5,
   "Karten lügen": 8,

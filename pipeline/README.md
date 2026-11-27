@@ -33,6 +33,7 @@ Status: `idee` → `skript` → `wartet-auf-stimme` → `in-produktion` → `fer
 ## Regeln für Skripte
 - Länge 62–75 s gesprochen: **höchstens 185 Wörter**, besser 150–175. Ein Absatz entspricht einer Szene, 7 Szenen plus Outro.
 - **Hook-Regel (seit 2026-11-19, Priorität):** Die ersten 5 bis 15 Sekunden (etwa 15 bis 40 Wörter) wecken sofort Neugier und halten die Leute im Video: konkretes Szenario oder überraschende Behauptung, offene Frage („Was passiert dann?“), Eskalation („Und das ist erst Tag eins.“). Keine Begrüßung, kein „Heute geht es um …“, kein Definitionssatz am Anfang. Die Erklärung kommt danach.
+- **Längen-Regel (seit 2026-11-27):** Ziel etwa 65 Sekunden, mindestens knapp über 60 s (≤ 75 s). Lennart spricht etwa 2,4–2,6 Wörter pro Sekunde, also rund 160–175 Wörter inklusive Outro.
 - **Titel-Regel:** Titel, Cover-Text und erste Caption-Zeile sind Klick-Hooks in Frageform oder Szenario („Der Bosporus wird gesperrt: Was passiert dann?“, „Was, wenn …? Dann …“), nicht Themenbezeichnungen. Immer faktentreu, keine falschen Versprechen.
 - Offene Schleifen: Mitten im Skript mindestens 1–2 Spannungspunkte („Doch hier kommt der Haken“, „Und dann wird es seltsam“), die den nächsten Absatz ankündigen.
 - Zeitleiste/Eskalation bevorzugt (Tag 1 → Woche 1 → Monat 1), bei Was-wäre-wenn und Warum-Videos.
