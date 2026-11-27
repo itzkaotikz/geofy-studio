@@ -1,0 +1,37 @@
+{
+ "title": "Hier lag mal ein Meer",
+ "series": "Wow",
+ "nr": 8,
+ "status": "wartet-auf-stimme",
+ "created": "2026-11-27",
+ "outro": "neu",
+ "priority": 3,
+ "look": "v3",
+ "caption": "Diese Schiffe liegen mitten in der Wüste 🏜️ Hier war vor 60 Jahren noch der viertgrößte See der Erde. Wusstest du das schon?",
+ "hashtags": [
+  "#aralsee",
+  "#wow",
+  "#geografie",
+  "#umwelt",
+  "#lernenmittiktok"
+ ],
+ "youtube_title": "Hier lag mal ein Meer",
+ "highlight": "Wow",
+ "cover": {
+  "time": 3.0,
+  "kicker": "WOW",
+  "lines": "Hier lag|mal ein|Meer."
+ },
+ "popwords": [],
+ "spoken": {},
+ "check": [
+  "viertgrößter See 1960, ≈ 68.000 km² (Britannica)",
+  "Bayern ≈ 70.550 km²",
+  "Umleitung Amudarja/Syrdarja für Bewässerung (Britannica, NASA)",
+  "2007 ≈ 10 % der Fläche (Wikipedia)",
+  "Aralkum-Wüste, Salz- und Staubstürme",
+  "Kokaral-Damm (2005), Nordaralsee erholt sich"
+ ],
+ "words": 163,
+ "story_todo": "story.js nach Eingang der Stimme bauen"
+}

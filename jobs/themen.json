@@ -7,29 +7,9 @@
  },
  "warteschlange": [
   {
-   "titel": "Gallipoli – warum diese Halbinsel zwei Länder prägte",
-   "serie": "Krieg auf der Karte",
-   "notiz": "Türkei-Quote; neutral erzählen"
-  },
-  {
-   "titel": "Aralsee – der See, der verschwand",
-   "serie": "Wow",
-   "notiz": "Satellit vorher/nachher"
-  },
-  {
-   "titel": "Sealand – Staat auf einer Seefestung",
-   "serie": "Wow",
-   "notiz": ""
-  },
-  {
    "titel": "Warum ist Norwegen so zerfranst",
    "serie": "Warum ist",
    "notiz": "Fjorde, Gletscher"
-  },
-  {
-   "titel": "Wo leben alle Kanadier",
-   "serie": "Wo leben alle",
-   "notiz": "Bevölkerung nahe US-Grenze"
   },
   {
    "titel": "Surtsey – Insel aus dem Meer",
@@ -99,17 +79,17 @@
   "länder die es nicht mehr gibt"
  ],
  "serien_naechste_nr": {
-  "Wow": 8,
+  "Wow": 10,
   "Was wäre wenn": 7,
   "Warum ist": 10,
-  "Grenz-Kuriositäten": 8,
+  "Grenz-Kuriositäten": 9,
   "Hauptstädte": 5,
   "Karten lügen": 8,
   "Nadelöhre": 4,
   "Rekorde": 4,
-  "Wo leben alle": 4,
+  "Wo leben alle": 5,
   "Konflikt erklärt": 2,
   "Grenzen die Kriege machten": 2,
-  "Krieg auf der Karte": 3
+  "Krieg auf der Karte": 4
  }
 }

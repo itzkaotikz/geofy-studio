@@ -1,0 +1,38 @@
+{
+ "title": "Deutsches Dorf, Schweizer Franken",
+ "series": "Grenz-Kuriositäten",
+ "nr": 8,
+ "status": "wartet-auf-stimme",
+ "created": "2026-11-27",
+ "outro": "neu",
+ "priority": 3,
+ "look": "v3",
+ "caption": "Dieses Dorf gehört zu Deutschland, aber rundherum ist nur Schweiz 🇩🇪🇨🇭 Büsingen. Wusstest du das schon?",
+ "hashtags": [
+  "#büsingen",
+  "#grenzkuriositäten",
+  "#geografie",
+  "#deutschland",
+  "#lernenmittiktok"
+ ],
+ "youtube_title": "Deutsches Dorf, Schweizer Franken",
+ "highlight": "Grenz-Kuriositäten",
+ "cover": {
+  "time": 3.0,
+  "kicker": "GRENZ-KURIOSITÄTEN",
+  "lines": "Deutsches Dorf.|Schweizer|Franken."
+ },
+ "popwords": [],
+ "spoken": {},
+ "check": [
+  "≈ 1.500 Einwohner (swissinfo)",
+  "einzige Exklave Deutschlands",
+  "Streit um 1693 (Eberhard Im Thurn) – zu prüfen",
+  "Schweizer Zollgebiet per Vertrag, in Kraft 1967; keine Kontrollen zur Schweiz",
+  "zwei PLZ: D-78266 / CH-8238; zwei Telefonnetze",
+  "Euro offiziell, Alltag Franken (swissinfo)",
+  "max. 10 Schweizer Polizisten gleichzeitig (Big Think) – zu prüfen"
+ ],
+ "words": 167,
+ "story_todo": "story.js nach Eingang der Stimme bauen"
+}

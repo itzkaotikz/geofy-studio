@@ -1,0 +1,37 @@
+{
+ "title": "Fast alle Kanadier wohnen an der Grenze",
+ "series": "Wo leben alle",
+ "nr": 4,
+ "status": "wartet-auf-stimme",
+ "created": "2026-11-27",
+ "outro": "neu",
+ "priority": 3,
+ "look": "v3",
+ "caption": "Kanada ist riesig, aber zwei von drei Kanadiern wohnen keine 100 km von den USA entfernt 🇨🇦 Wusstest du das schon?",
+ "hashtags": [
+  "#kanada",
+  "#wolebenalle",
+  "#geografie",
+  "#bevölkerung",
+  "#lernenmittiktok"
+ ],
+ "youtube_title": "Fast alle Kanadier wohnen an der Grenze",
+ "highlight": "Wo leben alle",
+ "cover": {
+  "time": 3.0,
+  "kicker": "WO LEBEN ALLE?",
+  "lines": "Fast alle|Kanadier wohnen|an der Grenze."
+ },
+ "popwords": [],
+ "spoken": {},
+ "check": [
+  "66 % innerhalb 100 km der südlichen Grenze (Statistics Canada 2021)",
+  "Fläche ≈ 9,98 Mio. km² ≈ 27,9 × Deutschland",
+  "Einwohner ≈ 41 Mio. (2025)",
+  "Toronto 43,7° N; Minneapolis 45,0° N; Seattle 47,6° N",
+  "Permafrost: große Teile Nordkanadas",
+  "Nunavut ≈ 2,09 Mio. km² > Mexiko ≈ 1,96 Mio. km²; Einwohner ≈ 37.000 (Zensus 2021)"
+ ],
+ "words": 158,
+ "story_todo": "story.js nach Eingang der Stimme bauen"
+}

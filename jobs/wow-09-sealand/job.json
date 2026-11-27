@@ -1,0 +1,38 @@
+{
+ "title": "Das kleinste Land der Welt ist eine Plattform",
+ "series": "Wow",
+ "nr": 9,
+ "status": "wartet-auf-stimme",
+ "created": "2026-11-27",
+ "outro": "neu",
+ "priority": 3,
+ "look": "v3",
+ "caption": "Ein Prinz, eine Flagge, eigene Briefmarken, aber kleiner als zwei Tennisplätze 🌊 Sealand. Wusstest du das schon?",
+ "hashtags": [
+  "#sealand",
+  "#wow",
+  "#geografie",
+  "#mikronation",
+  "#lernenmittiktok"
+ ],
+ "youtube_title": "Das kleinste Land der Welt ist eine Plattform",
+ "highlight": "Wow",
+ "cover": {
+  "time": 3.0,
+  "kicker": "WOW",
+  "lines": "Dieses Land|ist kleiner als|2 Tennisplätze."
+ },
+ "popwords": [],
+ "spoken": {},
+ "check": [
+  "Fläche ≈ zwei Tennisplätze (CBS)",
+  "Maunsell-Fort, ≈ 12 km vor Suffolk",
+  "2.9.1967 Roy Bates, Piratensender Radio Essex",
+  "Gericht 1968: nicht zuständig",
+  "Söldner-Übernahme 1978",
+  "Michael Bates seit 2012; 1 Dauerbewohner (CBS)",
+  "UK 12-Seemeilen-Zone seit 1987"
+ ],
+ "words": 152,
+ "story_todo": "story.js nach Eingang der Stimme bauen"
+}

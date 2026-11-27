@@ -1,6 +1,159 @@
 {
- "updated": "2026-11-27T20:47:20Z",
+ "updated": "2026-11-27T20:51:00Z",
  "jobs": [
+  {
+   "title": "Deutsches Dorf, Schweizer Franken",
+   "series": "Grenz-Kuriositäten",
+   "nr": 8,
+   "status": "wartet-auf-stimme",
+   "created": "2026-11-27",
+   "caption": "Dieses Dorf gehört zu Deutschland, aber rundherum ist nur Schweiz 🇩🇪🇨🇭 Büsingen. Wusstest du das schon?",
+   "hashtags": [
+    "#büsingen",
+    "#grenzkuriositäten",
+    "#geografie",
+    "#deutschland",
+    "#lernenmittiktok"
+   ],
+   "release": null,
+   "duration": null,
+   "error": null,
+   "check": [
+    "≈ 1.500 Einwohner (swissinfo)",
+    "einzige Exklave Deutschlands",
+    "Streit um 1693 (Eberhard Im Thurn) – zu prüfen",
+    "Schweizer Zollgebiet per Vertrag, in Kraft 1967; keine Kontrollen zur Schweiz",
+    "zwei PLZ: D-78266 / CH-8238; zwei Telefonnetze",
+    "Euro offiziell, Alltag Franken (swissinfo)",
+    "max. 10 Schweizer Polizisten gleichzeitig (Big Think) – zu prüfen"
+   ],
+   "priority": 3,
+   "slug": "grenz-08-buesingen",
+   "words": 167,
+   "has_voice": false
+  },
+  {
+   "title": "Diese Halbinsel prägt drei Länder bis heute",
+   "series": "Krieg auf der Karte",
+   "nr": 3,
+   "status": "wartet-auf-stimme",
+   "created": "2026-11-27",
+   "caption": "1915 kämpften hier Armeen aus aller Welt. Drei Länder erinnern bis heute jedes Jahr daran 🇹🇷🇦🇺🇳🇿 Gallipoli. Wusstest du das schon?",
+   "hashtags": [
+    "#gallipoli",
+    "#kriegaufderkarte",
+    "#geografie",
+    "#geschichte",
+    "#lernenmittiktok"
+   ],
+   "release": null,
+   "duration": null,
+   "error": null,
+   "check": [
+    "Dardanellen-Feldzug Feb. 1915 – 9. Jan. 1916 (Britannica)",
+    "Ziel: Durchfahrt, Konstantinopel einnehmen, Osmanisches Reich aus dem Krieg (IWM)",
+    "18. März 1915 Flottenangriff gescheitert",
+    "Landung 25. April 1915, ANZAC",
+    "≈ 250.000 Verluste je Seite (Wikipedia; Angaben schwanken)",
+    "18. März: Çanakkale-Gedenktag (Türkei)",
+    "Anzac Day 25. April"
+   ],
+   "priority": 3,
+   "slug": "krieg-03-gallipoli",
+   "words": 171,
+   "has_voice": false
+  },
+  {
+   "title": "Fast alle Kanadier wohnen an der Grenze",
+   "series": "Wo leben alle",
+   "nr": 4,
+   "status": "wartet-auf-stimme",
+   "created": "2026-11-27",
+   "caption": "Kanada ist riesig, aber zwei von drei Kanadiern wohnen keine 100 km von den USA entfernt 🇨🇦 Wusstest du das schon?",
+   "hashtags": [
+    "#kanada",
+    "#wolebenalle",
+    "#geografie",
+    "#bevölkerung",
+    "#lernenmittiktok"
+   ],
+   "release": null,
+   "duration": null,
+   "error": null,
+   "check": [
+    "66 % innerhalb 100 km der südlichen Grenze (Statistics Canada 2021)",
+    "Fläche ≈ 9,98 Mio. km² ≈ 27,9 × Deutschland",
+    "Einwohner ≈ 41 Mio. (2025)",
+    "Toronto 43,7° N; Minneapolis 45,0° N; Seattle 47,6° N",
+    "Permafrost: große Teile Nordkanadas",
+    "Nunavut ≈ 2,09 Mio. km² > Mexiko ≈ 1,96 Mio. km²; Einwohner ≈ 37.000 (Zensus 2021)"
+   ],
+   "priority": 3,
+   "slug": "wo-leben-alle-04-kanada",
+   "words": 158,
+   "has_voice": false
+  },
+  {
+   "title": "Hier lag mal ein Meer",
+   "series": "Wow",
+   "nr": 8,
+   "status": "wartet-auf-stimme",
+   "created": "2026-11-27",
+   "caption": "Diese Schiffe liegen mitten in der Wüste 🏜️ Hier war vor 60 Jahren noch der viertgrößte See der Erde. Wusstest du das schon?",
+   "hashtags": [
+    "#aralsee",
+    "#wow",
+    "#geografie",
+    "#umwelt",
+    "#lernenmittiktok"
+   ],
+   "release": null,
+   "duration": null,
+   "error": null,
+   "check": [
+    "viertgrößter See 1960, ≈ 68.000 km² (Britannica)",
+    "Bayern ≈ 70.550 km²",
+    "Umleitung Amudarja/Syrdarja für Bewässerung (Britannica, NASA)",
+    "2007 ≈ 10 % der Fläche (Wikipedia)",
+    "Aralkum-Wüste, Salz- und Staubstürme",
+    "Kokaral-Damm (2005), Nordaralsee erholt sich"
+   ],
+   "priority": 3,
+   "slug": "wow-08-aralsee",
+   "words": 163,
+   "has_voice": false
+  },
+  {
+   "title": "Das kleinste Land der Welt ist eine Plattform",
+   "series": "Wow",
+   "nr": 9,
+   "status": "wartet-auf-stimme",
+   "created": "2026-11-27",
+   "caption": "Ein Prinz, eine Flagge, eigene Briefmarken, aber kleiner als zwei Tennisplätze 🌊 Sealand. Wusstest du das schon?",
+   "hashtags": [
+    "#sealand",
+    "#wow",
+    "#geografie",
+    "#mikronation",
+    "#lernenmittiktok"
+   ],
+   "release": null,
+   "duration": null,
+   "error": null,
+   "check": [
+    "Fläche ≈ zwei Tennisplätze (CBS)",
+    "Maunsell-Fort, ≈ 12 km vor Suffolk",
+    "2.9.1967 Roy Bates, Piratensender Radio Essex",
+    "Gericht 1968: nicht zuständig",
+    "Söldner-Übernahme 1978",
+    "Michael Bates seit 2012; 1 Dauerbewohner (CBS)",
+    "UK 12-Seemeilen-Zone seit 1987"
+   ],
+   "priority": 3,
+   "slug": "wow-09-sealand",
+   "words": 152,
+   "has_voice": false
+  },
   {
    "title": "Der Bosporus wird gesperrt: Was passiert dann?",
    "series": "Was wäre wenn",

@@ -1,0 +1,38 @@
+{
+ "title": "Diese Halbinsel prägt drei Länder bis heute",
+ "series": "Krieg auf der Karte",
+ "nr": 3,
+ "status": "wartet-auf-stimme",
+ "created": "2026-11-27",
+ "outro": "neu",
+ "priority": 3,
+ "look": "v3",
+ "caption": "1915 kämpften hier Armeen aus aller Welt. Drei Länder erinnern bis heute jedes Jahr daran 🇹🇷🇦🇺🇳🇿 Gallipoli. Wusstest du das schon?",
+ "hashtags": [
+  "#gallipoli",
+  "#kriegaufderkarte",
+  "#geografie",
+  "#geschichte",
+  "#lernenmittiktok"
+ ],
+ "youtube_title": "Diese Halbinsel prägt drei Länder bis heute",
+ "highlight": "Krieg auf der Karte",
+ "cover": {
+  "time": 3.0,
+  "kicker": "KRIEG AUF DER KARTE",
+  "lines": "Diese Halbinsel|prägt drei Länder|bis heute."
+ },
+ "popwords": [],
+ "spoken": {},
+ "check": [
+  "Dardanellen-Feldzug Feb. 1915 – 9. Jan. 1916 (Britannica)",
+  "Ziel: Durchfahrt, Konstantinopel einnehmen, Osmanisches Reich aus dem Krieg (IWM)",
+  "18. März 1915 Flottenangriff gescheitert",
+  "Landung 25. April 1915, ANZAC",
+  "≈ 250.000 Verluste je Seite (Wikipedia; Angaben schwanken)",
+  "18. März: Çanakkale-Gedenktag (Türkei)",
+  "Anzac Day 25. April"
+ ],
+ "words": 171,
+ "story_todo": "story.js nach Eingang der Stimme bauen"
+}
