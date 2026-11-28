@@ -1,0 +1,52 @@
+{
+ "title": "Wem gehört die Antarktis?",
+ "thema": "Antarktis",
+ "series": "Grenz-Kuriositäten",
+ "nr": 8,
+ "status": "wartet-auf-stimme",
+ "look": "v3",
+ "created": "2026-11-27",
+ "outro": "neu",
+ "priority": 1,
+ "caption": "Sieben Länder wollen ein Stück der Antarktis, drei sogar dasselbe. Und trotzdem gehört sie niemandem 🧊 Wusstest du das schon?",
+ "hashtags": [
+  "#antarktis",
+  "#grenzkuriositäten",
+  "#geografie",
+  "#südpol",
+  "#lernenmittiktok"
+ ],
+ "youtube_title": "Wem gehört die Antarktis? 7 Länder, 1 Kontinent",
+ "highlight": "Grenz-Kuriositäten",
+ "story": {
+  "question": "Wem gehört die Antarktis?",
+  "options": [
+   "Niemandem",
+   "7 Ländern"
+  ]
+ },
+ "cover": {
+  "time": 4.5,
+  "kicker": "GRENZ-KURIOSITÄTEN",
+  "lines": "Wem gehört|die Antarktis?"
+ },
+ "popwords": [],
+ "spoken": {
+  "1959": "neunzehnhundertneunundfünfzig",
+  "1998": "neunzehnhundertachtundneunzig",
+  "2048": "zweitausendachtundvierzig",
+  "Marie-Byrd-Land": "mari börd land"
+ },
+ "check": [
+  "Australien ≈ 42 % der Antarktis (antarctica.gov.au: ≈ 5,9 Mio. km²)",
+  "Sektorgrenzen der Ansprüche (NOR 20°W–45°E, AUS 45–160°E ohne FRA 136–142°E, NZL 160°E–150°W, CHL 90–53°W, ARG 74–25°W, GBR 80–20°W) – Norwegen hat offiziell keine Nord/Süd-Grenzen, im Video schematisch als Sektor",
+  "Marie-Byrd-Land: größtes von keinem Staat beanspruchtes Gebiet der Erde",
+  "Antarktis-Vertrag: 1.12.1959 in Washington von 12 Staaten unterschrieben, in Kraft 1961; Art. IV friert Ansprüche ein, Art. I: keine Militärbasen, keine Waffentests",
+  "Vertragsstaaten: im Skript „über 50“ (aktuell wohl 58, nicht mit Sekretariatsliste abgeglichen)",
+  "Forschungsstationen: im Skript „mehr als 70“ (COMNAP-Angaben 70–80, je nach Jahr); Punkte im Video sind eine Auswahl echter Stationen",
+  "Madrid-Protokoll: Bergbauverbot seit Inkrafttreten 1998, ab 2048 kann eine Überprüfungskonferenz verlangt werden – kein Ablaufdatum"
+ ],
+ "release": null,
+ "duration": null,
+ "hook_check": "Hook in den ersten 2 s: „Sieben Länder wollen ein Stück der Antarktis.“ + Widerspruch (gehört niemandem) + Frage"
+}

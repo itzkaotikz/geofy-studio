@@ -8,7 +8,15 @@ PORT="${PORT:-8766}"; mkdir -p "$O"
 cd "$ROOT"
 python3 -m http.server "$PORT" >/dev/null 2>&1 & SRV=$!; trap 'kill $SRV 2>/dev/null || true' EXIT; sleep 2
 SP=""; python3 -c "import json,sys;j=json.load(open('$J/job.json'));json.dump(j.get('spoken',{}),open('$O/spoken.json','w'))" && SP="$O/spoken.json"
-python3 pipeline/align.py "$J/script.txt" "$J/voice.mp3" "$J/timing.json" $SP | tail -3
+# Abgleich: lokal mit faster-whisper (wortgenau), sonst Fallback auf den alten Silben-Abgleich
+if [ "${SKIP_ALIGN:-}" = "1" ] && [ -f "$J/timing.json" ]; then
+  echo "Abgleich übersprungen (timing.json vorhanden)"
+elif [ -x "$ROOT/.venv/bin/python" ] && "$ROOT/.venv/bin/python" -c "import faster_whisper" 2>/dev/null; then
+  "$ROOT/.venv/bin/python" pipeline/align_whisper.py "$J/script.txt" "$J/timing.json" "$J/voice.mp3"
+  rm -f "$J/timing.voice.mp3"
+else
+  python3 pipeline/align.py "$J/script.txt" "$J/voice.mp3" "$J/timing.json" $SP | tail -3
+fi
 node pipeline/render.js "$SLUG" preview
 node pipeline/render.js "$SLUG" video 30
 python3 pipeline/sfx.py "$O/meta.json" "$O/sfx.wav"

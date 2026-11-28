@@ -1,6 +1,37 @@
 {
- "updated": "2026-11-27T21:12:09Z",
+ "updated": "2026-11-28T12:09:10Z",
  "jobs": [
+  {
+   "title": "Wem gehört die Antarktis?",
+   "series": "Grenz-Kuriositäten",
+   "nr": 8,
+   "status": "wartet-auf-stimme",
+   "created": "2026-11-27",
+   "caption": "Sieben Länder wollen ein Stück der Antarktis, drei sogar dasselbe. Und trotzdem gehört sie niemandem 🧊 Wusstest du das schon?",
+   "hashtags": [
+    "#antarktis",
+    "#grenzkuriositäten",
+    "#geografie",
+    "#südpol",
+    "#lernenmittiktok"
+   ],
+   "release": null,
+   "duration": null,
+   "error": null,
+   "check": [
+    "Australien ≈ 42 % der Antarktis (antarctica.gov.au: ≈ 5,9 Mio. km²)",
+    "Sektorgrenzen der Ansprüche (NOR 20°W–45°E, AUS 45–160°E ohne FRA 136–142°E, NZL 160°E–150°W, CHL 90–53°W, ARG 74–25°W, GBR 80–20°W) – Norwegen hat offiziell keine Nord/Süd-Grenzen, im Video schematisch als Sektor",
+    "Marie-Byrd-Land: größtes von keinem Staat beanspruchtes Gebiet der Erde",
+    "Antarktis-Vertrag: 1.12.1959 in Washington von 12 Staaten unterschrieben, in Kraft 1961; Art. IV friert Ansprüche ein, Art. I: keine Militärbasen, keine Waffentests",
+    "Vertragsstaaten: im Skript „über 50“ (aktuell wohl 58, nicht mit Sekretariatsliste abgeglichen)",
+    "Forschungsstationen: im Skript „mehr als 70“ (COMNAP-Angaben 70–80, je nach Jahr); Punkte im Video sind eine Auswahl echter Stationen",
+    "Madrid-Protokoll: Bergbauverbot seit Inkrafttreten 1998, ab 2048 kann eine Überprüfungskonferenz verlangt werden – kein Ablaufdatum"
+   ],
+   "priority": 1,
+   "slug": "grenz-08-antarktis",
+   "words": 176,
+   "has_voice": false
+  },
   {
    "title": "Diese Halbinsel prägt drei Länder bis heute",
    "series": "Krieg auf der Karte",
@@ -336,6 +367,130 @@
    "priority": null,
    "slug": "wow-04-helgoland",
    "words": 178,
+   "has_voice": true
+  },
+  {
+   "title": "Kampf ums Wasser: Wem gehört ein Fluss?",
+   "series": "Geofy Doku",
+   "nr": 1,
+   "status": "fertig",
+   "created": "2026-11-27",
+   "caption": null,
+   "hashtags": null,
+   "release": null,
+   "duration": 352.9,
+   "error": null,
+   "check": [
+    "GERD Einweihung 9.9.2025, Ägypten/Sudan fern (AFP)",
+    "Ägypten 97 % Wasser aus dem Nil (AFP)",
+    "Blauer Nil bis 85 % (Al-Monitor)",
+    "Stausee 74 Mrd. m³; Bodensee ≈ 48 Mrd. m³",
+    "≈ Hälfte Äthiopiens ohne Strom; Verdopplung Stromproduktion (AFP)",
+    "Nil ≈ 6.650 km, 11 Länder",
+    "Vertrag 1959 Ägypten–Sudan; Abkommen 1929",
+    "≈ 300 grenzüberschreitende Flussgebiete (UN-Water: 310)",
+    "GAP > 20 große Dämme (Chatham House: > 22)",
+    "Irak: niedrigste Reserven seit 80 Jahren, < 40 % (AFP Mai 2025)",
+    "Rahmenabkommen Irak–Türkei 2024 (10 Jahre)",
+    "Indus-Wasservertrag 1960; Aussetzung April 2025 nach Anschlag mit 26 Toten",
+    "Schiedsgericht Den Haag Aug. 2026; Indien erkennt nicht an",
+    "IKSR Rhein seit 1950; Mekong-Kommission"
+   ],
+   "priority": null,
+   "slug": "doku-01-kampf-ums-wasser",
+   "words": 867,
+   "has_voice": true
+  },
+  {
+   "title": "Wenn dein Nachbar dir das Wasser abdrehen könnte",
+   "series": "Doku-Teaser",
+   "nr": 1,
+   "status": "fertig",
+   "created": "2026-11-27",
+   "caption": "Was passiert, wenn ein Nachbarland dir das Wasser abdrehen könnte? 🌊 Die ganze Geschichte von Nil, Euphrat und Indus gibt's in unserer neuen Doku auf YouTube – Link im Profil.",
+   "hashtags": [
+    "#nil",
+    "#doku",
+    "#geografie",
+    "#geopolitik",
+    "#lernenmittiktok"
+   ],
+   "release": null,
+   "duration": 67.38,
+   "error": null,
+   "check": [
+    "Ägypten ≈ 97 % Wasser aus dem Nil (AFP)",
+    "Blauer Nil bis 85 % (Al-Monitor)",
+    "GERD eröffnet 9.9.2025 (AFP/Dawn)",
+    "Stausee 74 Mrd. m³ (Ahram), Bodensee ≈ 48 Mrd. m³",
+    "≈ Hälfte ohne Strom, Verdopplung Stromproduktion (AFP)",
+    "über 10 Jahre Verhandlungen ohne Einigung"
+   ],
+   "priority": null,
+   "slug": "reel-doku-01-nil",
+   "words": 174,
+   "has_voice": true
+  },
+  {
+   "title": "Wem gehört die Arktis?",
+   "series": "Geofy Doku",
+   "nr": 2,
+   "status": "fertig",
+   "created": "2026-11-28",
+   "caption": null,
+   "hashtags": null,
+   "release": null,
+   "duration": 350.65,
+   "error": null,
+   "check": [
+    "2007 Arktika: Titanflagge ≈ 4.261 m Tiefe; Zitat MacKay '15. Jahrhundert' (zu prüfen)",
+    "Antarktisvertrag 1959 friert Ansprüche ein",
+    "5 Anrainer / 8 Arktis-Staaten (bpb)",
+    "AWZ 200 sm ≈ 370 km (SRÜ)",
+    "Erwärmung fast 4× seit 1979 (Rantanen et al. 2022)",
+    "letzte 19 Jahre = 19 kleinste Minima; Wintermaximum März 2025 Rekordtief (NSIDC)",
+    "USGS 2008: 13 % Öl, 30 % Gas, meist < 500 m Wassertiefe",
+    "NSR ≈ 15 Tage kürzer als Suez (Rosatom/AFP); 2025: 103 Transits; ≈ 1,5 Tage Kap-Verkehr (cyprusshippingnews)",
+    "Lomonossow-Rücken ≈ 1.800 km",
+    "CLCS-Empfehlung Russland 6.2.2023; Dänemark/Kanada ausstehend (Stand 2023, zu prüfen für 2026)",
+    "Nordwestpassage: Kanada innere Gewässer vs. USA internationale Meerenge",
+    "Grönland-Sicherheitsabkommen Sept. 2026, Parlament 3.11.2026 ratifiziert; keine Souveränitätsübertragung",
+    "Ilulissat-Erklärung 2008",
+    "Hans-Insel geteilt 14.6.2022, Whisky/Schnaps"
+   ],
+   "priority": null,
+   "slug": "doku-02-arktis",
+   "words": 864,
+   "has_voice": true
+  },
+  {
+   "title": "Der Whisky-Krieg um die Hans-Insel",
+   "series": "Doku-Teaser",
+   "nr": 2,
+   "status": "fertig",
+   "created": "2026-11-28",
+   "caption": "Fast 50 Jahre „Krieg“ um eine Insel – mit Whisky und Schnaps 🥃 Die ganze Geschichte der Arktis gibt's in unserer neuen Doku auf YouTube – Link im Profil.",
+   "hashtags": [
+    "#arktis",
+    "#grenzkuriositaeten",
+    "#geografie",
+    "#kanada",
+    "#lernenmittiktok"
+   ],
+   "release": null,
+   "duration": 70.33,
+   "error": null,
+   "check": [
+    "Hans-Insel ≈ 1,2 km², unbewohnt (Canadian Geographic)",
+    "1973 Grenzvertrag Nares-Straße, Insel ausgespart (LoC, CBC)",
+    "ab 1980er abwechselnd Flaggen + Whisky/Schnaps (Canadian Geographic, NatGeo)",
+    "14.6.2022 geteilt entlang natürlicher Spalte, ≈ 60/40 (Canadian Encyclopedia)",
+    "Grenze 1.280 m (Wikipedia), Landgrenze Kanada–Europa (Euronews)",
+    "Flaschentausch bei Unterzeichnung (LoC)"
+   ],
+   "priority": null,
+   "slug": "reel-doku-02-hans",
+   "words": 175,
    "has_voice": true
   }
  ]
