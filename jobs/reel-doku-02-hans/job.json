@@ -2,7 +2,7 @@
  "title": "Der Whisky-Krieg um die Hans-Insel",
  "series": "Doku-Teaser",
  "nr": 2,
- "status": "wartet-auf-stimme",
+ "status": "fertig",
  "created": "2026-11-28",
  "look": "v3",
  "format": "9:16",
@@ -17,7 +17,7 @@
   "#lernenmittiktok"
  ],
  "cover": {
-  "time": 3.0,
+  "time": 46.0,
   "kicker": "KAMPF UM DIE ARKTIS",
   "lines": "Der Whisky-|Krieg"
  },
@@ -28,5 +28,6 @@
   "14.6.2022 geteilt entlang natürlicher Spalte, ≈ 60/40 (Canadian Encyclopedia)",
   "Grenze 1.280 m (Wikipedia), Landgrenze Kanada–Europa (Euronews)",
   "Flaschentausch bei Unterzeichnung (LoC)"
- ]
+ ],
+ "duration": 70.33
 }
