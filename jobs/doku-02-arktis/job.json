@@ -5,7 +5,7 @@
  "format": "16:9",
  "platform": "YouTube",
  "look": "v3",
- "status": "wartet-auf-stimme",
+ "status": "fertig",
  "created": "2026-11-28",
  "words": 864,
  "chapters": [
@@ -58,5 +58,12 @@
   "Grönland-Sicherheitsabkommen Sept. 2026, Parlament 3.11.2026 ratifiziert; keine Souveränitätsübertragung",
   "Ilulissat-Erklärung 2008",
   "Hans-Insel geteilt 14.6.2022, Whisky/Schnaps"
- ]
+ ],
+ "cover": {
+  "time": 214,
+  "kicker": "GEOFY DOKU #2",
+  "lines": "Wem gehört|die Arktis?"
+ },
+ "outro": "doku (Kommentar-Frage + Abonnieren)",
+ "duration": 350.65
 }
