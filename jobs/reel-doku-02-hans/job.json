@@ -1,0 +1,32 @@
+{
+ "title": "Der Whisky-Krieg um die Hans-Insel",
+ "series": "Doku-Teaser",
+ "nr": 2,
+ "status": "wartet-auf-stimme",
+ "created": "2026-11-28",
+ "look": "v3",
+ "format": "9:16",
+ "outro": "Doku-Verweis (Link im Profil + Kommentarfrage)",
+ "links_to": "doku-02-arktis",
+ "caption": "Fast 50 Jahre „Krieg“ um eine Insel – mit Whisky und Schnaps 🥃 Die ganze Geschichte der Arktis gibt's in unserer neuen Doku auf YouTube – Link im Profil.",
+ "hashtags": [
+  "#arktis",
+  "#grenzkuriositaeten",
+  "#geografie",
+  "#kanada",
+  "#lernenmittiktok"
+ ],
+ "cover": {
+  "time": 3.0,
+  "kicker": "KAMPF UM DIE ARKTIS",
+  "lines": "Der Whisky-|Krieg"
+ },
+ "check": [
+  "Hans-Insel ≈ 1,2 km², unbewohnt (Canadian Geographic)",
+  "1973 Grenzvertrag Nares-Straße, Insel ausgespart (LoC, CBC)",
+  "ab 1980er abwechselnd Flaggen + Whisky/Schnaps (Canadian Geographic, NatGeo)",
+  "14.6.2022 geteilt entlang natürlicher Spalte, ≈ 60/40 (Canadian Encyclopedia)",
+  "Grenze 1.280 m (Wikipedia), Landgrenze Kanada–Europa (Euronews)",
+  "Flaschentausch bei Unterzeichnung (LoC)"
+ ]
+}
